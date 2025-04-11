@@ -29,7 +29,7 @@ AUCTIONED_HORSES_PATH = os.path.join("Data/Past Auctions - Horses.csv")
 
 HORSES_RENAMED_COLUMNS = {
     'name': 'Name',
-    'studbook_id': 'Studbook ID',
+    # 'studbook_id': 'Studbook ID',
     'padrillo': 'Sire',
     'M': 'Dam',
     'birth_eday':'Birth Date',
@@ -275,8 +275,8 @@ def index():
                         'Start',
                         'End',
                         'lote',
-                        'Href',
-                        'Studbook ID'
+                        'Href'
+                        # 'Studbook ID'
                              ]
         
 
@@ -350,12 +350,14 @@ def index():
         #     axis=1
         # )
 
+        # horses_df.drop(columns=['Studbook ID'], inplace=True)
+
         column_groups = [
                         ("Basic Information", 9, "group-basic"),
                         ("Family Overview", 11, "group-family"),
                         ("Decomposing PS Factors", 7, "group-ps"),
                         ("Factors PR", 3, "group-pr"),
-                        ("Auction Info", 6, "group-auction")
+                        ("Auction Info", 5, "group-auction")
                     ]
 
         horses_data = horses_df.to_dict(orient="records")
