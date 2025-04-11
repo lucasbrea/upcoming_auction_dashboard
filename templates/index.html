@@ -10,276 +10,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-bg: #000000;
-            --secondary-bg: #1c1c1e;
-            --tertiary-bg: #2c2c2e;
-            --border-color: #38383a;
-            --text-primary: #ffffff;
-            --text-secondary: #98989a;
-            --accent-color: #ffffff;
-            --accent-color-light: rgba(255, 255, 255, 0.7);
-            --danger-color: #ff453a;
-        }
-
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            padding-bottom: 20px;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .header {
-            background: linear-gradient(180deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
-            padding: 60px 0 40px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            opacity: 0.2;
-        }
-
-        .header h1 {
-            font-weight: 600;
-            font-size: 2.75rem;
-            margin: 0;
-            color: var(--accent-color);
-            letter-spacing: -0.5px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .table-container {
-            background-color: var(--secondary-bg);
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-        }
-
-        .table-container:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            transform: translateY(-1px);
-        }
-
-        .error-message {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: rgba(255, 77, 77, 0.1);
-            border: 1px solid var(--danger-color);
-            color: var(--danger-color);
-        }
-
-        .table {
-            color: var(--text-primary);
-            min-width: 100%;
-            font-size: 0.9375rem;
-            background-color: var(--secondary-bg);
-            border-color: var(--border-color);
-        }
-
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: var(--tertiary-bg);
-        }
-
-        .table-striped > tbody > tr:nth-of-type(even) {
-            background-color: var(--secondary-bg);
-        }
-
-        .table > :not(caption) > * > * {
-            border-color: var(--border-color);
-            color: var(--text-primary);
-            padding: 12px;
-            background-color: transparent;
-        }
-
-        .table thead th {
-            background-color: var(--tertiary-bg);
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 0.875rem;
-            letter-spacing: 0.5px;
-            padding: 16px 12px;
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-            position: relative;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .table tbody td {
-            color: var(--text-primary);
-            vertical-align: middle;
-            background-color: transparent;
-        }
-
-        .table tbody tr:hover {
-            background-color: var(--border-color);
-        }
-
-        .table thead th.sortable:hover {
-            background-color: var(--border-color);
-        }
-
-        .table thead th.sortable::after {
-            content: '↕';
-            position: absolute;
-            right: 12px;
-            opacity: 0.5;
-            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .table thead th.sort-asc::after {
-            content: '↑';
-            opacity: 1;
-        }
-
-        .table thead th.sort-desc::after {
-            content: '↓';
-            opacity: 1;
-        }
-
-        /* Tab styling */
-        .nav-tabs {
-            border-bottom-color: var(--border-color);
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .nav-tabs::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
-        }
-
-        .nav-tabs .nav-link {
-            color: var(--text-secondary);
-            border-color: transparent;
-            background-color: transparent;
-            padding: 12px 24px;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            letter-spacing: 0.5px;
-            font-size: 0.9375rem;
-        }
-
-        .nav-tabs .nav-link:hover {
-            color: var(--accent-color-light);
-            border-color: transparent;
-        }
-
-        .nav-tabs .nav-link.active {
-            color: var(--accent-color);
-            background-color: transparent;
-            border-color: transparent;
-            border-bottom: 1px solid var(--accent-color);
-            font-weight: 600;
-        }
-
-        .nav-tabs .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light));
-            opacity: 0.8;
-        }
-
-        .tab-content {
-            padding-top: 20px;
-        }
-
-        /* Filter styling */
-        .filter-section {
-            background-color: var(--secondary-bg);
-            padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-        }
-
-        .filter-row {
-            background-color: var(--tertiary-bg);
-            padding: 16px;
-            border-radius: 12px;
-        }
-
-        .filter-input {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.9375rem;
-        }
-
-        .filter-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-        }
-
-        .filter-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .filter-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-bottom: 8px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        /* Export button styling */
-        #export-btn {
-            background-color: var(--danger-color);
-            border: none;
-            padding: 10px 24px;
-            border-radius: 12px;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 12px;
-            font-size: 0.9375rem;
-            letter-spacing: 0.5px;
-        }
-
-        #export-btn:hover {
-            background-color: #ff3b30;
-            transform: translateY(-1px);
-        }
-
-        /* Gradient cell styling */
-        .gradient-cell {
-            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="header">
@@ -288,7 +20,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         {% if error %}
         <div class="error-message">
             {{ error }}
@@ -314,31 +46,51 @@
         </ul>
     
         <form method="get" action="{{ url_for('index') }}">
+            <!--Horses Tab-->
             <div class="tab-content" id="myTabContent">
-                <!-- Horses Tab -->
                 <div class="tab-pane fade {% if initial_tab == 'horses' %}show active{% endif %}" id="horses" role="tabpanel" aria-labelledby="horses-tab">
                     <div class="filter-section">
-                        <div class="filter-row">
+                                <div class="filter-row">
                             <div class="row">
                                 {% for column in horses_filters.keys() %}
                                 <div class="col">
-                                    <div class="filter-label">{{ column }}</div>
-                                    <input type="text" 
-                                           class="filter-input" 
-                                           data-table="horses"
-                                           data-column="{{ column }}"
-                                           value="{{ horses_filters[column] or '' }}"
-                                           placeholder="Filter {{ column }}">
+                                        <div class="filter-label">{{ column }}</div>
+                                        <input type="text" 
+                                               class="filter-input" 
+                                               data-table="horses"
+                                               data-column="{{ column }}"
+                                               value="{{ horses_filters[column] or '' }}"
+                                               placeholder="Filter {{ column }}">
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
                             </div>
                         </div>
-                    </div>
-                    <div class="table-container">
-                        {{ horses_table | safe }}
-                    </div>
+                
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="column-groups">
+                                {% for group_name, colspan, class_name in column_groups %}
+                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                {% for column in horses_columns %}
+                                <th data-column="{{ column }}">{{ column }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                            <tbody>
+                            {% for row in horses_data %}
+                            <tr>
+                                {% for column in horses_columns %}
+                                <td>{{ row[column] }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                 </div>
-            
                 <!-- Dams Tab -->
                 <div class="tab-pane fade {% if initial_tab == 'dams' %}show active{% endif %}" id="dams" role="tabpanel" aria-labelledby="dams-tab">
                     <div class="filter-section">
@@ -359,7 +111,11 @@
                         </div>
                     </div>
                     <div class="table-container">
-                        {{ dams_table | safe }}
+                        <table class="table">
+                            <tbody>
+                                {{ dams_table | safe }}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             
@@ -387,7 +143,11 @@
                         </div>
                     </div>
                     <div class="table-container">
-                        {{ past_auction_table | safe }}
+                        <table class="table">
+                            <tbody>
+                                {{ past_auction_table | safe }}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             
@@ -411,7 +171,11 @@
                         </div>
                     </div>
                     <div class="table-container">
-                        {{ auctioned_horses_table | safe }}
+                        <table class="table">
+                            <tbody>
+                                {{ auctioned_horses_table | safe }}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -420,213 +184,11 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Filter functionality
-            const filterInputs = document.querySelectorAll('.filter-input');
-            
-            function applyFilters() {
-                // Get all tables
-                const tables = document.querySelectorAll('.table');
-                
-                tables.forEach(tableElement => {
-                    const tableId = tableElement.closest('.tab-pane').id;
-                    const rows = tableElement.querySelectorAll('tbody tr');
-                    
-                    // Get all filters for this table
-                    const tableFilters = {};
-                    document.querySelectorAll(`#${tableId} .filter-input`).forEach(input => {
-                        const column = input.dataset.column;
-                        const value = input.value.toLowerCase();
-                        if (value) {
-                            tableFilters[column] = value;
-                        }
-                    });
-                    
-                    // Apply all filters to each row
-                    rows.forEach(row => {
-                        let shouldShow = true;
-                        
-                        // Check if row matches all filters
-                        for (const [column, value] of Object.entries(tableFilters)) {
-                            const cell = row.querySelector(`td:nth-child(${getColumnIndex(tableElement, column)})`);
-                            if (cell) {
-                                const cellText = cell.textContent.toLowerCase();
-                                if (!cellText.includes(value)) {
-                                    shouldShow = false;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        row.style.display = shouldShow ? '' : 'none';
-                    });
-                });
-            }
-            
-            // Add input event listener to all filter inputs
-            filterInputs.forEach(input => {
-                input.addEventListener('input', applyFilters);
-            });
-
-            function getColumnIndex(table, columnName) {
-                const headers = table.querySelectorAll('thead th');
-                for (let i = 0; i < headers.length; i++) {
-                    if (headers[i].textContent.trim() === columnName) {
-                        return i + 1;
-                    }
-                }
-                return 0;
-            }
-
-            // Sorting functionality
-            const sortableColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS', 'Start', 'End'];
-            const tables = document.querySelectorAll('.table');
-            
-            function parseValue(value, columnName) {
-                if (columnName === 'Start' || columnName === 'End') {
-                    // Parse date in format DD/MM/YYYY
-                    const [day, month, year] = value.split('/');
-                    if (day && month && year) {
-                        // Create a date string in YYYY-MM-DD format for proper comparison
-                        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-                    }
-                    return '0000-00-00'; // Return invalid date string for sorting to the end
-                }
-                // For percentage values, remove % and convert to number
-                const numValue = parseFloat(value.replace('%', ''));
-                return isNaN(numValue) ? 0 : numValue;
-            }
-            
-            tables.forEach(table => {
-                const headers = table.querySelectorAll('thead th');
-                headers.forEach((header, index) => {
-                    const columnName = header.textContent.trim();
-                    if (sortableColumns.includes(columnName)) {
-                        header.classList.add('sortable');
-                        header.addEventListener('click', () => {
-                            const tbody = table.querySelector('tbody');
-                            const rows = Array.from(tbody.querySelectorAll('tr'));
-                            const currentSort = header.classList.contains('sort-asc') ? 'desc' : 'asc';
-                            
-                            // Remove sort classes from all headers
-                            headers.forEach(h => {
-                                h.classList.remove('sort-asc', 'sort-desc');
-                                h.classList.add('sortable');
-                            });
-                            
-                            // Add sort class to current header
-                            header.classList.remove('sortable');
-                            header.classList.add(`sort-${currentSort}`);
-                            
-                            // Sort rows
-                            rows.sort((a, b) => {
-                                const aValue = parseValue(a.children[index].textContent.trim(), columnName);
-                                const bValue = parseValue(b.children[index].textContent.trim(), columnName);
-                                
-                                if (columnName === 'Start' || columnName === 'End') {
-                                    // For dates, use string comparison since they're in YYYY-MM-DD format
-                                    return currentSort === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-                                } else {
-                                    // For numbers, use numeric comparison
-                                    return currentSort === 'asc' ? aValue - bValue : bValue - aValue;
-                                }
-                            });
-                            
-                            // Reorder rows
-                            rows.forEach(row => tbody.appendChild(row));
-                            // Reapply gradient highlighting after sorting
-                            applyGradientHighlighting();
-                        });
-                    }
-                });
-            });
-
-            // Gradient highlighting functionality
-            const gradientColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS'];
-            
-            // Get max values passed from Flask
-            const horsesMaxValues = {{ horses_max_values|tojson }};
-            const damsMaxValues = {{ dams_max_values|tojson }};
-
-            function applyGradientHighlighting() {
-                tables.forEach(table => {
-                    const headers = table.querySelectorAll('thead th');
-                    const isHorsesTable = table.closest('#horses') !== null;
-                    const maxValues = isHorsesTable ? horsesMaxValues : damsMaxValues;
-                    
-                    headers.forEach((header, index) => {
-                        const columnName = header.textContent.trim();
-                        if (gradientColumns.includes(columnName)) {
-                            const rows = table.querySelectorAll('tbody tr:not([style*="display: none"])');
-                            const maxValue = maxValues[columnName];
-                            
-                            rows.forEach(row => {
-                                const cell = row.children[index];
-                                const raw = cell.textContent.replace('%', '').trim();
-                                const value = parseFloat(raw);
-
-                                if (!isNaN(value)) {
-                                    // Normalize based on actual max value for this column
-                                    let normalized = value / maxValue;
-                                    normalized = Math.max(0, Math.min(1, normalized));
-
-                                    // Calculate color based on normalized value
-                                    if (normalized < 0.2) {
-                                        // Red to yellow transition (0% to 20%)
-                                        const opacity = 0.3 + (normalized * 0.7); // 0.3 to 1.0 opacity
-                                        cell.style.backgroundColor = `rgba(255, ${Math.floor(normalized * 255)}, 0, ${opacity})`;
-                                    } else {
-                                        // Green shades (20% to 100%)
-                                        const greenIntensity = 255;
-                                        const opacity = 0.3 + ((normalized - 0.2) * 0.7); // 0.3 to 1.0 opacity
-                                        cell.style.backgroundColor = `rgba(0, ${greenIntensity}, 0, ${opacity})`;
-                                    }
-                                    cell.classList.add('gradient-cell');
-                                } else {
-                                    cell.style.backgroundColor = '';
-                                }
-                            });
-                        }
-                    });
-                });
-            }
-
-            // Apply gradient highlighting initially
-            applyGradientHighlighting();
-
-            // Reapply gradient highlighting after filtering
-            filterInputs.forEach(input => {
-                input.addEventListener('input', () => {
-                    setTimeout(applyGradientHighlighting, 50);
-                });
-            });
-
-            // Export to PDF button logic
-            document.getElementById('export-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-
-                // Get the current active tab
-                const activeTab = document.querySelector('.nav-link.active').getAttribute('aria-controls');
-                
-                // Collect filter values from the current tab
-                const filters = {};
-                document.querySelectorAll(`#${activeTab} .filter-input`).forEach(input => {
-                    const column = input.dataset.column;
-                    filters[column] = input.value;
-                });
-
-                // Add the current tab to the filters
-                filters['current_tab'] = activeTab;
-
-                // Build query string
-                const params = new URLSearchParams(filters).toString();
-                const exportUrl = `/export-pdf?${params}`;
-
-                // Redirect to server-side PDF export route with filters
-                window.location.href = exportUrl;
-            });
-        });
+        const horsesMaxValues = {{ horses_max_values | tojson }};
+        const damsMaxValues = {{ dams_max_values | tojson }};
     </script>
+    
 </body>
 </html> 
