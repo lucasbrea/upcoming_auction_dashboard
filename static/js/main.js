@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const group2Columns_dams = [
         'Dam\'s Age', 
         'Dam\'s Season', 
-        'Birth Rate(All)', 
-        'Birth Rate(last 3)', 
+        'Birth Rate (All)', 
+        'Birth Rate (last 3)', 
         'Had Rest Year'
     
     ];
