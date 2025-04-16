@@ -186,6 +186,7 @@ def load_data(file_path):
                         'Best_Foal_Bsn',
                         'M_age_at_birth',
                         'M_age_at_service',
+                        'M_cumAEI'
     ]
     for col in rounded_columns:
         if col in df.columns:
