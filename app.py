@@ -155,7 +155,9 @@ def load_data(file_path):
                           'Momsiblings', 
                           'uncles',
                           'maternalParents',
-                          
+                          'birthRateLast3',
+                          'birthRate',
+                          'hadRestYear'
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -172,7 +174,8 @@ def load_data(file_path):
                        'Dam_Mean_T3_BSN',
                         'Best_Foal_Bsn',
                         'M_age_at_birth',
-                        'M_age_at_service']
+                        'M_age_at_service',
+                        '']
     for col in rounded_columns:
         if col in df.columns:
            df[col] = df[col].round().astype('Int64').astype(str).replace('<NA>', '-')
@@ -324,9 +327,9 @@ def index():
             'Dam G1 STK placed',
             'Dam G1 STK wins',
             'Lote',
-            'Haras',
             'Start',
-            'End'
+            'End',
+            'Href'
         ]
 
         horses_df = horses_df[horses_df_order]
