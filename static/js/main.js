@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             'Dam\'s Foal Raced Stk?',
                             'Dam\'s Foal Placed Stk?',
                             'Dam\'s Siblings Total G1/G2',
-                            'Dam\'s Siblings G1G2/Races',
+                            'Dam\'s Siblings G1G2/Races'
 
                         ];
     const group2Columns = [
@@ -131,7 +131,18 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam G1 STK placed',
         'Dam G1 STK wins'
     ];
-
+    const group4Columns_dams = [
+        'Dam Stk Wnrs / RA Offs', 
+        'Dams RA Offs', 
+        'Dam Top 3 BSN\'s', 
+        'Dam\'s Foals Top 3 BSN',
+        'Dam Raced STK?',
+        'Dam Total Races',
+        'Dam\'s Foal Raced Stk?',
+        'Dam\'s Foal Placed Stk?',
+        'Dam\'s Siblings Total G1/G2',
+        'Dam\'s Siblings G1G2/Races'
+    ];
     function getColumnHeaders(table) {
         const headerRows = table.querySelectorAll('thead tr');
         return headerRows.length >= 2 ? headerRows[1].querySelectorAll('th') : [];
@@ -221,7 +232,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const columnIndices = {
                 group1: [],
                 group2: [],
-                group3: []
+                group3: [],
+                group4: []
             };
 
             headers.forEach((header, index) => {
@@ -234,13 +246,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group1Columns_dams.includes(columnName)) columnIndices.group1.push(index);
                     if (group2Columns_dams.includes(columnName)) columnIndices.group2.push(index);
                     if (group3Columns_dams.includes(columnName)) columnIndices.group3.push(index);
+                    if (group4Columns_dams.includes(columnName)) columnIndices.group4.push(index);
                 }
             });
 
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
                 cells.forEach(cell => {
-                    cell.classList.remove('group-1-highlight', 'group-2-highlight', 'group-3-highlight');
+                    cell.classList.remove('group-1-highlight', 'group-2-highlight', 'group-3-highlight', 'group-4-highlight');
                     cell.style.boxShadow = '';
                 });
 
@@ -252,6 +265,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 columnIndices.group3.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-3-highlight');
+                });
+                columnIndices.group4.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-4-highlight');
                 });
             });
         });

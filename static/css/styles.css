@@ -393,6 +393,9 @@ body {
 .group-3-highlight {
     background-color: rgba(74, 57, 255, 0.1) !important; 
 }
+.group-4-highlight {
+    background-color: rgba(131, 166, 247, 0.1) !important; 
+}
 
 
 
@@ -430,4 +433,10 @@ body {
 
 .group-racing {
     background-color: rgba(74, 57, 255, 0.1) !important;
+}
+.group-family-dams {
+    background-color: rgba(131, 166, 247, 0.1) !important; 
+}
+.group-inbreeding{
+    background-color: rgba(255, 255, 255, 0.212) !important; 
 }
