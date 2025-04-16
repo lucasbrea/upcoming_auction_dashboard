@@ -100,23 +100,40 @@
                                 <div class="col">
                                     <div class="filter-label">{{ column }}</div>
                                     <input type="text" 
-                                           class="filter-input" 
-                                           data-table="dams"
-                                           data-column="{{ column }}"
-                                           value="{{ dams_filters[column] or '' }}"
-                                           placeholder="Filter {{ column }}">
+                                        class="filter-input" 
+                                        data-table="dams"
+                                        data-column="{{ column }}"
+                                        value="{{ dams_filters[column] or '' }}"
+                                        placeholder="Filter {{ column }}">
                                 </div>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
-                    <div class="table-container">
-                        <table class="table">
-                            <tbody>
-                                {{ dams_table | safe }}
-                            </tbody>
-                        </table>
-                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="column-groups">
+                                {% for group_name, colspan, class_name in column_groups_dams %}
+                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                {% for column in dams_columns %}
+                                <th data-column="{{ column }}">{{ column }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in dams_data %}
+                            <tr>
+                                {% for column in dams_columns %}
+                                <td>{{ row[column] }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             
                 <!-- Past Auction Tab -->

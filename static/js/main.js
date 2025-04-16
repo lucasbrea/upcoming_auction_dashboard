@@ -72,11 +72,12 @@ document.addEventListener('DOMContentLoaded', function () {
         'PS': { type: 'percentage' },
         'PB': { type: 'percentage' },
         'PBRS': { type: 'percentage' },
+        'Inbreeding Coef.': { type: 'percentage' },
         'Start': { type: 'date' },
         'End': { type: 'date' }
     };
 
-    const gradientColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS'];
+    const gradientColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.'];
     const sortableColumns = Object.keys(columnConfig);
     const tables = document.querySelectorAll('.table');
 
@@ -106,6 +107,29 @@ document.addEventListener('DOMContentLoaded', function () {
                             'Inbreeding',
                             'Dam\'s Age',
                             'Dam\'s Season'
+    ];
+    const group1Columns_dams = [
+        'Dam\'s Age and Racing Career',
+        'Dam\'s Offs',
+        'Dam\'s Sibs',
+        'Dam\'s Parents Career'
+    ];
+    const group2Columns_dams = [
+        'Dam\'s Age', 
+        'Dam\'s Season', 
+        'Birth Rate(All)', 
+        'Birth Rate(last 3)', 
+        'Had Rest Year'
+    
+    ];
+    const group3Columns_dams = [
+        'Dam\'s total races',
+        'Dam\'s total wins',
+        'Dam\'s CEI',
+        'Dam STK races',
+        'Dam STK wins',
+        'Dam G1 STK placed',
+        'Dam G1 STK wins'
     ];
 
     function getColumnHeaders(table) {
@@ -191,6 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
         tables.forEach(table => {
             const headers = getColumnHeaders(table);
             const rows = table.querySelectorAll('tbody tr');
+            const isHorsesTable = table.closest('#horses') !== null;
+            const isDamsTable = table.closest('#dams') !== null;
 
             const columnIndices = {
                 group1: [],
@@ -200,9 +226,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             headers.forEach((header, index) => {
                 const columnName = header.getAttribute('data-column');
-                if (group1Columns.includes(columnName)) columnIndices.group1.push(index);
-                if (group2Columns.includes(columnName)) columnIndices.group2.push(index);
-                if (group3Columns.includes(columnName)) columnIndices.group3.push(index);
+                if (isHorsesTable) {
+                    if (group1Columns.includes(columnName)) columnIndices.group1.push(index);
+                    if (group2Columns.includes(columnName)) columnIndices.group2.push(index);
+                    if (group3Columns.includes(columnName)) columnIndices.group3.push(index);
+                } else if (isDamsTable) {
+                    if (group1Columns_dams.includes(columnName)) columnIndices.group1.push(index);
+                    if (group2Columns_dams.includes(columnName)) columnIndices.group2.push(index);
+                    if (group3Columns_dams.includes(columnName)) columnIndices.group3.push(index);
+                }
             });
 
             rows.forEach(row => {

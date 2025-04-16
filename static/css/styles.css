@@ -395,6 +395,7 @@ body {
 }
 
 
+
 /*Styling for group headers*/
 .group-basic {
     background-color: #2563eb;
@@ -406,14 +407,27 @@ body {
 }
 
 .group-ps {
-    background-color: rgba(43, 124, 255, 0.1) !important; /* Purple tint */
+    background-color: rgba(43, 124, 255, 0.1) !important; 
 }
 
 .group-pr {
-    background-color: rgba(74, 57, 255, 0.1) !important; /* Green tint */
+    background-color: rgba(74, 57, 255, 0.1) !important; 
 }
 
 .group-auction {
     background-color: #8b5cf6; /* violet */
     color: white;
+}
+
+
+.group-ps-dam {
+    background-color: rgba(39, 201, 255, 0.1) !important; 
+}
+
+.group-pb {
+    background-color: rgba(43, 124, 255, 0.1)!important;
+}
+
+.group-racing {
+    background-color: rgba(74, 57, 255, 0.1) !important;
 }

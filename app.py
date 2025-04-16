@@ -10,6 +10,7 @@ from io import BytesIO
 from weasyprint import HTML
 import sys
 from dateutil import parser
+from unidecode import unidecode
 print(sys.executable)
 
 print("CWD:", os.getcwd())
@@ -20,7 +21,7 @@ print("CWD:", os.getcwd())
 app = Flask(__name__)
 
 CSV_PATH = os.path.join("Data/dashboard_data.csv")
-DAMS_CSV_PATH = os.path.join("Data/merge_auction_dams.csv")
+DAMS_CSV_PATH = os.path.join("Data/dashboard_data_dams.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Past Auctions - Horses.csv")
 
@@ -59,24 +60,35 @@ HORSES_RENAMED_COLUMNS = {
     'maternalParents': 'Dam\'s Parents Career',
     'inbreedingCoefficient': 'Inbreeding',
     'M_age_at_birth': 'Dam\'s Age',
-    'M_season': 'Dam\'s Season',
+    'M_season': 'Dam\'s Season'
 
 }
 DAMS_RENAMED_COLUMNS = {
-    'name': 'Name',
-    'studbook_id': 'Studbook ID',
-    'padrillo': 'Sire',
-    'M': 'Dam',
-    'birth_eday':'Birth Date',
-    'sex': 'Sex',
+    'name_clean': 'Name',
+    'padrillo_clean': 'Sire',
+    'M_clean': 'Dam',
     'haras': 'Haras',
-    'remate': 'Remate',
-    'source': 'Source',
-    'inbreedingCoefficient': 'Avg. Inbreeding Coefficient(if IC<0.05)',
-    'mother': 'Dams Age and Racing Career',
-    'Momsiblings': 'Dams Offsprings',
-    'uncles': 'Dams Siblings',
-    'dams_parents_career':'Dams Parents Career',
+    'link': 'Href',
+    'start': 'Start',
+    'end_date': 'End',
+    'lote': 'Lote',
+    'inbreedingCoefficient': 'Inbreeding Coef.',
+    'mother': 'Dam\'s Age and Racing Career',
+    'Momsiblings': 'Dam\'s Offs',
+    'uncles': 'Dam\'s Sibs',
+    'maternalParents': 'Dam\'s Parents Career',
+    'M_age_at_service': 'Dam\'s Age',
+    'M_season_orig': 'Dam\'s Season',
+    'birthRate': 'Birth Rate(All)',
+    'birthRateLast3': 'Birth Rate(last 3)',
+    'hadRestYear': 'Had Rest Year',
+    'M_total_rcs': 'Dam\'s total races',
+    'M_won_rcs': 'Dam\'s total wins',
+    'M_cumAEI': 'Dam\'s CEI',
+    'M_STK_ran': 'Dam STK races',
+    'M_STK_won': 'Dam STK wins',
+    'M_g1_STK_placed': 'Dam G1 STK placed',
+    'M_g1_STK_won': 'Dam G1 STK wins'
 }
 
 
@@ -121,7 +133,11 @@ def load_data(file_path):
     
 
 
-    # Re formateo de valores, a porcentaje o rodondeado
+    # Re formateo de valores, a porcentaje o rodondeado o strings
+    up_columns = ['name_clean','padrillo_clean','M_clean','haras','name','padrillo','M']
+    for col in up_columns:
+        if col in df.columns:
+            df[col] = df[col].apply(lambda x: unidecode(str(x).upper()) if pd.notnull(x) else x)
 
     percentage_columns = ['PS', 
                           'PR', 
@@ -147,7 +163,7 @@ def load_data(file_path):
             df[col] = df[col] * 100
 
             # Use 1 decimal only for PRS, else round to int
-            if col == 'PRS':
+            if col in ['PRS','PBRS']:
                 df[col] = df[col].round(1).apply(lambda x: f"{x}%" if pd.notnull(x) else "-")
             else:
                 df[col] = df[col].round(0).apply(lambda x: f"{int(x)}%" if pd.notnull(x) else "-")
@@ -155,7 +171,8 @@ def load_data(file_path):
                        'dams_parents_career',
                        'Dam_Mean_T3_BSN',
                         'Best_Foal_Bsn',
-                        'M_age_at_birth' ]
+                        'M_age_at_birth',
+                        'M_age_at_service']
     for col in rounded_columns:
         if col in df.columns:
            df[col] = df[col].round().astype('Int64').astype(str).replace('<NA>', '-')
@@ -176,6 +193,7 @@ def filter_dataframe(df, filters):
                 )
             ]
     return filtered_df
+
 @app.route("/export-pdf")
 def export_pdf():
     try:
@@ -239,7 +257,7 @@ def index():
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
 
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
-        dams_df = dams_df.iloc[:, [0,12,13,1,2,3,4,15,5,6,7,8,9,10,11,14,16]]
+        # dams_df = dams_df.iloc[:, [0,12,13,1,2,3,4,15,5,6,7,8,9,10,11,14,16]]
 
         horses_df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
         horses_df_order = ['Name',
@@ -279,8 +297,40 @@ def index():
                         # 'Studbook ID'
                              ]
         
+        dams_df_order = [
+            'Name',
+            'Sire',
+            'Dam',
+            'Haras',
+            'PBRS',
+            'PB',
+            'PR',
+            'PS',
+            'Inbreeding Coef.',
+            'Dam\'s Age and Racing Career',
+            'Dam\'s Offs',
+            'Dam\'s Sibs',
+            'Dam\'s Parents Career',
+            'Dam\'s Age',
+            'Dam\'s Season',
+            'Birth Rate(All)',
+            'Birth Rate(last 3)',
+            'Had Rest Year',
+            'Dam\'s total races',
+            'Dam\'s total wins',
+            'Dam\'s CEI',
+            'Dam STK races',
+            'Dam STK wins',
+            'Dam G1 STK placed',
+            'Dam G1 STK wins',
+            'Lote',
+            'Haras',
+            'Start',
+            'End'
+        ]
 
         horses_df = horses_df[horses_df_order]
+        dams_df = dams_df[dams_df_order]
         
         #We have to convert all the dates into the same format
         def parse_birth_date(date_str):
@@ -299,18 +349,35 @@ def index():
         horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
         horses_df['Start'] = horses_df['Start'].apply(parse_start_end)
         horses_df['End'] = horses_df['End'].apply(parse_start_end)
+        dams_df['Start'] = dams_df['Start'].apply(parse_start_end)
+        dams_df['End'] = dams_df['End'].apply(parse_start_end)
 
         # Format all as dd/mm/yy strings
         horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
         horses_df['Start'] = horses_df['Start'].dt.strftime('%d/%m/%y')
         horses_df['End'] = horses_df['End'].dt.strftime('%d/%m/%y')
+        dams_df['Start'] = dams_df['Start'].dt.strftime('%d/%m/%y')
+        dams_df['End'] = dams_df['End'].dt.strftime('%d/%m/%y')    
 
         # Calculate max values for gradient columns
-        gradient_columns = ['PR', 'PS', 'PRS', 'PB', 'PBRS']
+        gradient_columns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.']
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
-        dams_max_values = {col: float(dams_df[col].str.rstrip('%').astype(float).max()) 
-                          for col in gradient_columns if col in dams_df.columns}
+
+        # Add error handling for dams max values calculation
+        dams_max_values = {}
+        for col in gradient_columns:
+            if col in dams_df.columns:
+                try:
+                    # Remove % and convert to numeric, ignoring errors
+                    numeric_values = pd.to_numeric(dams_df[col].str.rstrip('%'), errors='coerce')
+                    if not numeric_values.empty and not numeric_values.isna().all():
+                        max_val = numeric_values.max()
+                        if pd.notnull(max_val):
+                            dams_max_values[col] = float(max_val)
+                except Exception as e:
+                    print(f"Error processing column {col}: {str(e)}")
+                    continue
         
         # Initialize empty filter dictionaries
         horses_filters = {col: '' for col in HORSES_FILTER_COLUMNS}
@@ -350,20 +417,29 @@ def index():
         #     axis=1
         # )
 
-        # horses_df.drop(columns=['Studbook ID'], inplace=True)
 
-        column_groups = [
+        column_groups_horses = [
                         ("Basic Information", 9, "group-basic"),
                         ("Family Overview", 11, "group-family"),
                         ("Decomposing PS Factors", 7, "group-ps"),
                         ("Factors PR", 3, "group-pr"),
                         ("Auction Info", 5, "group-auction")
                     ]
+        
+        column_groups_dams = [
+                        ("Basic Information", 9, "group-basic"),
+                        ("Decomposing PS Factors", 4, "group-ps-dam"),
+                        ("Factors PB/PR-Dam's Birth Success", 5, "group-pb"),
+                        ("Factors PS-Dam's Racing Career", 7, "group-racing"),
+                        ("Auction Info", 4, "group-auction")
+                    ]
 
         horses_data = horses_df.to_dict(orient="records")
         horses_columns = horses_df_order
 
-        dams_table = dams_df.to_html(classes='table table-striped', index=False)
+        dams_data = dams_df.to_dict(orient="records")
+        dams_columns = dams_df_order
+
         past_auction_table = past_auction_df.to_html(classes='table table-striped', index=False)
         auctioned_horses_table = auctioned_horses_df.to_html(classes='table table-striped', index=False)
 
@@ -394,10 +470,12 @@ def index():
         
         return render_template('index.html', 
                             initial_tab=initial_tab,
-                             column_groups=column_groups,
+                             column_groups=column_groups_horses,
                              horses_data=horses_data,
                              horses_columns=horses_columns,
-                             dams_table=dams_table,
+                             dams_data=dams_data,
+                             dams_columns=dams_columns,
+                             column_groups_dams=column_groups_dams,
                              past_auction_table=past_auction_table,
                              auctioned_horses_table=auctioned_horses_table,
                              horses_filters=horses_filters,
