@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam\'s Parents Career'
     ];
     const group2Columns_dams = [
-        'Dam\'s Age', 
         'Dam\'s Season', 
         'Birth Rate (All)', 
         'Birth Rate (last 3)', 
@@ -132,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam G1 STK wins'
     ];
     const group4Columns_dams = [
+        'Dam\'s Age', 
         'Dam Stk Wnrs / RA Offs', 
         'Dams RA Offs', 
         'Dam Top 3 BSN\'s', 
