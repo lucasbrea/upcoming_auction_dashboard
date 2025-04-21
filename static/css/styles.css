@@ -440,3 +440,11 @@ body {
 .group-inbreeding{
     background-color: rgba(255, 255, 255, 0.212) !important; 
 }
+
+.group-family-sire{
+    background-color: rgba(166, 250, 160, 0.1) !important; 
+}
+
+.group-family-dam{
+    background-color: rgba(255, 144, 248, 0.1) !important; 
+}

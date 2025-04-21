@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         function getColumnHeaders(table) {
             const headerRows = table.querySelectorAll('thead tr');
-            return headerRows.length >= 2 ? headerRows[1].querySelectorAll('th') : [];
+            return headerRows.length >= 3 ? headerRows[2].querySelectorAll('th') : [];
         }
-    
+     
     const columnConfig = {
         'PRS': { type: 'percentage' },
         'PR': { type: 'percentage' },
@@ -81,17 +81,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const sortableColumns = Object.keys(columnConfig);
     const tables = document.querySelectorAll('.table');
 
-    const group1Columns = ['Sire Stk Wnrs / Rnrs', 
+    const group1Columns = ['STK Wnrs / Rnrs', 
+                            '#RUnners/ Born at 3yo',
                             'Dam Stk Wnrs / RA Offs', 
                             'Dams RA Offs', 
                             'Dam Top 3 BSN\'s', 
                             'Dam\'s Foals Top 3 BSN',
+                            'Dam Placed STK?',
                             'Dam Raced STK?',
                             'Dam Total Races',
                             'Dam\'s Foal Raced Stk?',
                             'Dam\'s Foal Placed Stk?',
                             'Dam\'s Siblings Total G1/G2',
-                            'Dam\'s Siblings G1G2/Races'
+                            'Dam\'s Siblings G1G2/Races',
+                            'CEI per foal',
+                            'Age'
 
                         ];
     const group2Columns = [
@@ -105,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     const group3Columns = [
                             'Inbreeding',
-                            'Dam\'s Age',
                             'Dam\'s Season'
     ];
     const group1Columns_dams = [
@@ -143,10 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam\'s Siblings Total G1/G2',
         'Dam\'s Siblings G1G2/Races'
     ];
-    function getColumnHeaders(table) {
-        const headerRows = table.querySelectorAll('thead tr');
-        return headerRows.length >= 2 ? headerRows[1].querySelectorAll('th') : [];
-    }
+    
 
     function parseValue(value, type) {
         if (!value || value === '-') return null;

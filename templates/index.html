@@ -74,6 +74,11 @@
                                 <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
                                 {% endfor %}
                             </tr>
+                            <tr class="column-groups">
+                                {% for group_name, colspan, class_name in column_groups_horses_h2 %}
+                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                                {% endfor %}
+                            </tr>
                             <tr>
                                 {% for column in horses_columns %}
                                 <th data-column="{{ column }}">{{ column }}</th>

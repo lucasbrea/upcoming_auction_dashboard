@@ -39,7 +39,6 @@ HORSES_RENAMED_COLUMNS = {
     'link' : 'Href',
     'start': 'Start',
     'end_date': 'End',
-    'Sire_Stk_Wnrs_Rnrs': 'Sire Stk Wnrs / Rnrs',
     'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
     'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
@@ -59,8 +58,11 @@ HORSES_RENAMED_COLUMNS = {
     'uncles': 'Dam\'s Sibs',
     'maternalParents': 'Dam\'s Parents Career',
     'inbreedingCoefficient': 'Inbreeding',
-    'M_age_at_birth': 'Dam\'s Age',
-    'M_season': 'Dam\'s Season'
+    'M_age_at_birth': 'Age',
+    'M_season': 'Dam\'s Season',
+    'FathSibSTKWnrShL4Gens': 'STK Wnrs / Rnrs',
+    'FathSib_runshare_3yo': '#RUnners/ Born at 3yo',
+    'MSib_mean_cumAEI_at2y':'CEI per foal'
 
 }
 DAMS_RENAMED_COLUMNS = {
@@ -168,7 +170,10 @@ def load_data(file_path):
                           'maternalParents',
                           'birthRateLast3',
                           'birthRate',
-                          'hadRestYear'
+                          'hadRestYear',
+                          'FathSibSTKWnrShL4Gens',
+                          'FathSib_runshare_3yo',
+                          'MSib_mean_cumAEI_at2y'
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -283,17 +288,21 @@ def index():
                         'PRS',
                         'PR',
                         'PS',
-                        'Sire Stk Wnrs / Rnrs',
+                        'STK Wnrs / Rnrs',
+                        '#RUnners/ Born at 3yo',
+                        'Age',
                         'Dam Stk Wnrs / RA Offs',
                         'Dams RA Offs',
                         'Dam Top 3 BSN\'s',
                         'Dam\'s Foals Top 3 BSN',
+                        'Dam Placed STK?',
                         'Dam Raced STK?',
                         'Dam Total Races',
                         'Dam\'s Foal Raced Stk?',
                         'Dam\'s Foal Placed Stk?',
                         'Dam\'s Siblings Total G1/G2',
                         'Dam\'s Siblings G1G2/Races',
+                        'CEI per foal',
                         'Own Chars',
                         'Father',
                         'Father\'s Offs',
@@ -302,7 +311,6 @@ def index():
                         'Dam\'s Sibs',
                         'Dam\'s Parents Career',
                         'Inbreeding',
-                        'Dam\'s Age',
                         'Dam\'s Season',
                         'Start',
                         'End',
@@ -443,10 +451,19 @@ def index():
 
         column_groups_horses = [
                         ("Basic Information", 9, "group-basic"),
-                        ("Family Overview", 11, "group-family"),
+                        ("Family Overview", 15, "group-family"),
                         ("Decomposing PS Factors", 7, "group-ps"),
-                        ("Factors PR", 3, "group-pr"),
+                        ("Factors PR", 2, "group-pr"),
                         ("Auction Info", 5, "group-auction")
+                    ]
+        
+        column_groups_horses_h2 = [
+                        ("", 9, "group-basic"),
+                        ("Sire", 2, "group-family-sire"),
+                        ("Dam", 13, "group-family-dam"),
+                        ("", 7, ""),
+                        ("", 2, ""),
+                        ("", 5, "group-auction")
                     ]
         
         column_groups_dams = [
@@ -496,6 +513,7 @@ def index():
         return render_template('index.html', 
                             initial_tab=initial_tab,
                              column_groups=column_groups_horses,
+                             column_groups_horses_h2=column_groups_horses_h2,
                              horses_data=horses_data,
                              horses_columns=horses_columns,
                              dams_data=dams_data,
