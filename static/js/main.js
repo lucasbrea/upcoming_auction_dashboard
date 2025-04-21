@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
         function getColumnIndex(table, columnName) {
             const headerRows = table.querySelectorAll('thead tr');
-            if (headerRows.length < 2) return 0;
-    
-            const headers = headerRows[1].querySelectorAll('th'); 
+            if (headerRows.length < 3) return 0;
+        
+            const headers = headerRows[2].querySelectorAll('th');  // was [1]
             for (let i = 0; i < headers.length; i++) {
                 if (headers[i].textContent.trim() === columnName) {
                     return i + 1;
