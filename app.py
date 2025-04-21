@@ -475,6 +475,10 @@ def index():
                         ("Factors PS-Dam's Racing Career", 7, "group-racing"),
                         ("Auction Info", 4, "group-auction")
                     ]
+        column_groups_dams_h2 = [
+                        ("", 38, "group-basic"),
+                    ]
+
 
         horses_data = horses_df.to_dict(orient="records")
         horses_columns = horses_df_order
