@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     const group4Columns_dams = [
         'Dam\'s Age', 
-        'Dam Stk Wnrs / RA Offs', 
+        // 'Dam Stk Wnrs / RA Offs', 
         'Dams RA Offs', 
         'Dam Top 3 BSN\'s', 
         'Dam\'s Foals Top 3 BSN',

@@ -80,7 +80,7 @@ DAMS_RENAMED_COLUMNS = {
     'uncles': 'Dam\'s Sibs',
     'maternalParents': 'Dam\'s Parents Career',
     'M_age_at_service': 'Dam\'s Age',
-    # 'M_season': 'Dam\'s Season',
+    'M_season_orig': 'Dam\'s Season',
     'birthRate': 'Birth Rate (All)',
     'birthRateLast3': 'Birth Rate (last 3)',
     'hadRestYear': 'Had Rest Year',
@@ -93,15 +93,15 @@ DAMS_RENAMED_COLUMNS = {
     'M_g1_STK_won': 'Dam G1 STK wins',
     # 'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
-    # 'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
-    # 'Dam_Raced_STK': 'Dam Raced STK?',
-    # 'Dam_Placed_STK': 'Dam Placed STK?',
-    # 'Dam_Total_Rcs': 'Dam Total Races',
-    # 'Best_Foal_Bsn': 'Dam\'s Foals Top 3 BSN',
-    # 'Best_Foal_Raced_Stk':'Dam\'s Foal Raced Stk?',
-    # 'Best_Foal_Placed_Stk':'Dam\'s Foal Placed Stk?',
-    # 'Dam_Sib_Total_G1G2': 'Dam\'s Siblings Total G1/G2',
-    # 'DamSibs_G1G2_Total': 'Dam\'s Siblings G1G2/Races'
+    'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
+    'Dam_Raced_STK': 'Dam Raced STK?',
+    'Dam_Placed_STK': 'Dam Placed STK?',
+    'Dam_Total_Rcs': 'Dam Total Races',
+    'Best_Foal_Bsn': 'Dam\'s Foals Top 3 BSN',
+    'Best_Foal_Raced_Stk':'Dam\'s Foal Raced Stk?',
+    'Best_Foal_Placed_Stk':'Dam\'s Foal Placed Stk?',
+    'Dam_Sib_Total_G1G2': 'Dam\'s Siblings Total G1/G2',
+    'DamSibs_G1G2_Total': 'Dam\'s Siblings G1G2/Races'
 }
 
 
@@ -170,7 +170,7 @@ def load_data(file_path):
                           'maternalParents',
                           'birthRateLast3',
                           'birthRate',
-                          'hadRestYear',
+                        #   'hadRestYear',
                           'FathSibSTKWnrShL4Gens',
                           'FathSib_runshare_3yo',
                           'MSib_mean_cumAEI_at2y'
@@ -191,6 +191,7 @@ def load_data(file_path):
                         'Best_Foal_Bsn',
                         'M_age_at_birth',
                         'M_age_at_service',
+                        'hadRestYear',
                         'M_cumAEI'
     ]
     for col in rounded_columns:
@@ -330,20 +331,20 @@ def index():
             'PS',
             'Dam\'s Age',
             # 'Dam Stk Wnrs / RA Offs',
-            # 'Dams RA Offs',
-            # 'Dam Top 3 BSN\'s',
-            # 'Dam\'s Foals Top 3 BSN',
-            # 'Dam Raced STK?',
-            # 'Dam\'s Foal Raced Stk?',
-            # 'Dam\'s Foal Placed Stk?',
-            # 'Dam\'s Siblings Total G1/G2',
-            # 'Dam\'s Siblings G1G2/Races',
+            'Dams RA Offs',
+            'Dam Top 3 BSN\'s',
+            'Dam\'s Foals Top 3 BSN',
+            'Dam Raced STK?',
+            'Dam\'s Foal Raced Stk?',
+            'Dam\'s Foal Placed Stk?',
+            'Dam\'s Siblings Total G1/G2',
+            'Dam\'s Siblings G1G2/Races',
             'Inbreeding Coef.',
             'Dam\'s Age and Racing Career',
             'Dam\'s Offs',
             'Dam\'s Sibs',
             'Dam\'s Parents Career',
-            # 'Dam\'s Season',
+            'Dam\'s Season',
             'Birth Rate (All)',
             'Birth Rate (last 3)',
             'Had Rest Year',
@@ -468,10 +469,10 @@ def index():
         
         column_groups_dams = [
                         ("Basic Information", 8, "group-basic"),
-                        ("Dams Characteristics", 1, "group-family-dams"),
+                        ("Dams Characteristics", 9, "group-family-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
                         ("Decomposing PS Factors", 4, "group-ps-dam"),
-                        ("Factors PB/PR-Dam's Birth Success", 3, "group-pb"),
+                        ("Factors PB/PR-Dam's Birth Success", 4, "group-pb"),
                         ("Factors PS-Dam's Racing Career", 7, "group-racing"),
                         ("Auction Info", 4, "group-auction")
                     ]
