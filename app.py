@@ -329,6 +329,7 @@ def index():
             'Haras',
             'PBRS',
             'PB',
+            'PRS',
             'PR',
             'PS',
             'Dam\'s Age',
@@ -471,7 +472,7 @@ def index():
                     ]
         
         column_groups_dams = [
-                        ("Basic Information", 8, "group-basic"),
+                        ("Basic Information", 9, "group-basic"),
                         ("Dams Characteristics", 10, "group-family-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
                         ("Decomposing PS Factors", 4, "group-ps-dam"),
