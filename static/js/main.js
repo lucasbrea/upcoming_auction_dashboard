@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam\'s Age', 
         // 'Dam Stk Wnrs / RA Offs', 
         'Dams RA Offs', 
+        '#Offs Ran',
         'Dam Top 3 BSN\'s', 
         'Dam\'s Foals Top 3 BSN',
         'Dam Raced STK?',
@@ -202,7 +203,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         const value = parseFloat(raw);
 
                         if (!isNaN(value) && maxValue > 0) {
-                            let ratio = value / maxValue;
+                            let ratio;
+                            if (columnName === 'Inbreeding Coef.') {
+                                const minValue = 0;
+                                ratio = 1 - (value - minValue) / (maxValue - minValue);
+                            } else {
+                                ratio = value / maxValue;
+                            }
                             ratio = Math.max(0, Math.min(1, ratio));
                             const r = Math.floor(255 * (1 - ratio));
                             const g = Math.floor(255 * ratio);

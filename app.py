@@ -93,6 +93,7 @@ DAMS_RENAMED_COLUMNS = {
     'M_g1_STK_won': 'Dam G1 STK wins',
     # 'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
+    'MomSib_Sibs_raced_at2y': '#Offs Ran',
     'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
     'Dam_Raced_STK': 'Dam Raced STK?',
     'Dam_Placed_STK': 'Dam Placed STK?',
@@ -332,6 +333,7 @@ def index():
             'Dam\'s Age',
             # 'Dam Stk Wnrs / RA Offs',
             'Dams RA Offs',
+            '#Offs Ran',
             'Dam Top 3 BSN\'s',
             'Dam\'s Foals Top 3 BSN',
             'Dam Raced STK?',
@@ -469,7 +471,7 @@ def index():
         
         column_groups_dams = [
                         ("Basic Information", 8, "group-basic"),
-                        ("Dams Characteristics", 9, "group-family-dams"),
+                        ("Dams Characteristics", 10, "group-family-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
                         ("Decomposing PS Factors", 4, "group-ps-dam"),
                         ("Factors PB/PR-Dam's Birth Success", 4, "group-pb"),
