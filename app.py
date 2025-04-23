@@ -37,6 +37,7 @@ HORSES_RENAMED_COLUMNS = {
     'sex': 'Sex',
     'haras': 'Haras',
     'link' : 'Href',
+    'lote': 'Lote',
     'start': 'Start',
     'end_date': 'End',
     'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
@@ -316,7 +317,7 @@ def index():
                         'Dam\'s Season',
                         'Start',
                         'End',
-                        'lote',
+                        'Lote',
                         'Href'
                         # 'Studbook ID'
                              ]
