@@ -75,7 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
         'Inbreeding Coef.': { type: 'percentage' },
         'Start': { type: 'date' },
         'End': { type: 'date' },
-        'Lote':{type: 'number'}
+        'Lote':{type: 'number'},
+        'Price per Bp':{type: 'number'},
+        'Auction Order':{type: 'number'}
     };
 
     const gradientColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.'];

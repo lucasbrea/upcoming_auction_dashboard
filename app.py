@@ -159,7 +159,8 @@ AUCTIONED_HORSES_FILTER_COLUMNS = [
                             'Sire',
                             'Dam',
                             'Year',
-                            'Haras'
+                            'Haras',
+                            'Title'
                                     ]
 
 
@@ -256,6 +257,16 @@ def index():
         horses_df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
 
         auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
+
+        def format_dollar(x):
+            try:
+                 return f"${float(x):,.0f}" if pd.notnull(x) else ""
+            except Exception:
+                return ""
+
+        for col in ['Value', 'Value USDB', 'Price per Bp']:
+            if col in auctioned_horses_df.columns:
+                auctioned_horses_df[col] = auctioned_horses_df[col].apply(format_dollar)
 
         horses_df_order = [
                        'Name',
