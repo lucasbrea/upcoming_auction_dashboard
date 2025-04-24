@@ -177,34 +177,55 @@
                         </table>
                     </div>
                 </div>
-            
-                <!-- Auctioned Horses Tab -->
-                <div class="tab-pane fade {% if initial_tab == 'auctioned-horses' %}show active{% endif %}" id="auctioned-horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
-                    <div class="filter-section">
-                        <div class="filter-row">
-                            <div class="row">
-                                {% for column in auctioned_horses_filters.keys() %}
-                                <div class="col">
-                                    <div class="filter-label">{{ column }}</div>
-                                    <input type="text" 
-                                           class="filter-input" 
-                                           data-table="auctioned-horses"
-                                           data-column="{{ column }}"
-                                           value="{{ auctioned_horses_filters[column] or '' }}"
-                                           placeholder="Filter {{ column }}">
-                                </div>
-                                {% endfor %}
+        
+               <!-- Auctioned Horses Tab -->
+               <div class="tab-pane fade {% if initial_tab == 'auctioned-horses' %}show active{% endif %}" id="auctioned-horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
+                <div class="filter-section">
+                    <div class="filter-row">
+                        <div class="row">
+                            {% for column in auctioned_horses_filters.keys() %}
+                            <div class="col">
+                                <div class="filter-label">{{ column }}</div>
+                                <input type="text" 
+                                       class="filter-input" 
+                                       data-table="auctioned-horses"
+                                       data-column="{{ column }}"
+                                       value="{{ auctioned_horses_filters[column] or '' }}"
+                                       placeholder="Filter {{ column }}">
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="table-container">
-                        <table class="table">
-                            <tbody>
-                                {{ auctioned_horses_table | safe }}
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
+            
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="column-groups">
+                            {% for group_name, colspan, class_name in column_groups_auctioned_horses %}
+                            <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr class="column-groups">
+                            {% for group_name, colspan, class_name in column_groups_auctioned_horses_h2 %}
+                            <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for column in auctioned_horses_columns %}
+                            <th data-column="{{ column }}">{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in auctioned_horses_data %}
+                        <tr>
+                            {% for column in auctioned_horses_columns %}
+                            <td>{{ row[column] }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
@@ -215,6 +236,7 @@
     <script>
         const horsesMaxValues = {{ horses_max_values | tojson }};
         const damsMaxValues = {{ dams_max_values | tojson }};
+        const auctioned_horses_max_values = {{ auctioned_horses_max_values | tojson }};
     </script>
     
 </body>

@@ -23,7 +23,7 @@ app = Flask(__name__)
 CSV_PATH = os.path.join("Data/dashboard_data.csv")
 DAMS_CSV_PATH = os.path.join("Data/dashboard_data_dams.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
-AUCTIONED_HORSES_PATH = os.path.join("Data/Past Auctions - Horses.csv")
+AUCTIONED_HORSES_PATH = os.path.join("Data/past_auction_horse_data_csv.csv")
 
 
 
@@ -106,6 +106,29 @@ DAMS_RENAMED_COLUMNS = {
     'DamSibs_G1G2_Total': 'Dam\'s Siblings G1G2/Races'
 }
 
+PAST_AUCTION_RENAMED_COLUMNS = {
+
+    'name': 'Name',
+    'padrillo': 'Sire',
+    'M': 'Dam',
+    'birth_eday': 'Birth Date',
+    'sex': 'Sex',
+    'PR': 'PR',
+    'PS': 'PS',
+    'PRS': 'PRS',
+    'Haras': 'Haras',
+    'value': 'Value',
+    'valueUSDB': 'Value USDB',
+    'pricePerBp': 'Price per Bp',
+    'title': 'Title',
+    'source': 'Source',
+    'auctionOrder': 'Auction Order',
+    'studbook_id': 'Studbook ID',
+    'year': 'Year',
+    'date': 'Auction Date'
+
+}
+
 
 # Columnas para filtrar
 HORSES_FILTER_COLUMNS = [
@@ -131,12 +154,12 @@ AUCTIONS_FILTER_COLUMNS = [
                             ]
 
 AUCTIONED_HORSES_FILTER_COLUMNS = [
-                                    'name', 
-                                    'padrillo', 
-                                    'yegua',
-                                    'criador',
-                                    'valueUSDB',
-                                    'year'
+
+                            'Name',
+                            'Sire',
+                            'Dam',
+                            'Year',
+                            'Haras'
                                     ]
 
 
@@ -194,7 +217,9 @@ def load_data(file_path):
                         'M_age_at_birth',
                         'M_age_at_service',
                         'hadRestYear',
-                        'M_cumAEI'
+                        'M_cumAEI',
+                        'pricePerBp',
+                        'valueUSDB'
     ]
     for col in rounded_columns:
         if col in df.columns:
@@ -217,59 +242,6 @@ def filter_dataframe(df, filters):
             ]
     return filtered_df
 
-@app.route("/export-pdf")
-def export_pdf():
-    try:
-        # Get the current tab and filters from query parameters
-        current_tab = request.args.get('current_tab', 'horses')
-        filters = {k: v for k, v in request.args.items() if k != 'current_tab'}
-
-        # Load the appropriate dataset based on the current tab
-        if current_tab == 'horses':
-            df = load_data(CSV_PATH)
-            df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
-            max_values = {col: float(df[col].str.rstrip('%').astype(float).max()) 
-                         for col in ['PR', 'PS', 'PRS', 'PB', 'PBRS'] if col in df.columns}
-        elif current_tab == 'dams':
-            df = load_data(DAMS_CSV_PATH)
-            df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
-            df = df.iloc[:, [0,12,13,1,2,3,4,15,5,6,7,8,9,10,11,14,16]]
-            max_values = {col: float(df[col].str.rstrip('%').astype(float).max()) 
-                         for col in ['PR', 'PS', 'PRS', 'PB', 'PBRS'] if col in df.columns}
-        elif current_tab == 'auctions':
-            df = load_data(PAST_AUCTION_PATH)
-            max_values = {}
-        elif current_tab == 'auctioned-horses':
-            df = load_data(AUCTIONED_HORSES_PATH)
-            max_values = {}
-        else:
-            return "Invalid tab selected", 400
-
-        # Apply filters
-        df = filter_dataframe(df, filters)
-
-        # Convert DataFrame to HTML with gradient highlighting
-        html = render_template("pdf_template.html", 
-                             table=df.to_html(index=False, classes='table table-striped'),
-                             title=current_tab.replace('-', ' ').title(),
-                             max_values=max_values,
-                             gradient_columns=['PR', 'PS', 'PRS', 'PB', 'PBRS'])
-
-        # Generate PDF
-        pdf_file = BytesIO()
-        HTML(string=html).write_pdf(pdf_file)
-        pdf_file.seek(0)
-
-        # Return PDF file
-        return send_file(
-            pdf_file,
-            download_name=f"{current_tab}_filtered.pdf",
-            as_attachment=True,
-            mimetype='application/pdf'
-        )
-    except Exception as e:
-        return str(e), 500
-
 @app.route('/')
 def index():
     try:
@@ -282,7 +254,11 @@ def index():
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
 
         horses_df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
-        horses_df_order = ['Name',
+
+        auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
+
+        horses_df_order = [
+                       'Name',
                        'Sire',
                         'Dam',
                         'Sex',
@@ -365,8 +341,27 @@ def index():
             'Href'
         ]
 
+        past_auction_order = [
+            'Name',
+            'Sire',
+            'Dam',
+            'Birth Date',
+            'Sex',
+            'PR',
+            'PS',
+            'PRS',
+            'Haras',
+            'Value',
+            'Value USDB',
+            'Price per Bp',
+            'Title',
+            'Auction Order',
+            'Year',
+            'Auction Date'
+        ]
         horses_df = horses_df[horses_df_order]
         dams_df = dams_df[dams_df_order]
+        auctioned_horses_df = auctioned_horses_df[past_auction_order]
         
         #We have to convert all the dates into the same format
         def parse_birth_date(date_str):
@@ -387,6 +382,8 @@ def index():
         horses_df['End'] = horses_df['End'].apply(parse_start_end)
         dams_df['Start'] = dams_df['Start'].apply(parse_start_end)
         dams_df['End'] = dams_df['End'].apply(parse_start_end)
+        auctioned_horses_df['Auction Date'] = auctioned_horses_df['Auction Date'].apply(parse_start_end)
+        auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].apply(parse_birth_date)
 
         # Format all as dd/mm/yy strings
         horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
@@ -394,10 +391,16 @@ def index():
         horses_df['End'] = horses_df['End'].dt.strftime('%d/%m/%y')
         dams_df['Start'] = dams_df['Start'].dt.strftime('%d/%m/%y')
         dams_df['End'] = dams_df['End'].dt.strftime('%d/%m/%y')    
+        auctioned_horses_df['Auction Date'] = auctioned_horses_df['Auction Date'].dt.strftime('%d/%m/%y')
+        auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].dt.strftime('%d/%m/%y')
 
         # Calculate max values for gradient columns
         gradient_columns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.']
+
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
+                           for col in gradient_columns if col in horses_df.columns}
+        
+        auctioned_horses_max_values = {col: float(auctioned_horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
 
         # Add error handling for dams max values calculation
@@ -484,6 +487,15 @@ def index():
                         ("", 38, "group-basic"),
                     ]
 
+        column_groups_auctioned_horses = [
+
+                        ("Basic Information", 9, "group-basic"),
+                        ("Auction Info", 7, "group-past-auction")
+        ]
+        column_groups_auctioned_horses_h2 = [
+
+                        ("", 16, "group-basic")
+        ]
 
         horses_data = horses_df.to_dict(orient="records")
         horses_columns = horses_df_order
@@ -491,8 +503,10 @@ def index():
         dams_data = dams_df.to_dict(orient="records")
         dams_columns = dams_df_order
 
+        auctioned_horses_data = auctioned_horses_df.to_dict(orient="records")
+        auctioned_horses_columns = past_auction_order
+
         past_auction_table = past_auction_df.to_html(classes='table table-striped', index=False)
-        auctioned_horses_table = auctioned_horses_df.to_html(classes='table table-striped', index=False)
 
         fig = px.line(
             past_auction_df,
@@ -525,18 +539,26 @@ def index():
                              column_groups_horses_h2=column_groups_horses_h2,
                              horses_data=horses_data,
                              horses_columns=horses_columns,
+
                              dams_data=dams_data,
                              dams_columns=dams_columns,
                              column_groups_dams=column_groups_dams,
+
                              past_auction_table=past_auction_table,
-                             auctioned_horses_table=auctioned_horses_table,
                              horses_filters=horses_filters,
                              dams_filters=dams_filters,
                              auctions_filters=auctions_filters,
-                             auctioned_horses_filters=auctioned_horses_filters,
+                            auctioned_horses_filters=auctioned_horses_filters,
+                             auctioned_horses_data=auctioned_horses_data,
+                             auctioned_horses_columns=auctioned_horses_columns,
+                             column_groups_auctioned_horses=column_groups_auctioned_horses,
+                             column_groups_auctioned_horses_h2=column_groups_auctioned_horses_h2,
+                             auctioned_horses_max_values=auctioned_horses_max_values,
                              horses_max_values=horses_max_values,
                              dams_max_values=dams_max_values,
                              plot_url=plot_html)
+    
+    
     except Exception as e:
         # When there's an error, we still need to pass empty filters
         return render_template('index.html', 
@@ -546,39 +568,6 @@ def index():
                              auctions_filters={col: '' for col in AUCTIONS_FILTER_COLUMNS},
                              auctioned_horses_filters={col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS})
 
-
-
-@app.route('/horse/<studbook_id>')
-def horse_profile(studbook_id):
-    try:
-        # Load the horses dataset
-        df = load_data(CSV_PATH)
-        df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
-        
-        # Convert studbook_id column to string for comparison
-        df['Studbook ID'] = df['Studbook ID'].astype(str).str.strip()
-        studbook_id = str(studbook_id).strip()
-        
-        # Find the horse with matching studbook_id
-        matching_horses = df[df['Studbook ID'] == studbook_id]
-        
-        if matching_horses.empty:
-            return f"No horse found with Studbook ID: {studbook_id}", 404
-            
-        horse = matching_horses.iloc[0]
-        display_columns = list(HORSES_RENAMED_COLUMNS.values())
-        print("Display columns:", display_columns)
-        
-        return render_template('horse_profile.html', 
-                             horse=horse,
-                             columns=display_columns,
-                             title=f"Profile - {horse['Name']}")
-    
-    except Exception as e:
-        print(f"Error in horse_profile: {str(e)}")
-        print(f"Searching for studbook_id: {studbook_id}")
-        print(f"Available IDs: {df['Studbook ID'].unique()}")
-        return str(e), 500
 
 if __name__ == '__main__':
     app.run(debug=True) 

@@ -149,6 +149,15 @@ document.addEventListener('DOMContentLoaded', function () {
         'Dam\'s Siblings G1G2/Races'
     ];
     
+    const group1Columns_auctioned_horses = [
+            'Value',
+            'Value USDB',
+            'Price per Bp',
+            'Title',
+            'Auction Order',
+            'Year',
+            'Auction Date'
+    ]
 
     function parseValue(value, type) {
         if (!value || value === '-') return null;
@@ -236,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const rows = table.querySelectorAll('tbody tr');
             const isHorsesTable = table.closest('#horses') !== null;
             const isDamsTable = table.closest('#dams') !== null;
+            const isauctioned_horses_table = table.closest('#auctioned-horses') !== null;
 
             const columnIndices = {
                 group1: [],
@@ -255,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group2Columns_dams.includes(columnName)) columnIndices.group2.push(index);
                     if (group3Columns_dams.includes(columnName)) columnIndices.group3.push(index);
                     if (group4Columns_dams.includes(columnName)) columnIndices.group4.push(index);
+                } else if (isauctioned_horses_table){
+                    if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
                 }
             });
 

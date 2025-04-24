@@ -422,6 +422,9 @@ body {
     color: white;
 }
 
+.group-past-auction {
+    background-color:rgba(39, 201, 255, 0.1) !important;  
+}
 
 .group-ps-dam {
     background-color: rgba(39, 201, 255, 0.1) !important; 
