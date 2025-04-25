@@ -107,7 +107,6 @@ DAMS_RENAMED_COLUMNS = {
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
-
     'name': 'Name',
     'padrillo': 'Sire',
     'M': 'Dam',
@@ -121,7 +120,28 @@ PAST_AUCTION_RENAMED_COLUMNS = {
     'valueUSDB': 'Value USDB',
     'pricePerBp': 'Price per Bp',
     'title': 'Title',
-    'source': 'Source',
+    'source': 'Source', 
+    'auctionOrder': 'Auction Order',
+    'studbook_id': 'Studbook ID',
+    'year': 'Year',
+    'date': 'Auction Date'
+
+}
+
+
+PAST_AUCTION_SUMMARY_RENAMED_COLUMNS = {
+
+    'birth_eday': 'Birth Date',
+    'sex': 'Sex',
+    'PR': 'PR',
+    'PS': 'PS',
+    'PRS': 'PRS',
+    'Haras': 'Criador',
+    'value': 'Value',
+    'valueUSDB': 'valueUSDB',
+    'pricePerBp': 'PricePerBp',
+    'title': 'Title',
+    'source': 'Source', 
     'auctionOrder': 'Auction Order',
     'studbook_id': 'Studbook ID',
     'year': 'Year',
@@ -148,9 +168,8 @@ DAMS_FILTER_COLUMNS = [
                         'Link'
                         ]
 AUCTIONS_FILTER_COLUMNS = [
-                            'criador', 
-                            'year', 
-                            'valueUSDB'
+                            'Criador', 
+                            'Year', 
                             ]
 
 AUCTIONED_HORSES_FILTER_COLUMNS = [
@@ -249,7 +268,7 @@ def index():
         # Load both datasets
         horses_df = load_data(CSV_PATH)
         dams_df = load_data(DAMS_CSV_PATH)
-        past_auction_df = load_data(PAST_AUCTION_PATH)
+        past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
 
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
@@ -258,11 +277,24 @@ def index():
 
         auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
 
+        past_auction_summary.rename(columns=PAST_AUCTION_SUMMARY_RENAMED_COLUMNS, inplace=True)
+
         def format_dollar(x):
             try:
                  return f"${float(x):,.0f}" if pd.notnull(x) else ""
             except Exception:
                 return ""
+        past_auction_summary["valueUSDB"] = pd.to_numeric(past_auction_summary["valueUSDB"], errors="coerce")
+        past_auction_summary["PricePerBp"] = pd.to_numeric(past_auction_summary["PricePerBp"], errors="coerce")       
+        past_auction_summary = past_auction_summary.groupby(["Criador","Year"]).agg(
+            valueUSDB=("valueUSDB", "mean"),
+            PricePerBp=("PricePerBp", "mean"),
+            count=("valueUSDB", "count"),
+
+        ).reset_index()
+
+        past_auction_summary["valueUSDB"] = past_auction_summary["valueUSDB"].apply(format_dollar)
+        past_auction_summary["PricePerBp"] = past_auction_summary["PricePerBp"].apply(format_dollar)
 
         for col in ['Value', 'Value USDB', 'Price per Bp']:
             if col in auctioned_horses_df.columns:
@@ -370,9 +402,18 @@ def index():
             'Year',
             'Auction Date'
         ]
+
+        past_auction_summary_order = [
+            'Criador',
+            'Year',
+            'valueUSDB',
+            'PricePerBp',
+            'count'
+        ]
         horses_df = horses_df[horses_df_order]
         dams_df = dams_df[dams_df_order]
         auctioned_horses_df = auctioned_horses_df[past_auction_order]
+        past_auction_summary = past_auction_summary[past_auction_summary_order]
         
         #We have to convert all the dates into the same format
         def parse_birth_date(date_str):
@@ -455,7 +496,7 @@ def index():
         # Apply filters
         horses_df = filter_dataframe(horses_df, horses_filters)
         dams_df = filter_dataframe(dams_df, dams_filters)
-        past_auction_df = filter_dataframe(past_auction_df, auctions_filters)
+        past_auction_summary = filter_dataframe(past_auction_summary, auctions_filters)
         auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
         
         #Replace sex int values with strings
@@ -508,6 +549,9 @@ def index():
                         ("", 16, "group-basic")
         ]
 
+        column_groups_past_auction_summary = [ ("", 5, "group-basic")]
+        column_groups_past_auction_summary_h2 = [("", 5, "group-basic")]
+
         horses_data = horses_df.to_dict(orient="records")
         horses_columns = horses_df_order
 
@@ -517,30 +561,10 @@ def index():
         auctioned_horses_data = auctioned_horses_df.to_dict(orient="records")
         auctioned_horses_columns = past_auction_order
 
-        past_auction_table = past_auction_df.to_html(classes='table table-striped', index=False)
+        auction_summary_data = past_auction_summary.to_dict(orient="records")
+        auction_summary_columns = past_auction_summary_order
 
-        fig = px.line(
-            past_auction_df,
-            x="year",
-            y="valueUSDB",
-            color="criador",
-            markers=True,
-            title="Precio Promedio por Criador",
-            labels={
-                "year": "Año",
-                "valueUSDB": "Precio Promedio (USD)",
-                "criador": "Criador"
-            }
-        )
 
-        fig.update_layout(
-            yaxis_tickformat=',',
-            legend_title_text="Criador",
-            margin=dict(t=50, b=40, l=40, r=40),
-            plot_bgcolor="#fff",
-            hovermode="x unified"
-        )
-        plot_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
 
         initial_tab = request.args.get('tab', 'horses')
         
@@ -555,19 +579,25 @@ def index():
                              dams_columns=dams_columns,
                              column_groups_dams=column_groups_dams,
 
-                             past_auction_table=past_auction_table,
+                             auction_summary_data=auction_summary_data,
+                             auction_summary_columns=auction_summary_columns,
+                            column_groups_past_auction_summary=column_groups_past_auction_summary,
+                            column_groups_past_auction_summary_h2=column_groups_past_auction_summary_h2,
+
                              horses_filters=horses_filters,
                              dams_filters=dams_filters,
                              auctions_filters=auctions_filters,
                             auctioned_horses_filters=auctioned_horses_filters,
+
                              auctioned_horses_data=auctioned_horses_data,
                              auctioned_horses_columns=auctioned_horses_columns,
                              column_groups_auctioned_horses=column_groups_auctioned_horses,
                              column_groups_auctioned_horses_h2=column_groups_auctioned_horses_h2,
+
                              auctioned_horses_max_values=auctioned_horses_max_values,
                              horses_max_values=horses_max_values,
                              dams_max_values=dams_max_values,
-                             plot_url=plot_html)
+                             )
     
     
     except Exception as e:

@@ -150,8 +150,8 @@
                 <div class="tab-pane fade {% if initial_tab == 'auctions' %}show active{% endif %}" id="auctions" role="tabpanel" aria-labelledby="auctions-tab">
                     <div class="text-center my-4">
                         <h4 class="mb-3">Precio Promedio por Criador</h4>
-                        <div>{{ plot_url | safe }}</div>
                     </div>
+
                     <div class="filter-section">
                         <div class="filter-row">
                             <div class="row">
@@ -159,25 +159,48 @@
                                 <div class="col">
                                     <div class="filter-label">{{ column }}</div>
                                     <input type="text" 
-                                           class="filter-input" 
-                                           data-table="auctions"
-                                           data-column="{{ column }}"
-                                           value="{{ auctions_filters[column] or '' }}"
-                                           placeholder="Filter {{ column }}">
+                                        class="filter-input" 
+                                        data-table="auctions"
+                                        data-column="{{ column }}"
+                                        value="{{ auctions_filters[column] or '' }}"
+                                        placeholder="Filter {{ column }}">
                                 </div>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
+
                     <div class="table-container">
-                        <table class="table">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="column-groups">
+                                    {% for group_name, colspan, class_name in column_groups_past_auction_summary %}
+                                    <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                                    {% endfor %}
+                                </tr>
+                                <tr class="column-groups">
+                                    {% for group_name, colspan, class_name in column_groups_past_auction_summary_h2 %}
+                                    <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    {% for column in auction_summary_columns %}
+                                    <th data-column="{{ column }}">{{ column }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
                             <tbody>
-                                {{ past_auction_table | safe }}
+                                {% for row in auction_summary_data %}
+                                <tr>
+                                    {% for column in auction_summary_columns %}
+                                    <td>{{ row[column] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-        
                <!-- Auctioned Horses Tab -->
                <div class="tab-pane fade {% if initial_tab == 'auctioned-horses' %}show active{% endif %}" id="auctioned-horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
                 <div class="filter-section">
