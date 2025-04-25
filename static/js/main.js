@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 // Get all filters for this table
                 const tableFilters = {};
-                const allowedFilters = ['Haras', 'Name', 'Sire', 'Dam', 'Href', 'Sex']; // Only allow these filters
+                const allowedFilters = ['Haras', 'Name', 'Sire', 'Dam', 'Href', 'Sex', 'Criador', 'Year']; // Only allow these filters
                 
                 document.querySelectorAll(`#${tableId} .filter-input`).forEach(input => {
                     const column = input.dataset.column;
