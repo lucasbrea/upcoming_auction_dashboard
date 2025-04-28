@@ -40,6 +40,9 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link {% if initial_tab == 'auctioned-horses' %}active{% endif %}" id="auctioned-horses-tab" data-bs-toggle="tab" data-bs-target="#auctioned-horses" type="button" role="tab" aria-controls="auctioned-horses" aria-selected="{{ 'true' if initial_tab == 'auctioned-horses' else 'false' }}">Auctioned Horses</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if initial_tab == 'reports' %}active{% endif %}" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="{{ 'true' if initial_tab == 'reports' else 'false' }}">Reports</button>"
+            </li>
             <li>  
                 <a id="export-btn" class="btn btn-danger" href="/export-pdf">Export as PDF</a>
             </li>
@@ -252,6 +255,20 @@
             </div>
         </form>
     </div>
+      <!-- Reports Tabs -->
+      <div class="tab-pane fade {% if initial_tab == 'reports' %}show active{% endif %}" id="reports" role="tabpanel" aria-labelledby="reports-tab">
+        <select id="pdf-select">
+            <option value="Report Firmamento (criador).pdf">Report Firmamento (criador)</option>
+            <option value="Report Firmamento (stud).pdf">Report Firmamento (stud)</option>
+            <option value="Proposal La Pasion - 22-03-2024.pdf">Proposal La Pasion 22-03-2024</option>
+          </select>
+          
+          <iframe id="pdf-frame"
+                  src="{{ url_for('static', filename='reports/Report Firmamento (criador).pdf') }}"
+                  width="100%" height="2000px"
+                  style="border: none;">
+          </iframe>           
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -260,6 +277,12 @@
         const horsesMaxValues = {{ horses_max_values | tojson }};
         const damsMaxValues = {{ dams_max_values | tojson }};
         const auctioned_horses_max_values = {{ auctioned_horses_max_values | tojson }};
+
+
+    document.getElementById('pdf-select').addEventListener('change', function() {
+        const selectedPDF = this.value;
+        document.getElementById('pdf-frame').src = `/static/reports/${selectedPDF}`;
+    });
     </script>
     
 </body>

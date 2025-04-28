@@ -23,7 +23,7 @@ app = Flask(__name__)
 CSV_PATH = os.path.join("Data/dashboard_data.csv")
 DAMS_CSV_PATH = os.path.join("Data/dashboard_data_dams.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
-AUCTIONED_HORSES_PATH = os.path.join("Data/past_auction_horse_data_csv.csv")
+AUCTIONED_HORSES_PATH = os.path.join("Data/Auctioned_Horses_Data.csv")
 
 
 
@@ -108,23 +108,23 @@ DAMS_RENAMED_COLUMNS = {
 
 PAST_AUCTION_RENAMED_COLUMNS = {
     'name': 'Name',
-    'padrillo': 'Sire',
-    'M': 'Dam',
+    'padrilloAuction': 'Sire',
+    'yeguaAuction': 'Dam',
     'birth_eday': 'Birth Date',
-    'sex': 'Sex',
+    'genre': 'Sex',
     'PR': 'PR',
     'PS': 'PS',
     'PRS': 'PRS',
-    'Haras': 'Haras',
-    'value': 'Value',
+    'haras1': 'Haras',
+    # 'value': 'Value',
     'valueUSDB': 'Value USDB',
     'pricePerBp': 'Price per Bp',
     'title': 'Title',
-    'source': 'Source', 
+    # 'source': 'Source', 
     'auctionOrder': 'Auction Order',
     'studbook_id': 'Studbook ID',
     'year': 'Year',
-    'date': 'Auction Date'
+    'eday': 'Auction Date'
 
 }
 
@@ -132,20 +132,20 @@ PAST_AUCTION_RENAMED_COLUMNS = {
 PAST_AUCTION_SUMMARY_RENAMED_COLUMNS = {
 
     'birth_eday': 'Birth Date',
-    'sex': 'Sex',
+    'genre': 'Sex',
     'PR': 'PR',
     'PS': 'PS',
     'PRS': 'PRS',
-    'Haras': 'Criador',
-    'value': 'Value',
+    'haras1': 'Criador',
+    # 'value': 'Value',
     'valueUSDB': 'valueUSDB',
     'pricePerBp': 'PricePerBp',
     'title': 'Title',
-    'source': 'Source', 
+    # 'source': 'Source', 
     'auctionOrder': 'Auction Order',
     'studbook_id': 'Studbook ID',
     'year': 'Year',
-    'date': 'Auction Date'
+    'eday': 'Auction Date'
 
 }
 
@@ -394,7 +394,7 @@ def index():
             'PS',
             'PRS',
             'Haras',
-            'Value',
+            # 'Value',
             'Value USDB',
             'Price per Bp',
             'Title',
@@ -452,8 +452,20 @@ def index():
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
         
-        auctioned_horses_max_values = {col: float(auctioned_horses_df[col].str.rstrip('%').astype(float).max()) 
-                           for col in gradient_columns if col in horses_df.columns}
+        auctioned_horses_max_values = {}
+        for col in gradient_columns:
+            if col in auctioned_horses_df.columns:
+                try:
+                    # Remove % and convert to numeric, ignoring errors
+                    numeric_values = pd.to_numeric(auctioned_horses_df[col].str.rstrip('%'), errors='coerce')
+                    if not numeric_values.empty and not numeric_values.isna().all():
+                        max_val = numeric_values.max()
+                        if pd.notnull(max_val):
+                            auctioned_horses_max_values[col] = float(max_val)
+                except Exception as e:
+                    print(f"Error processing column {col}: {str(e)}")
+                    continue
+                
 
         # Add error handling for dams max values calculation
         dams_max_values = {}
@@ -587,7 +599,7 @@ def index():
                              horses_filters=horses_filters,
                              dams_filters=dams_filters,
                              auctions_filters=auctions_filters,
-                            auctioned_horses_filters=auctioned_horses_filters,
+                             auctioned_horses_filters=auctioned_horses_filters,
 
                              auctioned_horses_data=auctioned_horses_data,
                              auctioned_horses_columns=auctioned_horses_columns,
