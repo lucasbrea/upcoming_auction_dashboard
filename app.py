@@ -416,7 +416,7 @@ def index():
             'count'
         ]
         horses_df = horses_df[horses_df_order]
-        dams_df = dams_df[dams_df_order]
+        dams_df = dams_df[[col for col in dams_df_order if col in dams_df.columns]]
         auctioned_horses_df = auctioned_horses_df[past_auction_order]
         past_auction_summary = past_auction_summary[past_auction_summary_order]
         
