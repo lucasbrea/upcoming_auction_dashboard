@@ -21,7 +21,7 @@ print("CWD:", os.getcwd())
 app = Flask(__name__)
 
 CSV_PATH = os.path.join("Data/dashboard_data.csv")
-DAMS_CSV_PATH = os.path.join("Data/dashboard_data_dams.csv")
+DAMS_CSV_PATH = os.path.join("Data/Dashboard_Data_Dams_Table.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Auctioned_Horses_Data.csv")
 
@@ -92,7 +92,7 @@ DAMS_RENAMED_COLUMNS = {
     'M_STK_won': 'Dam STK wins',
     'M_g1_STK_placed': 'Dam G1 STK placed',
     'M_g1_STK_won': 'Dam G1 STK wins',
-    # 'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
+    'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
     'MomSib_Sibs_raced_at2y': '#Offs Ran',
     'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
@@ -103,7 +103,12 @@ DAMS_RENAMED_COLUMNS = {
     'Best_Foal_Raced_Stk':'Dam\'s Foal Raced Stk?',
     'Best_Foal_Placed_Stk':'Dam\'s Foal Placed Stk?',
     'Dam_Sib_Total_G1G2': 'Dam\'s Siblings Total G1/G2',
-    'DamSibs_G1G2_Total': 'Dam\'s Siblings G1G2/Races'
+    'DamSibs_G1G2_Total': 'Dam\'s Siblings G1G2/Races',
+    'PBRS': 'PBRS',
+    'PB': 'PB',
+    'PRS': 'PRS',
+    'PR': 'PR',
+    'PS': 'PS'
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
@@ -352,7 +357,7 @@ def index():
             'PR',
             'PS',
             'Dam\'s Age',
-            # 'Dam Stk Wnrs / RA Offs',
+            'Dam Stk Wnrs / RA Offs',
             'Dams RA Offs',
             '#Offs Ran',
             'Dam Top 3 BSN\'s',
@@ -540,7 +545,7 @@ def index():
         
         column_groups_dams = [
                         ("Basic Information", 9, "group-basic"),
-                        ("Dams Characteristics", 10, "group-family-dams"),
+                        ("Dams Characteristics", 11, "group-family-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
                         ("Decomposing PS Factors", 4, "group-ps-dam"),
                         ("Factors PB/PR-Dam's Birth Success", 4, "group-pb"),
@@ -548,7 +553,7 @@ def index():
                         ("Auction Info", 4, "group-auction")
                     ]
         column_groups_dams_h2 = [
-                        ("", 38, "group-basic"),
+                        ("", 39, "group-basic"),
                     ]
 
         column_groups_auctioned_horses = [
