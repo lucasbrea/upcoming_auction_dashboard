@@ -544,12 +544,13 @@ def index():
                     ]
         
         column_groups_dams = [
-                        ("Basic Information", 9, "group-basic"),
-                        ("Dams Characteristics", 11, "group-family-dams"),
+                        ("Basic Information", 4, "group-basic"),
+                        ("Selection",6, "group-selection"),
+                        ("Decomposing PS Factors",4, "group-ps-dam"),
+                        ("Main Characteristics", 10, "main-characteristics-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
-                        ("Decomposing PS Factors", 4, "group-ps-dam"),
-                        ("Factors PB/PR-Dam's Birth Success", 4, "group-pb"),
-                        ("Factors PS-Dam's Racing Career", 7, "group-racing"),
+                        ("Factors PB/PR", 4, "group-pb"),
+                        ("Detailed Racing Career", 7, "group-racing"),
                         ("Auction Info", 4, "group-auction")
                     ]
         column_groups_dams_h2 = [
@@ -595,6 +596,7 @@ def index():
                              dams_data=dams_data,
                              dams_columns=dams_columns,
                              column_groups_dams=column_groups_dams,
+                             column_groups_dams_h2=column_groups_dams_h2,
 
                              auction_summary_data=auction_summary_data,
                              auction_summary_columns=auction_summary_columns,
