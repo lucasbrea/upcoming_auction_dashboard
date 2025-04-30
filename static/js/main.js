@@ -157,7 +157,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ]
 
-    
+    const groupInbreedingDams = ['Inbreeding Coef.']
+    const groupSelectionDams = ['TPBRS','PBRS', 'PRS', 'PR', 'PS', 'PB']
+
     const group1Columns_auctioned_horses = [
             'Value',
             'Value USDB',
@@ -281,6 +283,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group3Columns_dams.includes(columnName)) columnIndices.group3dams.push(index);
                     if (group4Columns_dams.includes(columnName)) columnIndices.group4dams.push(index);
                     if(group5Columns_dams.includes(columnName)) columnIndices.group5dams.push(index);
+                    if (group1Columns_dams.includes(columnName)) header.classList.add('group-basic-dams');
+                    if (groupSelectionDams.includes(columnName)) header.classList.add('group-basic-dams');
+                    if (groupInbreedingDams.includes(columnName)) header.classList.add('group-inbreeding-dams');
+                    if (group2Columns_dams.includes(columnName)) header.classList.add('group-ps-dam');
+                    if (group3Columns_dams.includes(columnName)) header.classList.add('main-characteristics-dams');
+                    if (group4Columns_dams.includes(columnName)) header.classList.add('group-pb-dam');
+                    if (group5Columns_dams.includes(columnName)) header.classList.add('group-racing-dam');
                 } else if (isauctioned_horses_table){
                     if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
                 }

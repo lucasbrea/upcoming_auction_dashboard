@@ -400,44 +400,51 @@ body {
     background-color: rgba(112, 155, 255, 0.1) !important; 
 }
 .group-1dams-highlight {
-    background-color: rgba(255, 218, 253, 0.1) !important; 
+    background-color: rgba(106, 255, 193, 0.1) !important; 
 }
 .group-2dams-highlight {
-    background-color: rgba(255, 191, 52, 0.1) !important; 
+    background-color: rgba(255, 238, 201, 0.1) !important;   
 }
+
 .group-3dams-highlight {
     background-color: rgba(255, 228, 140, 0.1) !important; 
 }
 .group-4dams-highlight {
-    background-color: rgba(201, 255, 241, 0.1) !important; 
+    background-color: rgba(234, 254, 248, 0.1) !important; 
 }
 .group-5dams-highlight {
-    background-color: rgba(128, 171, 255, 0.1) !important; 
+    background-color: rgba(130, 229, 254, 0.1) !important; 
 }
 /*Dams Header Highlighting*/
 .group-basic-dams{
-    background-color:rgba(255, 218, 253, 0.1) !important; 
+    background-color: rgba(106, 255, 193, 0.1) !important; 
+
 }
 .group-selection-dams{
-    background-color: rgba(255, 218, 253, 0.1) !important; 
+    background-color: rgba(106, 255, 193, 0.1) !important; 
 }
 .group-ps-dam{
-    background-color: rgba(255, 191, 52, 0.1) !important;   
+    background-color: rgba(255, 238, 201, 0.1) !important;   
+    color: #b45f00 !important;
+}
+.group-inbreeding-dams{
+    background-color: rgba(255, 114, 185, 0.1) !important; 
+    color: #ff2115 !important;
 }
 
 .main-characteristics-dams{
     background-color: rgba(255, 228, 140, 0.1) !important;  
+    color:#ffd569 !important;
 }
 .group-pb-dam{
-    background-color: rgba(201, 255, 241, 0.1) !important; 
+    background-color: rgba(234, 254, 248, 0.1) !important; 
 
 }
 
 .group-racing-dam{
-    background-color: rgba(128, 171, 255, 0.1) !important; 
+    background-color: rgba(130, 229, 254, 0.1) !important; 
 
 }
-
 /*Styling for group headers*/
 .group-basic {
     background-color: #2563eb;
