@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
      
     const columnConfig = {
+        'TPBRS': { type: 'percentage' },
         'PRS': { type: 'percentage' },
         'PR': { type: 'percentage' },
         'PS': { type: 'percentage' },
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Auction Order':{type: 'number'}
     };
 
-    const gradientColumns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.'];
+    const gradientColumns = ['TPBRS','PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.'];
     const sortableColumns = Object.keys(columnConfig);
     const tables = document.querySelectorAll('.table');
 
@@ -115,41 +116,47 @@ document.addEventListener('DOMContentLoaded', function () {
                             'Dam\'s Season'
     ];
     const group1Columns_dams = [
-        'Dam\'s Age and Racing Career',
-        'Dam\'s Offs',
-        'Dam\'s Sibs',
-        'Dam\'s Parents Career'
+        'Ranking',
+        'Name',
+        'Sire',
+        'Dam',
+        'Haras',
     ];
     const group2Columns_dams = [
-        'Dam\'s Season', 
-        'Birth Rate (All)', 
-        'Birth Rate (last 3)', 
-        'Had Rest Year'
-    
+        'Age and Racing Career',
+        'Offsprings\' Quality',
+        'Siblings\' quality',
+        'Parents Career',
     ];
     const group3Columns_dams = [
-        'Dam\'s total races',
-        'Dam\'s total wins',
-        'Dam\'s CEI',
-        'Dam STK races',
-        'Dam STK wins',
-        'Dam G1 STK placed',
-        'Dam G1 STK wins'
+        'Age',
+        'Top 3 BSN\'s',
+        'Raced Stk? Won G-Stk?',
+        '#Offs Ran',
+        'Dam\'s Foals Top 3 BSN',
+        'Foals wnrs before 3yo(non-ALT)',  
+        'Foals Stk Rnrs',
+        'Foals Stk Wnrs',
+        'Siblings total G-stk runs',
+        'Siblings total G-stk wins',
     ];
     const group4Columns_dams = [
-        'Dam\'s Age', 
-        'Dam Stk Wnrs / RA Offs', 
-        'Dams RA Offs', 
-        '#Offs Ran',
-        'Dam Top 3 BSN\'s', 
-        'Dam\'s Foals Top 3 BSN',
-        'Dam Raced STK?',
-        'Dam Total Races',
-        'Dam\'s Foal Raced Stk?',
-        'Dam\'s Foal Placed Stk?',
-        'Dam\'s Siblings Total G1/G2',
-        'Dam\'s Siblings G1G2/Races'
+        '#Offs Ran / #Running age',
+        '#Services',
+        '#Births',
+        'Date last service',
     ];
+    const group5Columns_dams = [
+        'Total Races',
+        'Total Wins',
+        'Stk Races',
+        'Stk Wins',
+        'G1 Placed',
+        'G1 Wins',
+        'CEI',
+
+    ]
+
     
     const group1Columns_auctioned_horses = [
             'Value',
@@ -253,7 +260,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 group1: [],
                 group2: [],
                 group3: [],
-                group4: []
+                group4: [],
+                group5: [],
+                group1dams: [],
+                group2dams: [],
+                group3dams: [],
+                group4dams: [],
+                group5dams: [],
             };
 
             headers.forEach((header, index) => {
@@ -263,10 +276,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group2Columns.includes(columnName)) columnIndices.group2.push(index);
                     if (group3Columns.includes(columnName)) columnIndices.group3.push(index);
                 } else if (isDamsTable) {
-                    if (group1Columns_dams.includes(columnName)) columnIndices.group1.push(index);
-                    if (group2Columns_dams.includes(columnName)) columnIndices.group2.push(index);
-                    if (group3Columns_dams.includes(columnName)) columnIndices.group3.push(index);
-                    if (group4Columns_dams.includes(columnName)) columnIndices.group4.push(index);
+                    if (group1Columns_dams.includes(columnName)) columnIndices.group1dams.push(index);
+                    if (group2Columns_dams.includes(columnName)) columnIndices.group2dams.push(index);
+                    if (group3Columns_dams.includes(columnName)) columnIndices.group3dams.push(index);
+                    if (group4Columns_dams.includes(columnName)) columnIndices.group4dams.push(index);
+                    if(group5Columns_dams.includes(columnName)) columnIndices.group5dams.push(index);
                 } else if (isauctioned_horses_table){
                     if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
                 }
@@ -290,6 +304,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 columnIndices.group4.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-4-highlight');
+                });
+                columnIndices.group5.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-5-highlight');
+                });
+                columnIndices.group1dams.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-1dams-highlight');
+                } );    
+                columnIndices.group2dams.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-2dams-highlight');
+                });
+                columnIndices.group3dams.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-3dams-highlight');
+                });
+                columnIndices.group4dams.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-4dams-highlight');
+                });
+                columnIndices.group5dams.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-5dams-highlight');
                 });
             });
         });

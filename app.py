@@ -76,26 +76,26 @@ DAMS_RENAMED_COLUMNS = {
     'end_date': 'End',
     'lote': 'Lote',
     'inbreedingCoefficient': 'Inbreeding Coef.',
-    'mother': 'Dam\'s Age and Racing Career',
-    'Momsiblings': 'Dam\'s Offs',
-    'uncles': 'Dam\'s Sibs',
-    'maternalParents': 'Dam\'s Parents Career',
-    'M_age_at_service': 'Dam\'s Age',
+    'mother': 'Age and Racing Career',
+    'Momsiblings': 'Offsprings\' Quality',
+    'uncles': 'Siblings\' quality',
+    'maternalParents': 'Parents Career',
+    'M_age_at_service': 'Age',
     'M_season_orig': 'Dam\'s Season',
     'birthRate': 'Birth Rate (All)',
     'birthRateLast3': 'Birth Rate (last 3)',
     'hadRestYear': 'Had Rest Year',
-    'M_total_rcs': 'Dam\'s total races',
-    'M_won_rcs': 'Dam\'s total wins',
-    'M_cumAEI': 'Dam\'s CEI',
-    'M_STK_ran': 'Dam STK races',
-    'M_STK_won': 'Dam STK wins',
-    'M_g1_STK_placed': 'Dam G1 STK placed',
-    'M_g1_STK_won': 'Dam G1 STK wins',
-    'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
+    'M_total_rcs': 'Total Races',
+    'M_won_rcs': 'Total Wins',
+    'M_cumAEI': 'CEI',
+    'M_STK_ran': 'Stk Races',
+    'M_STK_won': 'Stk Wins',
+    'M_g1_STK_placed': 'G1 Placed',
+    'M_g1_STK_won': 'G1 Wins',
+    'MSib_StkWnrs_Offs': 'Foals Stk Wnrs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
     'MomSib_Sibs_raced_at2y': '#Offs Ran',
-    'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
+    'Dam_Mean_T3_BSN': 'Top 3 BSN\'s',
     'Dam_Raced_STK': 'Dam Raced STK?',
     'Dam_Placed_STK': 'Dam Placed STK?',
     'Dam_Total_Rcs': 'Dam Total Races',
@@ -108,7 +108,14 @@ DAMS_RENAMED_COLUMNS = {
     'PB': 'PB',
     'PRS': 'PRS',
     'PR': 'PR',
-    'PS': 'PS'
+    'PS': 'PS',
+    'TPBRS':'TPBRS',
+    'Dam_Sib_Total_G1G2G3':'Siblings total G-stk runs',
+    'DamSibs_TotalG1G2_Won':'Siblings total G-stk wins',
+    'foal_wnrs_3yo':'Foals wnrs before 3yo(non-ALT)',
+    'rank':'Ranking',
+    'num_births':'#Births',
+    'num_services':'#Services',
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
@@ -206,6 +213,7 @@ def load_data(file_path):
                           'PR', 
                           'PRS',
                           'PB',
+                          'TPBRS',
                           'PBRS', 
                           'inbreedingCoefficient',
                           'Sire_Stk_Wnrs_Rnrs', 
@@ -347,46 +355,56 @@ def index():
                              ]
         
         dams_df_order = [
+            #Basic Information
+            'Ranking',
             'Name',
             'Sire',
             'Dam',
             'Haras',
+            #Selection
+            'TPBRS',
             'PBRS',
             'PB',
             'PRS',
             'PR',
             'PS',
-            'Dam\'s Age',
-            'Dam Stk Wnrs / RA Offs',
-            'Dams RA Offs',
+            #Decomposing PS Factors
+            'Age and Racing Career',
+            'Offsprings\' Quality',
+            'Siblings\' quality',
+            'Parents Career',
+            #Main Characteristics
+            'Age',
+            'Top 3 BSN\'s',
+            'Raced Stk? Won G-Stk?',
             '#Offs Ran',
-            'Dam Top 3 BSN\'s',
             'Dam\'s Foals Top 3 BSN',
-            'Dam Raced STK?',
-            'Dam\'s Foal Raced Stk?',
-            'Dam\'s Foal Placed Stk?',
-            'Dam\'s Siblings Total G1/G2',
-            'Dam\'s Siblings G1G2/Races',
+            'Foals wnrs before 3yo(non-ALT)',  
+            'Foals Stk Rnrs',
+            'Foals Stk Wnrs',
+            'Siblings total G-stk runs',
+            'Siblings total G-stk wins',
+            #Inbreeding
             'Inbreeding Coef.',
-            'Dam\'s Age and Racing Career',
-            'Dam\'s Offs',
-            'Dam\'s Sibs',
-            'Dam\'s Parents Career',
-            'Dam\'s Season',
-            'Birth Rate (All)',
-            'Birth Rate (last 3)',
-            'Had Rest Year',
-            'Dam\'s total races',
-            'Dam\'s total wins',
-            'Dam\'s CEI',
-            'Dam STK races',
-            'Dam STK wins',
-            'Dam G1 STK placed',
-            'Dam G1 STK wins',
+            #Factors PB/PR  
+            '#Offs Ran / #Running age',
+            '#Services',
+            '#Births',
+            'Date last service',
+            #Detailed Racing Career
+            'Total Races',
+            'Total Wins',
+            'Stk Races',
+            'Stk Wins',
+            'G1 Placed',
+            'G1 Wins',
+            'CEI',
+            #Auction Info
             'Lote',
             'Start',
             'End',
             'Href'
+        
         ]
 
         past_auction_order = [
@@ -452,7 +470,7 @@ def index():
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].dt.strftime('%d/%m/%y')
 
         # Calculate max values for gradient columns
-        gradient_columns = ['PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.']
+        gradient_columns = ['TPBRS','PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.']
 
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
@@ -544,17 +562,17 @@ def index():
                     ]
         
         column_groups_dams = [
-                        ("Basic Information", 4, "group-basic"),
-                        ("Selection",6, "group-selection"),
+                        ("Basic Information", 5, "group-basic-dams"),
+                        ("Selection",6, "group-selection-dams"),
                         ("Decomposing PS Factors",4, "group-ps-dam"),
                         ("Main Characteristics", 10, "main-characteristics-dams"),
                         ("Inbreeding",1,"group-inbreeding"),
-                        ("Factors PB/PR", 4, "group-pb"),
-                        ("Detailed Racing Career", 7, "group-racing"),
+                        ("Factors PB/PR", 4, "group-pb-dam"),
+                        ("Detailed Racing Career", 7, "group-racing-dam"),
                         ("Auction Info", 4, "group-auction")
                     ]
         column_groups_dams_h2 = [
-                        ("", 39, "group-basic"),
+                        ("", 45, "group-basic"),
                     ]
 
         column_groups_auctioned_horses = [
