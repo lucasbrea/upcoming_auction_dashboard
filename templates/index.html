@@ -48,215 +48,73 @@
             </li>
         </ul>
     
-        <form method="get" action="{{ url_for('index') }}">
+        <div class="tab-content" id="myTabContent">
             <!--Horses Tab-->
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade {% if initial_tab == 'horses' %}show active{% endif %}" id="horses" role="tabpanel" aria-labelledby="horses-tab">
-                    <div class="filter-section">
-                                <div class="filter-row">
-                            <div class="row">
-                                {% for column in horses_filters.keys() %}
-                                <div class="col">
-                                        <div class="filter-label">{{ column }}</div>
-                                        <input type="text" 
-                                               class="filter-input" 
-                                               data-table="horses"
-                                               data-column="{{ column }}"
-                                               value="{{ horses_filters[column] or '' }}"
-                                               placeholder="Filter {{ column }}">
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="column-groups">
-                                {% for group_name, colspan, class_name in column_groups %}
-                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                {% endfor %}
-                            </tr>
-                            <tr class="column-groups">
-                                {% for group_name, colspan, class_name in column_groups_horses_h2 %}
-                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                {% endfor %}
-                            </tr>
-                            <tr>
-                                {% for column in horses_columns %}
-                                <th data-column="{{ column }}">{{ column }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                            <tbody>
-                            {% for row in horses_data %}
-                            <tr>
-                                {% for column in horses_columns %}
-                                <td>{{ row[column] }}</td>
-                                {% endfor %}
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+            <div class="tab-pane fade {% if initial_tab == 'horses' %}show active{% endif %}" 
+                id="horses" role="tabpanel" aria-labelledby="horses-tab">
+                <form method="get" action="{{ url_for('index') }}">
+                    <div class="table-wrapper">
+                    {% set table_id = "horses" %}
+                    {% set filters = horses_filters %}
+                    {% set columns = horses_columns %}
+                    {% set data = horses_data %}
+                    {% set column_groups = column_groups %}
+                    {% set column_groups_h2 = column_groups_horses_h2 %}
+                    {% include "table_template.html" %}
                 </div>
-                <!-- Dams Tab -->
-                <div class="tab-pane fade {% if initial_tab == 'dams' %}show active{% endif %}" id="dams" role="tabpanel" aria-labelledby="dams-tab">
-                    <div class="filter-section">
-                        <div class="filter-row">
-                            <div class="row">
-                                {% for column in dams_filters.keys() %}
-                                <div class="col">
-                                    <div class="filter-label">{{ column }}</div>
-                                    <input type="text" 
-                                        class="filter-input" 
-                                        data-table="dams"
-                                        data-column="{{ column }}"
-                                        value="{{ dams_filters[column] or '' }}"
-                                        placeholder="Filter {{ column }}">
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="column-groups">
-                                {% for group_name, colspan, class_name in column_groups_dams %}
-                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                {% endfor %}
-                            </tr>
-                            <tr class="column-groups">
-                                {% for group_name, colspan, class_name in column_groups_dams_h2 %}
-                                <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                {% endfor %}
-                            </tr>
-                            <tr>
-                                {% for column in dams_columns %}
-                                <th data-column="{{ column }}">{{ column }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in dams_data %}
-                            <tr>
-                                {% for column in dams_columns %}
-                                <td>{{ row[column] }}</td>
-                                {% endfor %}
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            
-                <!-- Past Auction Tab -->
-                <div class="tab-pane fade {% if initial_tab == 'auctions' %}show active{% endif %}" id="auctions" role="tabpanel" aria-labelledby="auctions-tab">
-                    <div class="text-center my-4">
-                        <h4 class="mb-3">Precio Promedio por Criador</h4>
-                    </div>
-
-                    <div class="filter-section">
-                        <div class="filter-row">
-                            <div class="row">
-                                {% for column in auctions_filters.keys() %}
-                                <div class="col">
-                                    <div class="filter-label">{{ column }}</div>
-                                    <input type="text" 
-                                        class="filter-input" 
-                                        data-table="auctions"
-                                        data-column="{{ column }}"
-                                        value="{{ auctions_filters[column] or '' }}"
-                                        placeholder="Filter {{ column }}">
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="table-container">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="column-groups">
-                                    {% for group_name, colspan, class_name in column_groups_past_auction_summary %}
-                                    <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                    {% endfor %}
-                                </tr>
-                                <tr class="column-groups">
-                                    {% for group_name, colspan, class_name in column_groups_past_auction_summary_h2 %}
-                                    <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                                    {% endfor %}
-                                </tr>
-                                <tr>
-                                    {% for column in auction_summary_columns %}
-                                    <th data-column="{{ column }}">{{ column }}</th>
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for row in auction_summary_data %}
-                                <tr>
-                                    {% for column in auction_summary_columns %}
-                                    <td>{{ row[column] }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-               <!-- Auctioned Horses Tab -->
-               <div class="tab-pane fade {% if initial_tab == 'auctioned-horses' %}show active{% endif %}" id="auctioned-horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
-                <div class="filter-section">
-                    <div class="filter-row">
-                        <div class="row">
-                            {% for column in auctioned_horses_filters.keys() %}
-                            <div class="col">
-                                <div class="filter-label">{{ column }}</div>
-                                <input type="text" 
-                                       class="filter-input" 
-                                       data-table="auctioned-horses"
-                                       data-column="{{ column }}"
-                                       value="{{ auctioned_horses_filters[column] or '' }}"
-                                       placeholder="Filter {{ column }}">
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            
-                <table class="table table-striped">
-                    <thead>
-                        <tr class="column-groups">
-                            {% for group_name, colspan, class_name in column_groups_auctioned_horses %}
-                            <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                            {% endfor %}
-                        </tr>
-                        <tr class="column-groups">
-                            {% for group_name, colspan, class_name in column_groups_auctioned_horses_h2 %}
-                            <th colspan="{{ colspan }}" class="{{ class_name }}">{{ group_name }}</th>
-                            {% endfor %}
-                        </tr>
-                        <tr>
-                            {% for column in auctioned_horses_columns %}
-                            <th data-column="{{ column }}">{{ column }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in auctioned_horses_data %}
-                        <tr>
-                            {% for column in auctioned_horses_columns %}
-                            <td>{{ row[column] }}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                </form>
             </div>
-        </form>
-    </div>
+            <!--Dams Tab-->
+            <div class="tab-pane fade {% if initial_tab == 'dams' %}show active{% endif %}"
+                 id="dams" role="tabpanel" aria-labelledby="dams-tab">
+                 <form method="get" action="{{ url_for('index') }}">
+                <div class="table-wrapper">
+                    {% set table_id = "dams" %}
+                    {% set filters = dams_filters %}
+                    {% set columns = dams_columns %}
+                    {% set data = dams_data %}
+                    {% set column_groups = column_groups_dams %}
+                    {% set column_groups_h2 = column_groups_dams_h2 %}
+                    {% include "table_template.html" %}
+                </div>
+                 </form>
+            </div>
+
+            <!--Past Auction Summary Tab-->
+            <div class="tab-pane fade {% if initial_tab == 'auctions' %}show active{% endif %}" 
+                id="auctions" role="tabpanel" aria-labelledby="auctions-tab">
+                <form method="get" action="{{ url_for('index') }}">
+                <div class="table-wrapper">
+                    {% set table_id = "auctions" %}
+                    {% set filters = auctions_filters %}
+                    {% set columns = auction_summary_columns %}
+                    {% set data = auction_summary_data %}
+                    {% set column_groups = column_groups_past_auction_summary %}
+                    {% set column_groups_h2 = column_groups_past_auction_summary_h2 %}
+                    {% include "table_template.html" %}
+                </div>
+                </form>
+            </div>
+
+            <!--Auctioned Horses Tab-->
+            <div class="tab-pane fade {% if initial_tab == 'auctioned_horses' %}show active{% endif %}" 
+            id="auctioned_horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
+            <form method="get" action="{{ url_for('index') }}">
+            <div class="table-wrapper">
+                {% set table_id = "auctioned_horses" %}
+                {% set filters = auctioned_horses_filters %}
+                {% set columns = auctioned_horses_columns %}
+                {% set data = auctioned_horses_data %}
+                {% set column_groups =column_groups_auctioned_horses %}
+                {% set column_groups_h2 = column_groups_auctioned_horses_h2 %}
+                {% include "table_template.html" %}
+            </div>
+            </form>
+                
+            </div>
       <!-- Reports Tabs -->
-      <div class="tab-pane fade {% if initial_tab == 'reports' %}show active{% endif %}" id="reports" role="tabpanel" aria-labelledby="reports-tab">
+      <div class="tab-pane fade {% if initial_tab == 'reports' %}show active{% endif %}" 
+      id="reports" role="tabpanel" aria-labelledby="reports-tab">
         <select id="pdf-select">
             <option value="Report Firmamento (criador).pdf">Report Firmamento (criador)</option>
             <option value="Report Firmamento (stud).pdf">Report Firmamento (stud)</option>
@@ -268,6 +126,7 @@
                   width="100%" height="2000px"
                   style="border: none;">
           </iframe>           
+    </div>
     </div>
 
     <!-- Scripts -->
