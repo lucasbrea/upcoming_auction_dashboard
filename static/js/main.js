@@ -250,6 +250,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function getLastColumnIndex(columns, headers) {
+        for (let i = headers.length - 1; i >= 0; i--) {
+            const columnName = headers[i].getAttribute('data-column');
+            if (columns.includes(columnName)) return i;
+        }
+        return -1;
+    }
+
     function applyColumnHighlighting() {
         tables.forEach(table => {
             const headers = getColumnHeaders(table);
@@ -290,6 +298,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group3Columns_dams.includes(columnName)) header.classList.add('main-characteristics-dams');
                     if (group4Columns_dams.includes(columnName)) header.classList.add('group-pb-dam');
                     if (group5Columns_dams.includes(columnName)) header.classList.add('group-racing-dam');
+                    const lastGroupIndices = {
+                        group1: getLastColumnIndex(group1Columns_dams, headers),
+                        group2: getLastColumnIndex(group2Columns_dams, headers),
+                        group3: getLastColumnIndex(group3Columns_dams, headers),
+                        group4: getLastColumnIndex(group4Columns_dams, headers),
+                        group5: getLastColumnIndex(group5Columns_dams, headers)
+                    };
                 } else if (isauctioned_horses_table){
                     if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
                 }
@@ -331,6 +346,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 columnIndices.group5dams.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-5dams-highlight');
+                });
+                columnIndices.group1.forEach(i => {
+                    if (isDamsTable && cells[i]) {
+                        cells[i].classList.add('group-1dams-highlight');
+                        if (i === lastGroupIndices.group1) cells[i].classList.add('border-right');
+                    }
                 });
             });
         });

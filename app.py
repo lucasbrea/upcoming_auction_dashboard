@@ -566,13 +566,20 @@ def index():
                         ("Selection",6, "group-selection-dams"),
                         ("Decomposing PS Factors",4, "group-ps-dam"),
                         ("Main Characteristics", 10, "main-characteristics-dams"),
-                        ("Inbreeding",1,"group-inbreeding"),
+                        ("Inbreeding",1,"group-inbreeding-dams"),
                         ("Factors PB/PR", 4, "group-pb-dam"),
                         ("Detailed Racing Career", 7, "group-racing-dam"),
                         ("Auction Info", 4, "group-auction")
                     ]
         column_groups_dams_h2 = [
-                        ("", 45, "group-basic"),
+                        ("", 5, "group-basic-dams"),
+                        ("",6, "group-selection-dams"),
+                        ("",4, "group-ps-dam"),
+                        ("", 10, "main-characteristics-dams"),
+                        ("",1,"group-inbreeding-dams"),
+                        ("", 4, "group-pb-dam"),
+                        ("", 7, "group-racing-dam"),
+                        ("", 4, "group-auction"),
                     ]
 
         column_groups_auctioned_horses = [

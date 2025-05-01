@@ -114,16 +114,21 @@ body {
     cursor: pointer;
     position: relative;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
 }
 
 .table tbody td {
     color: var(--text-primary);
     vertical-align: middle;
     background-color: transparent;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .table tbody tr:hover {
     background-color: var(--border-color);
+    text-align: center;
+
 }
 
 .table thead th.sortable:hover {
@@ -381,6 +386,40 @@ body {
 .filter-input::placeholder {
     color: var(--text-secondary);
 }
+/*Borders for column groups*/
+#dams table td:nth-child(5),
+#dams table th:nth-child(5),
+#dams table td:nth-child(11),
+#dams table th:nth-child(11),
+#dams table td:nth-child(5),
+#dams table th:nth-child(5),
+#dams table td:nth-child(11),
+#dams table th:nth-child(11),
+#dams table td:nth-child(15),
+#dams table th:nth-child(15),
+#dams table td:nth-child(25),
+#dams table th:nth-child(25),
+#dams table td:nth-child(26),
+#dams table th:nth-child(26),
+#dams table td:nth-child(30),
+#dams table th:nth-child(30),
+#dams table td:nth-child(37),
+#dams table th:nth-child(37),
+#dams table thead tr:nth-child(1) th:nth-child(1),
+#dams table thead tr:nth-child(1) th:nth-child(2),
+#dams table thead tr:nth-child(1) th:nth-child(3),
+#dams table thead tr:nth-child(1) th:nth-child(4),
+#dams table thead tr:nth-child(1) th:nth-child(6),
+#dams table thead tr:nth-child(1) th:nth-child(7),
+#dams table thead tr:nth-child(2) th:nth-child(1),
+#dams table thead tr:nth-child(2) th:nth-child(2),
+#dams table thead tr:nth-child(2) th:nth-child(3),
+#dams table thead tr:nth-child(2) th:nth-child(4),
+#dams table thead tr:nth-child(2) th:nth-child(6),
+#dams table thead tr:nth-child(2) th:nth-child(7)
+  {
+    border-right: 4px solid rgba(0, 0, 0) !important; ;
+}
 /* Column highlighting styles */
 .group-1-highlight {
     background-color: rgba(39, 201, 255, 0.1) !important; 
@@ -418,7 +457,6 @@ body {
 /*Dams Header Highlighting*/
 .group-basic-dams{
     background-color: rgba(106, 255, 193, 0.1) !important; 
-
 }
 .group-selection-dams{
     background-color: rgba(106, 255, 193, 0.1) !important; 
