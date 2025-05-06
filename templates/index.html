@@ -43,9 +43,6 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link {% if initial_tab == 'reports' %}active{% endif %}" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="{{ 'true' if initial_tab == 'reports' else 'false' }}">Reports</button>"
             </li>
-            <li>  
-                <a id="export-btn" class="btn btn-danger" href="/export-pdf">Export as PDF</a>
-            </li>
         </ul>
     
         <div class="tab-content" id="myTabContent">

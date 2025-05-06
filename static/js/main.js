@@ -85,35 +85,52 @@ document.addEventListener('DOMContentLoaded', function () {
     const sortableColumns = Object.keys(columnConfig);
     const tables = document.querySelectorAll('.table');
 
-    const group1Columns = ['STK Wnrs / Rnrs', 
-                            '#RUnners/ Born at 3yo',
-                            'Dam Stk Wnrs / RA Offs', 
-                            'Dams RA Offs', 
-                            'Dam Top 3 BSN\'s', 
-                            'Dam\'s Foals Top 3 BSN',
-                            'Dam Placed STK?',
-                            'Dam Raced STK?',
-                            'Dam Total Races',
-                            'Dam\'s Foal Raced Stk?',
-                            'Dam\'s Foal Placed Stk?',
-                            'Dam\'s Siblings Total G1/G2',
-                            'Dam\'s Siblings G1G2/Races',
-                            'CEI per foal',
-                            'Age'
+    const group1Columns = [
+        
+        'Ranking Gen23',
+        'Horse',
+        'Sire',
+         'Dam',
+         'Sex',
+         'Birth Month',
 
                         ];
     const group2Columns = [
-                            'Own Chars',
-                            'Father',
-                            'Father\'s Offs',
-                            'Dam\'s Age and Racing Career',
-                            'Dam\'s Offs',
-                            'Dam\'s Sibs',
-                            'Dam\'s Parents Career'
+        'PRS',
+        'PR',
+        'PS',
     ];
     const group3Columns = [
-                            'Inbreeding',
-                            'Dam\'s Season'
+        'Sire PS',
+        'Dam\'s Age and Racing career',
+        'Dam\'s Offsprings Performance',
+        'Dam\'s Family (Parents & Siblings)',
+    ];
+    const group4Columns = [
+        'STK Races /Races',
+        'STK Wins 2-5yo/#2-5yo',
+        'Recent G1 Wnrs/Born',
+    ];
+    const group5Columns = [
+        'Age',
+        'Top BSNs',
+        'Raced Stk? Won G-Stk? Won-G1?',
+        '#Offs Ran',
+        'Offs Tops BSNs',
+        'Offs Wnrs before 3yo(non-ALT)',
+        'Offs Stk Wnrs',
+        'CEI per offs(**)',
+        'Dam\'s Siblings(GS) Stk wins',
+    ];
+    const group6Columns = [
+        'PRS Value (2.200 USDB per Bps)',
+    ];
+    const group7columns = [
+        'Haras',
+        'Start',
+        'End',
+        'Lote',
+        'Href'
     ];
     const group1Columns_dams = [
         'Ranking',
@@ -156,7 +173,12 @@ document.addEventListener('DOMContentLoaded', function () {
         'CEI',
 
     ]
-
+    const group6Columns_dams = [
+        'Lote',
+        'Start',
+        'End',
+        'Href'
+    ];
     const groupInbreedingDams = ['Inbreeding Coef.']
     const groupSelectionDams = ['TPBRS','PBRS', 'PRS', 'PR', 'PS', 'PB']
 
@@ -272,11 +294,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 group3: [],
                 group4: [],
                 group5: [],
+                group6: [],
+                group7:[],
                 group1dams: [],
                 group2dams: [],
                 group3dams: [],
                 group4dams: [],
                 group5dams: [],
+                group6dams: [],
             };
 
             headers.forEach((header, index) => {
@@ -285,6 +310,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group1Columns.includes(columnName)) columnIndices.group1.push(index);
                     if (group2Columns.includes(columnName)) columnIndices.group2.push(index);
                     if (group3Columns.includes(columnName)) columnIndices.group3.push(index);
+                    if (group4Columns.includes(columnName)) columnIndices.group4.push(index);
+                    if (group5Columns.includes(columnName)) columnIndices.group5.push(index);
+                    if (group6Columns.includes(columnName)) columnIndices.group6.push(index);
+                    if (group1Columns.includes(columnName)) header.classList.add('group-basic');
+                    if (group2Columns.includes(columnName)) header.classList.add('group-selection-horses');
+                    if (group3Columns.includes(columnName)) header.classList.add('group-ps');
+                    if (group4Columns.includes(columnName)) header.classList.add('group-sire-ps');
+                    if (group5Columns.includes(columnName)) header.classList.add('group-dam-ps');
+                    if (group6Columns.includes(columnName)) header.classList.add('group-internal-value');
+                    if (group7columns.includes(columnName)) header.classList.add('group-auction');
                 } else if (isDamsTable) {
                     if (group1Columns_dams.includes(columnName)) columnIndices.group1dams.push(index);
                     if (group2Columns_dams.includes(columnName)) columnIndices.group2dams.push(index);
@@ -298,13 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group3Columns_dams.includes(columnName)) header.classList.add('main-characteristics-dams');
                     if (group4Columns_dams.includes(columnName)) header.classList.add('group-pb-dam');
                     if (group5Columns_dams.includes(columnName)) header.classList.add('group-racing-dam');
-                    const lastGroupIndices = {
-                        group1: getLastColumnIndex(group1Columns_dams, headers),
-                        group2: getLastColumnIndex(group2Columns_dams, headers),
-                        group3: getLastColumnIndex(group3Columns_dams, headers),
-                        group4: getLastColumnIndex(group4Columns_dams, headers),
-                        group5: getLastColumnIndex(group5Columns_dams, headers)
-                    };
+                    if (group6Columns_dams.includes(columnName)) header.classList.add('group-auction');
                 } else if (isauctioned_horses_table){
                     if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
                 }
@@ -313,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
                 cells.forEach(cell => {
-                    cell.classList.remove('group-1-highlight', 'group-2-highlight', 'group-3-highlight', 'group-4-highlight');
+                    cell.classList.remove('group-1-highlight', 'group-2-highlight', 'group-3-highlight', 'group-4-highlight', 'group-5-highlight', 'group-6-highlight');
                     cell.style.boxShadow = '';
                 });
 
@@ -332,6 +361,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 columnIndices.group5.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-5-highlight');
                 });
+                columnIndices.group6.forEach(i => {
+                    if (cells[i]) cells[i].classList.add('group-6-highlight');
+                });
                 columnIndices.group1dams.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-1dams-highlight');
                 } );    
@@ -347,12 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 columnIndices.group5dams.forEach(i => {
                     if (cells[i]) cells[i].classList.add('group-5dams-highlight');
                 });
-                columnIndices.group1.forEach(i => {
-                    if (isDamsTable && cells[i]) {
-                        cells[i].classList.add('group-1dams-highlight');
-                        if (i === lastGroupIndices.group1) cells[i].classList.add('border-right');
-                    }
-                });
+                
             });
         });
     }

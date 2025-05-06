@@ -42,7 +42,7 @@ HORSES_RENAMED_COLUMNS = {
     'end_date': 'End',
     'MSib_StkWnrs_Offs': 'Dam Stk Wnrs / RA Offs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
-    'Dam_Mean_T3_BSN': 'Dam Top 3 BSN\'s',
+    'Dam_Mean_T3_BSN': 'Top BSNs',
     'Dam_Raced_STK': 'Dam Raced STK?',
     'Dam_Placed_STK': 'Dam Placed STK?',
     'Dam_Total_Rcs': 'Dam Total Races',
@@ -314,43 +314,68 @@ def index():
                 auctioned_horses_df[col] = auctioned_horses_df[col].apply(format_dollar)
 
         horses_df_order = [
-                       'Name',
+                        #Basic Info
+                        'Ranking Gen23',
+                       'Horse',
                        'Sire',
                         'Dam',
                         'Sex',
-                        'Birth Date',
-                        'Haras',
+                        'Birth Month',
+                        #Selection
                         'PRS',
                         'PR',
                         'PS',
-                        'STK Wnrs / Rnrs',
-                        '#RUnners/ Born at 3yo',
+                        #Decomposing PS Factors
+                        'Sire PS',
+                        'Dam\'s Age and Racing career',
+                        'Dam\'s Offsprings Performance',
+                        'Dam\'s Family (Parents & Siblings)',
+                        #Sires PS Characteristics
+                        'STK Races /Races',
+                        'STK Wins 2-5yo/#2-5yo',
+                        'Recent G1 Wnrs/Born',
+                        # 'STK Wnrs / Rnrs',
+                        # '#RUnners/ Born at 3yo',
+
+                        #Dams PS Characteristics
                         'Age',
-                        'Dam Stk Wnrs / RA Offs',
-                        'Dams RA Offs',
-                        'Dam Top 3 BSN\'s',
-                        'Dam\'s Foals Top 3 BSN',
-                        'Dam Placed STK?',
-                        'Dam Raced STK?',
-                        'Dam Total Races',
-                        'Dam\'s Foal Raced Stk?',
-                        'Dam\'s Foal Placed Stk?',
-                        'Dam\'s Siblings Total G1/G2',
-                        'Dam\'s Siblings G1G2/Races',
-                        'CEI per foal',
-                        'Own Chars',
-                        'Father',
-                        'Father\'s Offs',
-                        'Dam\'s Age and Racing Career',
-                        'Dam\'s Offs',
-                        'Dam\'s Sibs',
-                        'Dam\'s Parents Career',
-                        'Inbreeding',
-                        'Dam\'s Season',
+                        'Top BSNs',
+                        'Raced Stk? Won G-Stk? Won-G1?',
+                        '#Offs Ran',
+                        'Offs Tops BSNs',
+                        'Offs Wnrs before 3yo(non-ALT)',
+                        'Offs Stk Wnrs',
+                        'CEI per offs(**)',
+                        'Dam\'s Siblings(GS) Stk wins',
+                        #Internal Value
+                        'PRS Value (2.200 USDB per Bps)',
+                        #Auction info
+                        # 'Dam\'s Season',
+                        'Haras',
                         'Start',
                         'End',
                         'Lote',
                         'Href'
+                        # 'Dam Stk Wnrs / RA Offs',
+                        # 'Dams RA Offs',
+                        # 'Dam\'s Foals Top 3 BSN',
+                        # 'Dam Placed STK?',
+                        # 'Dam Raced STK?',
+                        # 'Dam Total Races',
+                        # 'Dam\'s Foal Raced Stk?',
+                        # 'Dam\'s Foal Placed Stk?',
+                        # 'Dam\'s Siblings Total G1/G2',
+                        # 'Dam\'s Siblings G1G2/Races',
+                        # 'CEI per foal',
+                        # 'Own Chars',
+                        # 'Father',
+                        # 'Father\'s Offs',
+                        # 'Dam\'s Age and Racing Career',
+                        # 'Dam\'s Offs',
+                        # 'Dam\'s Sibs',
+                        # 'Dam\'s Parents Career',
+                        # 'Inbreeding',
+ 
                         # 'Studbook ID'
                              ]
         
@@ -433,7 +458,7 @@ def index():
             'PricePerBp',
             'count'
         ]
-        horses_df = horses_df[horses_df_order]
+        horses_df = horses_df[[col for col in horses_df_order if col in horses_df.columns]]
         dams_df = dams_df[[col for col in dams_df_order if col in dams_df.columns]]
         auctioned_horses_df = auctioned_horses_df[past_auction_order]
         past_auction_summary = past_auction_summary[past_auction_summary_order]
@@ -452,7 +477,7 @@ def index():
                 return pd.NaT
 
         # Apply the functions
-        horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
+        # horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
         horses_df['Start'] = horses_df['Start'].apply(parse_start_end)
         horses_df['End'] = horses_df['End'].apply(parse_start_end)
         dams_df['Start'] = dams_df['Start'].apply(parse_start_end)
@@ -461,7 +486,7 @@ def index():
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].apply(parse_birth_date)
 
         # Format all as dd/mm/yy strings
-        horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
+        # horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
         horses_df['Start'] = horses_df['Start'].dt.strftime('%d/%m/%y')
         horses_df['End'] = horses_df['End'].dt.strftime('%d/%m/%y')
         dams_df['Start'] = dams_df['Start'].dt.strftime('%d/%m/%y')
@@ -545,19 +570,22 @@ def index():
 
 
         column_groups_horses = [
-                        ("Basic Information", 9, "group-basic"),
-                        ("Family Overview", 15, "group-family"),
-                        ("Decomposing PS Factors", 7, "group-ps"),
-                        ("Factors PR", 2, "group-pr"),
+                        ("Basic Information", 6, "group-basic"),
+                        ("Selection", 3, "group-selection-horses"),
+                        ("Decomposing PS Factors", 4, "group-ps"),
+                        ("Sire\'s PS Characteristics", 3, "group-sire-ps"),
+                        ("Dam\'s PS Characteristics", 9, "group-dam-ps"),
+                        ("Internal Value",1, "group-internal-value"),
                         ("Auction Info", 5, "group-auction")
                     ]
         
         column_groups_horses_h2 = [
-                        ("", 9, "group-basic"),
-                        ("Sire", 2, "group-family-sire"),
-                        ("Dam", 13, "group-family-dam"),
-                        ("", 7, ""),
-                        ("", 2, ""),
+                      ("", 6, "group-basic"),
+                        ("", 3, "group-selection-horses"),
+                        ("", 4, "group-ps"),
+                        ("", 3, "group-sire-ps"),
+                        ("", 9, "group-dam-ps"),
+                        ("",1, "group-internal-value"),
                         ("", 5, "group-auction")
                     ]
         
