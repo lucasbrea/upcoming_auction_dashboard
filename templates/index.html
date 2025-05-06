@@ -43,9 +43,6 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link {% if initial_tab == 'reports' %}active{% endif %}" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="{{ 'true' if initial_tab == 'reports' else 'false' }}">Reports</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link {% if initial_tab == 'test' %}active{% endif %}" id="test-tab" data-bs-toggle="tab" data-bs-target="#test" type="button" role="tab" aria-controls="test" aria-selected="{{ 'true' if initial_tab == 'test' else 'false' }}">Test</button>
-            </li>
         </ul>
     
         <div class="tab-content" id="myTabContent">
@@ -96,21 +93,6 @@
                 </form>
             </div>
 
-            <!--Test Mati Tab-->
-            <div class="tab-pane fade {% if initial_tab == 'test' %}show active{% endif %}" 
-                id="test" role="tabpanel" aria-labelledby="test-tab">
-                <form method="get" action="{{ url_for('index') }}">
-                <div class="table-wrapper">
-                    {% set table_id = "test" %}
-                    {% set filters = test_filters %}
-                    {% set columns = test_columns %}
-                    {% set data = test_data %}
-                    {% set column_groups = column_groups_test %}
-                    {% set column_groups_h2 = column_groups_test_h2 %}
-                    {% include "table_template.html" %}
-                </div>
-                </form>
-            </div>
             <!--Auctioned Horses Tab-->
             <div class="tab-pane fade {% if initial_tab == 'auctioned_horses' %}show active{% endif %}" 
             id="auctioned_horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
@@ -130,25 +112,156 @@
       <!-- Reports Tabs -->
       <div class="tab-pane fade {% if initial_tab == 'reports' %}show active{% endif %}" 
       id="reports" role="tabpanel" aria-labelledby="reports-tab">
-        <select id="pdf-select">
-            <option value="Report Firmamento (criador).pdf">Report Firmamento (criador)</option>
-            <option value="Report Firmamento (stud).pdf">Report Firmamento (stud)</option>
-            <option value="Proposal La Pasion - 22-03-2024.pdf">Proposal La Pasion 22-03-2024</option>
-          </select>
-            <a class="btn btn-primary" 
-                id="view-spreadsheet-button" 
-                href="https://docs.google.com/spreadsheets/d/1ZUyMbS7Cl7zV3hLXJRq4m_jdO9rP-zh3/edit?gid=1115563587#gid=1115563587" 
-                target="_blank" 
-                role="button">
-                Foward Testing Camada 2022
+      <div class="card-container">
+                <a href="https://drive.google.com/file/d/1XuVk-PZRkI7Aihw9cvUgHsNOb474iTXG/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Add-ons Firmamento </h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
                 </a>
-                <a class="btn btn-primary" 
-                    id="view-spreadsheet-button" 
-                    href="https://docs.google.com/spreadsheets/d/1hnsMrKHMpCcgGrDfz6lAKcWnA7RaIrEQ/edit?usp=sharing&ouid=114898536092612537397&rtpof=true&sd=true" 
-                    target="_blank" 
-                    role="button">
-                    Padrillos Table
+                <a href="https://drive.google.com/file/d/1G4TeMO4ILY_RFjhGN_3tifiUewrq5P8H/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Firmamento auction analysis(Sep 2024)</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
                 </a>
+                <a href="https://drive.google.com/file/d/1I7T5c7txWsWIU4baOt8TUrxUs9YFqyxc/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Proposal La Pasion - 22-03-2024</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://drive.google.com/file/d/1XPhELxhJy83UCcKbxVFoPjPl-eghul0v/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Firmamento Report</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://drive.google.com/file/d/1hIe5M42vxqQIFNd8mMoLTcnk3BZp8wss/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Report Firmamento(criador)</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                </a>
+                <a href="https://drive.google.com/file/d/10IfAEtpEKAY-a-rT-2DmE2IuiArgl5f0/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Report Firmamento(stud)</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                </a>
+                <a href="https://drive.google.com/file/d/1k72dGx4w32kruH1uSLl6Y_naH-_JXy3A/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Horse Profile -  Envidienme</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                </a>
+                <a href="https://drive.google.com/file/d/1tYF3isWs8y61tewyZRZa67-u3-5uHWYP/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Jockey Report - Gonzalo D. Borda</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://drive.google.com/file/d/1MJ8IKVKJK2Ea4jA1615Z7BMW1CmQvG6k/view?usp=drive_link"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Trainer Report - Frenkel<Add-Ons></Add-Ons></h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbJHX0_alxduIXfzBaBsSudrZPAuypRTIJgrkjsbkfT9PgdZxWP9G2XP3FpjmiLg/pubhtml"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">PS Decomposition graphs - Example<Add-Ons></Add-Ons></h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/131ORjkKEyewcLVQkXC00oMI-gmCZKFcO/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Criador Table<Add-Ons></Add-Ons></h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1UgWSZ4W2axebW6bOiqMLKWLCVlHP7VkW/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Padrillos table - CB<Add-Ons></Add-Ons></h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1SL_1IohEmQBG5jECf8bMjABxdC9C46WY/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Comparing generations table</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1yYYt6C-diN5E9-bCzQEsv7L-Uxjm_1Zy/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">DL Sires - Table</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1TvsrWZnmbTu3_h9v2-2v7RaH9m-O-yp2/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2"> Remates - Table</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1x2YQtNQ9HTOlbR2LnHkQY_R8NtuveJlD/edit?usp=drive_link&ouid=114898536092612537397&rtpof=true&sd=true"
+                target="_blank"
+                class="spreadsheet-card"
+                style="max-width: 400px; border-radius: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">SF Profit - Table</h5>
+                    <p class="card-text text-muted">Open Spreadsheet in new tab</p>
+                </div>
+      </div>
+            
+
           <!-- <iframe width="100%" height=1600px src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbJHX0_alxduIXfzBaBsSudrZPAuypRTIJgrkjsbkfT9PgdZxWP9G2XP3FpjmiLg/pubhtml?widget=true&amp;headers=false"></iframe> -->
 
     </div>
@@ -161,7 +274,6 @@
         const horsesMaxValues = {{ horses_max_values | tojson }};
         const damsMaxValues = {{ dams_max_values | tojson }};
         const auctioned_horses_max_values = {{ auctioned_horses_max_values | tojson }};
-        const testMaxValues = {{ test_max_values | tojson }};
 
     document.getElementById('pdf-select').addEventListener('change', function() {
         const selectedPDF = this.value;
