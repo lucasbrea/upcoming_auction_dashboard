@@ -304,19 +304,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function applyGradientHighlighting() {
         tables.forEach(table => {
             const headers = getColumnHeaders(table);
-            const isHorsesTable = table.closest('#horses') !== null;
-            const isDamsTable = table.closest('#dams') !== null;
-            const isTestTable = table.closest('#test') !== null;
-            let maxValues;
-                if (isHorsesTable) {
-                maxValues = horsesMaxValues;
-                } else if (isDamsTable) {
-                maxValues = damsMaxValues;
-                } else if (isTestTable) {
-                maxValues = testMaxValues;
-                } else {
-                maxValues = {}; // or handle as needed
-                }
+            const tabPane = table.closest('.tab-pane');
+            const tabId = tabPane?.id;
+
+            const maxValues = 
+                  tabId === 'horses' ? horsesMaxValues :
+                  tabId === 'dams' ? damsMaxValues :
+                  tabId === 'auctioned-horses' ? auctionedHorsesMaxValues :
+                  tabId === 'test' ? testMaxValues :
+                  {};
 
             headers.forEach((header, index) => {
                 const columnName = header.getAttribute('data-column');

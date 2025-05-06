@@ -135,12 +135,16 @@
             <option value="Report Firmamento (stud).pdf">Report Firmamento (stud)</option>
             <option value="Proposal La Pasion - 22-03-2024.pdf">Proposal La Pasion 22-03-2024</option>
           </select>
-          
-          <iframe id="pdf-frame"
-                  src="{{ url_for('static', filename='reports/Report Firmamento (criador).pdf') }}"
-                  width="100%" height="2000px"
-                  style="border: none;">
-          </iframe>           
+            <a class="btn btn-primary" 
+                id="view-spreadsheet-button" 
+                href="https://docs.google.com/spreadsheets/d/1ZUyMbS7Cl7zV3hLXJRq4m_jdO9rP-zh3/edit?gid=1115563587#gid=1115563587" 
+                target="_blank" 
+                role="button">
+                View Spreadsheet
+                </a>
+                        
+          <iframe width="100%" height=1600px src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbJHX0_alxduIXfzBaBsSudrZPAuypRTIJgrkjsbkfT9PgdZxWP9G2XP3FpjmiLg/pubhtml?widget=true&amp;headers=false"></iframe>
+
     </div>
     </div>
 
@@ -151,7 +155,7 @@
         const horsesMaxValues = {{ horses_max_values | tojson }};
         const damsMaxValues = {{ dams_max_values | tojson }};
         const auctioned_horses_max_values = {{ auctioned_horses_max_values | tojson }};
-        const testMaxValues = {{ test_mati_max_values | tojson }};
+        const testMaxValues = {{ test_max_values | tojson }};
 
     document.getElementById('pdf-select').addEventListener('change', function() {
         const selectedPDF = this.value;

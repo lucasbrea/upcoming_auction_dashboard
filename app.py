@@ -872,7 +872,7 @@ def index():
                             test_columns=test_mati_columns,
                             column_groups_test=column_groups_test,
                             column_group_test_h2=column_group_test_h2,
-                            test_mati_max_values=test_horses_max_values,
+                            test_max_values=test_horses_max_values,
                             test_filters=test_mati_filters,
                             test_column_classes=test_column_classes,
                              )
