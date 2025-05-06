@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Lote':{type: 'number'},
         'Price per Bp':{type: 'number'},
         'Auction Order':{type: 'number'},
+
        
     };
 
