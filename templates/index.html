@@ -41,7 +41,10 @@
                 <button class="nav-link {% if initial_tab == 'auctioned-horses' %}active{% endif %}" id="auctioned-horses-tab" data-bs-toggle="tab" data-bs-target="#auctioned-horses" type="button" role="tab" aria-controls="auctioned-horses" aria-selected="{{ 'true' if initial_tab == 'auctioned-horses' else 'false' }}">Auctioned Horses</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link {% if initial_tab == 'reports' %}active{% endif %}" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="{{ 'true' if initial_tab == 'reports' else 'false' }}">Reports</button>"
+                <button class="nav-link {% if initial_tab == 'reports' %}active{% endif %}" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="{{ 'true' if initial_tab == 'reports' else 'false' }}">Reports</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if initial_tab == 'test' %}active{% endif %}" id="test-tab" data-bs-toggle="tab" data-bs-target="#test" type="button" role="tab" aria-controls="test" aria-selected="{{ 'true' if initial_tab == 'test' else 'false' }}">Test</button>
             </li>
         </ul>
     
@@ -93,6 +96,21 @@
                 </form>
             </div>
 
+            <!--Test Mati Tab-->
+            <div class="tab-pane fade {% if initial_tab == 'test' %}show active{% endif %}" 
+                id="test" role="tabpanel" aria-labelledby="test-tab">
+                <form method="get" action="{{ url_for('index') }}">
+                <div class="table-wrapper">
+                    {% set table_id = "test" %}
+                    {% set filters = test_filters %}
+                    {% set columns = test_columns %}
+                    {% set data = test_data %}
+                    {% set column_groups = column_groups_test %}
+                    {% set column_groups_h2 = column_groups_test_h2 %}
+                    {% include "table_template.html" %}
+                </div>
+                </form>
+            </div>
             <!--Auctioned Horses Tab-->
             <div class="tab-pane fade {% if initial_tab == 'auctioned_horses' %}show active{% endif %}" 
             id="auctioned_horses" role="tabpanel" aria-labelledby="auctioned-horses-tab">
@@ -133,7 +151,7 @@
         const horsesMaxValues = {{ horses_max_values | tojson }};
         const damsMaxValues = {{ dams_max_values | tojson }};
         const auctioned_horses_max_values = {{ auctioned_horses_max_values | tojson }};
-
+        const testMaxValues = {{ test_mati_max_values | tojson }};
 
     document.getElementById('pdf-select').addEventListener('change', function() {
         const selectedPDF = this.value;

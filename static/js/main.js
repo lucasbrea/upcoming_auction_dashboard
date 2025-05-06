@@ -78,10 +78,39 @@ document.addEventListener('DOMContentLoaded', function () {
         'End': { type: 'date' },
         'Lote':{type: 'number'},
         'Price per Bp':{type: 'number'},
-        'Auction Order':{type: 'number'}
+        'Auction Order':{type: 'number'},
+        'Precocity':{type: 'percentage'},
+        'Avg Racing Kg':{type: 'number'},
+        'Avg Racing Distance':{type: 'number'},
+        'Recent Run Share':{type: 'percentage'},
+        'Share "Vacio"':{type: 'percentage'},
     };
 
-    const gradientColumns = ['TPBRS','PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.'];
+    const gradientColumns = [
+        'G1 Wins',
+        'G1 Wins / Races',
+        'G1 Wnrs / Born (Historic)',
+        'G1 Wnrs / Born (Last 2 yrs)',
+        'Historic Run Share at 4yo',
+        'Inbreeding Coef.',
+        'Number of Top 100 BSNs / Number of 3&4yo offsprings',
+        'PB',
+        'PBRS',
+        'PR',
+        'PRS',
+        'PS',
+        'Precocity',
+        'Recent Run Share at 4yo (Last 2y)',
+        'Share "Vacio"',
+        'STK Races /Races',
+        'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)',
+        'STK Wins 2-5yo / #2-5yo Offsprings',
+        'STK Wins 3-4yo / #3-4yo Offsprings',
+        'STK Wins / Races',
+        'TPBRS',
+        'Win share (races)',
+        'Wnrs share'
+      ];
     const sortableColumns = Object.keys(columnConfig);
     const tables = document.querySelectorAll('.table');
 
@@ -191,6 +220,50 @@ document.addEventListener('DOMContentLoaded', function () {
             'Year',
             'Auction Date'
     ]
+    const columngroups1_test = [
+        'Sire'
+    ];
+    const columngroups2_test = [
+        'Season',
+        'Share "Vacio"',
+        "Dam's Avg Max BSN",
+        'Number Offsprings 2-5yo',
+        'Gen 202X Offsprings (Current 3yo)',
+    ];
+    const columngroups3_test = [
+        'Avg Racing Kg',
+        'Avg Racing Distance',
+        'Precocity',
+    ];
+    const columngroups4_test = [
+        'Recent Run Share at 4yo (Last 2y)',
+        'Historic Run Share at 4yo',
+        'Avg number of races at 4yo',
+    ];
+    const columngroups5_test = [
+        'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)',
+        'STK Wins 2-5yo / #2-5yo Offsprings',
+        'STK Wins 3-4yo / #3-4yo Offsprings',
+        'Number of Top 100 BSNs / Number of 3&4yo offsprings',
+        'Sum AEI 2-5yo / #2-5yo offsprings',
+        'G1 Wnrs / Born (Historic)',
+        'G1 Wnrs / Born (Last 2 yrs)',
+    ];
+    const columngroups6_test = [
+        'Runners',
+        'Winners',
+        'Wnrs share',
+        'Races',
+        'Wins',
+        'Win share (Races)',
+        'STK Runs',
+        'G1 Runs',
+        'STK Wins',
+        'G1 Wins',
+        'STK Races /Races',
+        'STK Wins / Races',
+        'G1 Wins / Races'
+    ];
 
     function parseValue(value, type) {
         if (!value || value === '-') return null;
@@ -232,7 +305,18 @@ document.addEventListener('DOMContentLoaded', function () {
         tables.forEach(table => {
             const headers = getColumnHeaders(table);
             const isHorsesTable = table.closest('#horses') !== null;
-            const maxValues = isHorsesTable ? horsesMaxValues : damsMaxValues;
+            const isDamsTable = table.closest('#dams') !== null;
+            const isTestTable = table.closest('#test') !== null;
+            let maxValues;
+                if (isHorsesTable) {
+                maxValues = horsesMaxValues;
+                } else if (isDamsTable) {
+                maxValues = damsMaxValues;
+                } else if (isTestTable) {
+                maxValues = testMaxValues;
+                } else {
+                maxValues = {}; // or handle as needed
+                }
 
             headers.forEach((header, index) => {
                 const columnName = header.getAttribute('data-column');
@@ -284,9 +368,11 @@ document.addEventListener('DOMContentLoaded', function () {
         tables.forEach(table => {
             const headers = getColumnHeaders(table);
             const rows = table.querySelectorAll('tbody tr');
-            const isHorsesTable = table.closest('#horses') !== null;
-            const isDamsTable = table.closest('#dams') !== null;
-            const isauctioned_horses_table = table.closest('#auctioned-horses') !== null;
+            const tabPane = table.closest('.tab-pane');
+            const isHorsesTable = tabPane?.id === 'horses';
+            const isDamsTable = tabPane?.id === 'dams';
+            const isTestTable = tabPane?.id === 'test';
+            const isauctioned_horses_table = tabPane?.id === 'auctioned-horses';
 
             const columnIndices = {
                 group1: [],
@@ -302,10 +388,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 group4dams: [],
                 group5dams: [],
                 group6dams: [],
+                group1test:[],
+                group2test:[],
+                group3test:[],
+                group4test:[],
+                group5test:[],
+                group6test:[],
+    
             };
 
             headers.forEach((header, index) => {
-                const columnName = header.getAttribute('data-column');
+                const columnName = header.getAttribute('data-column') || header.textContent.trim();
                 if (isHorsesTable) {
                     if (group1Columns.includes(columnName)) columnIndices.group1.push(index);
                     if (group2Columns.includes(columnName)) columnIndices.group2.push(index);
@@ -336,6 +429,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (group6Columns_dams.includes(columnName)) header.classList.add('group-auction');
                 } else if (isauctioned_horses_table){
                     if (group1Columns_auctioned_horses.includes(columnName)) columnIndices.group1.push(index);
+                }else if (isTestTable) {
+                    if (columngroups1_test.includes(columnName)) header.classList.add('group-auction');
+                    if (columngroups2_test.includes(columnName)) header.classList.add('group-sire-test');
+                    if (columngroups3_test.includes(columnName)) header.classList.add('group-offsprings-test');
+                    if (columngroups4_test.includes(columnName)) header.classList.add('group-health-test');
+                    if (columngroups5_test.includes(columnName)) header.classList.add('group-recent-offsprings-test');
+                    if (columngroups6_test.includes(columnName)) header.classList.add('group-historic-offsprings-test');
                 }
             });
 

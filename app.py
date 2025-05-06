@@ -24,8 +24,43 @@ CSV_PATH = os.path.join("Data/dashboard_data.csv")
 DAMS_CSV_PATH = os.path.join("Data/Dashboard_Data_Dams_Table.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Auctioned_Horses_Data.csv")
+TEST_MATI_PATH = os.path.join("Data/Padrillos table (Summary).csv")
 
+TEST_MATI_RENAMED_COLUMNS = {
+    'padrillo': 'Sire',
+    'FatherSeason': 'Season',
+    'ShareVaciosL2S': 'Share "Vacio"',
+    'mMeanMaxBsn': "Dam's Avg Max BSN",
+    'Offs5yom': 'Number Offsprings 2-5yo',
+    'Offs3yo': 'Gen 202X Offsprings (Current 3yo)',
+    'OffsMeanKg': 'Avg Racing Kg',
+    'OffsMeanDist': 'Avg Racing Distance',
+    'ShareRacedAt2yo': 'Precocity',
+    'Share4_5toRacedBy4yo': 'Recent Run Share at 4yo (Last 2y)',
+    'Share4yopRacedBy4yo': 'Historic Run Share at 4yo',
+    'MeanRcsBy4yo': 'Avg number of races at 4yo',
+    'STKRcsBy5yoCurr5yomPer5yom': 'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)',
+    'STKWinsBy5yoCurr5yomPer5yom': 'STK Wins 2-5yo / #2-5yo Offsprings',
+    'STKWinsBy4yoCurr4yomPer4yom': 'STK Wins 3-4yo / #3-4yo Offsprings',
+    'PctCurr3_4yoInTop100BSN': 'Number of Top 100 BSNs / Number of 3&4yo offsprings',
+    'CEIBy5yoCurr5yomPer5yo':'Sum AEI 2-5yo / #2-5yo offsprings',
+    'G1WnnrsOverOffs': 'G1 Wnrs / Born (Historic)',
+    'G1Wnnrs4_5yoOverOffs4_5yo': 'G1 Wnrs / Born (Last 2 yrs)',
+    'OffsRaced': 'Runners',
+    'OffsWon': 'Winners',
+    'WonOverRaced': 'Wnrs share',
+    'OffsRcs': 'Races',
+    'OffsWins': 'Wins',
+    'WinsOverRcs': 'Win share (Races)',
+    'OffsSTKRan': 'STK Runs',
+    'OffsG1Rcs': 'G1 Runs',
+    'OffsSTKWon': 'STK Wins',
+    'OffsG1Won': 'G1 Wins',
+    'STKRacesShare': 'STK Races /Races',
+    'STKWinsOverRcs': 'STK Wins / Races',
+    'G1WinsOverRcs': 'G1 Wins / Races'
 
+}
 
 
 HORSES_RENAMED_COLUMNS = {
@@ -192,8 +227,12 @@ AUCTIONED_HORSES_FILTER_COLUMNS = [
                             'Year',
                             'Haras',
                             'Title'
-                                    ]
+]
 
+TEST_MATI_FITLER_COLUMNS = [
+    'Sire'
+
+]
 
 def load_data(file_path):
     if not os.path.exists(file_path):
@@ -229,9 +268,24 @@ def load_data(file_path):
                           'birthRateLast3',
                           'birthRate',
                         #   'hadRestYear',
-                          'FathSibSTKWnrShL4Gens',
-                          'FathSib_runshare_3yo',
-                          'MSib_mean_cumAEI_at2y'
+                        'FathSibSTKWnrShL4Gens',
+                        'FathSib_runshare_3yo',
+                        'MSib_mean_cumAEI_at2y',
+                        'ShareRacedAt2yo',
+                        'Share4_5toRacedBy4yo',
+                        'Share4yopRacedBy4yo',
+                        'STKRcsBy5yoCurr5yomPer5yom',
+                        'STKWinsBy5yoCurr5yomPer5yom',
+                        'STKWinsBy4yoCurr4yomPer4yom',
+                        'PctCurr3_4yoInTop100BSN',
+                        'G1WnnrsOverOffs',
+                        'G1Wnnrs4_5yoOverOffs4_5yo',
+                        'WonOverRaced',
+                        'WinsOverRcs',
+                        'ShareVaciosL2S',
+                        'STKRacesShare',
+                        'STKWinsOverRcs',
+                        'G1WinsOverRcs'
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -239,7 +293,7 @@ def load_data(file_path):
             df[col] = df[col] * 100
 
             # Use 1 decimal only for PRS, else round to int
-            if col in ['PRS','PBRS']:
+            if col in ['PRS','PBRS','G1WinsOverRcs','STKWinsOverRcs','STKRacesShare']:
                 df[col] = df[col].round(1).apply(lambda x: f"{x}%" if pd.notnull(x) else "-")
             else:
                 df[col] = df[col].round(0).apply(lambda x: f"{int(x)}%" if pd.notnull(x) else "-")
@@ -252,7 +306,11 @@ def load_data(file_path):
                         'hadRestYear',
                         'M_cumAEI',
                         'pricePerBp',
-                        'valueUSDB'
+                        'valueUSDB',
+                        'mMeanMaxBsn',
+                        'OffsMeanKg',
+                        'OffsMeanDist',
+                        'OffsRaced'
     ]
     for col in rounded_columns:
         if col in df.columns:
@@ -283,6 +341,7 @@ def index():
         dams_df = load_data(DAMS_CSV_PATH)
         past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
+        test_mati_df = load_data(TEST_MATI_PATH)
 
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
 
@@ -291,6 +350,8 @@ def index():
         auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
 
         past_auction_summary.rename(columns=PAST_AUCTION_SUMMARY_RENAMED_COLUMNS, inplace=True)
+
+        test_mati_df.rename(columns=TEST_MATI_RENAMED_COLUMNS, inplace=True)
 
         def format_dollar(x):
             try:
@@ -313,6 +374,46 @@ def index():
             if col in auctioned_horses_df.columns:
                 auctioned_horses_df[col] = auctioned_horses_df[col].apply(format_dollar)
 
+
+        test_mati_order = [
+                'Sire',
+                #Sire Characteristics
+                'Season',
+                'Share "Vacio"',
+                "Dam's Avg Max BSN",
+                'Number Offsprings 2-5yo',
+                'Gen 202X Offsprings (Current 3yo)',
+                #Offspring Characteristics
+                'Avg Racing Kg',
+                'Avg Racing Distance',
+                'Precocity',
+                #Health
+                'Recent Run Share at 4yo (Last 2y)',
+                'Historic Run Share at 4yo',
+                'Avg number of races at 4yo',
+                #Recent Offspring Performance
+                'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)',
+                'STK Wins 2-5yo / #2-5yo Offsprings',
+                'STK Wins 3-4yo / #3-4yo Offsprings',
+                'Number of Top 100 BSNs / Number of 3&4yo offsprings',
+                'Sum AEI 2-5yo / #2-5yo offsprings',
+                'G1 Wnrs / Born (Historic)',
+                'G1 Wnrs / Born (Last 2 yrs)',
+                #Historic Offspring Performance
+                'Runners',
+                'Winners',
+                'Wnrs share',
+                'Races',
+                'Wins',
+                'Win share (Races)',
+                'STK Runs',
+                'G1 Runs',
+                'STK Wins',
+                'G1 Wins',
+                'STK Races /Races',
+                'STK Wins / Races',
+                'G1 Wins / Races'
+        ]
         horses_df_order = [
                         #Basic Info
                         'Ranking Gen23',
@@ -458,10 +559,12 @@ def index():
             'PricePerBp',
             'count'
         ]
+        
         horses_df = horses_df[[col for col in horses_df_order if col in horses_df.columns]]
         dams_df = dams_df[[col for col in dams_df_order if col in dams_df.columns]]
         auctioned_horses_df = auctioned_horses_df[past_auction_order]
         past_auction_summary = past_auction_summary[past_auction_summary_order]
+        test_mati_df = test_mati_df[[col for col in test_mati_order if col in test_mati_df.columns]]
         
         #We have to convert all the dates into the same format
         def parse_birth_date(date_str):
@@ -495,11 +598,50 @@ def index():
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].dt.strftime('%d/%m/%y')
 
         # Calculate max values for gradient columns
-        gradient_columns = ['TPBRS','PR', 'PS', 'PRS', 'PB', 'PBRS','Inbreeding Coef.']
+        gradient_columns = [
+                    'G1 Wins',
+                    'G1 Wins / Races',
+                    'G1 Wnrs / Born (Historic)',
+                    'G1 Wnrs / Born (Last 2 yrs)',
+                    'Historic Run Share at 4yo',
+                    'Inbreeding Coef.',
+                    'Number of Top 100 BSNs / Number of 3&4yo offsprings',
+                    'PB',
+                    'PBRS',
+                    'PR',
+                    'PRS',
+                    'PS',
+                    'Precocity',
+                    'Recent Run Share at 4yo (Last 2y)',
+                    'Share "Vacio"',
+                    'STK Races /Races',
+                    'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)',
+                    'STK Wins 2-5yo / #2-5yo Offsprings',
+                    'STK Wins 3-4yo / #3-4yo Offsprings',
+                    'STK Wins / Races',
+                    'TPBRS',
+                    'Win share (races)',
+                    'Wnrs share'
+        ]
 
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
         
+        test_horses_max_values = {}
+
+        for col in gradient_columns:
+            if col in test_mati_df.columns:
+                try:
+                    # Remove % and convert to numeric, ignoring errors
+                    numeric_values = pd.to_numeric(test_mati_df[col].str.rstrip('%'), errors='coerce')
+                    if not numeric_values.empty and not numeric_values.isna().all():
+                        max_val = numeric_values.max()
+                        if pd.notnull(max_val):
+                            test_horses_max_values[col] = float(max_val)
+                except Exception as e:
+                    print(f"Error processing column {col} in test_mati_df: {str(e)}")
+                    continue
+
         auctioned_horses_max_values = {}
         for col in gradient_columns:
             if col in auctioned_horses_df.columns:
@@ -513,7 +655,7 @@ def index():
                 except Exception as e:
                     print(f"Error processing column {col}: {str(e)}")
                     continue
-                
+        
 
         # Add error handling for dams max values calculation
         dams_max_values = {}
@@ -535,7 +677,7 @@ def index():
         dams_filters = {col: '' for col in DAMS_FILTER_COLUMNS}
         auctions_filters = {col: '' for col in AUCTIONS_FILTER_COLUMNS}
         auctioned_horses_filters = {col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS}
-
+        test_mati_filters = {col: '' for col in TEST_MATI_FITLER_COLUMNS}
         # Update with any values from the request
         for col in HORSES_FILTER_COLUMNS:
             if request.args.get(f'horses_{col}'):
@@ -552,13 +694,15 @@ def index():
         for col in AUCTIONED_HORSES_FILTER_COLUMNS:
             if request.args.get(f'auctioned_horses_{col}'):
                 auctioned_horses_filters[col] = request.args.get(f'auctioned_horses_{col}')
-        
+        for col in TEST_MATI_RENAMED_COLUMNS:
+            if request.args.get(f'test_mati_{col}'):
+                test_mati_df[col] = request.args.get(f'test_mati_{col}')
         # Apply filters
         horses_df = filter_dataframe(horses_df, horses_filters)
         dams_df = filter_dataframe(dams_df, dams_filters)
         past_auction_summary = filter_dataframe(past_auction_summary, auctions_filters)
         auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
-        
+        test_mati_df = filter_dataframe(test_mati_df, test_mati_filters)
         #Replace sex int values with strings
         horses_df['Sex'] = horses_df['Sex'].map({1: 'F', 2: 'M'})
 
@@ -623,6 +767,56 @@ def index():
         column_groups_past_auction_summary = [ ("", 5, "group-basic")]
         column_groups_past_auction_summary_h2 = [("", 5, "group-basic")]
 
+        column_groups_test = [
+            ("",1, "group-basic"),
+            ("Sire Characteristics",5, "group-sire-test"),
+            ("Offsprings Characteristics",3, "group-offsprings-test"),
+            ("Health",3, "group-health-test"),
+            ("Recent Offspring Performance",7, "group-recent-offsprings-test"),
+            ("Historic Offspring Performance",14, "group-historic-offsprings-test"),
+        ]
+        column_group_test_h2 =[
+                        ("",1, "group-basic"),
+            ("",5, "group-sire-test"),
+            ("",3, "group-offsprings-test"),
+            ("",3, "group-health-test"),
+            ("",7, "group-recent-offsprings-test"),
+            ("",14, "group-historic-offsprings-test"),
+        ]
+        test_column_classes = {
+            'Sire': 'group-auction',
+            'Season': 'group-sire-test',
+            'Share "Vacio"': 'group-sire-test',
+            "Dam's Avg Max BSN": 'group-sire-test',
+            'Number Offsprings 2-5yo': 'group-sire-test',
+            'Gen 202X Offsprings (Current 3yo)': 'group-sire-test',
+            'Avg Racing Kg': 'group-offsprings-test',
+            'Avg Racing Distance': 'group-offsprings-test',
+            'Precocity': 'group-offsprings-test',
+            'Recent Run Share at 4yo (Last 2y)': 'group-health-test',
+            'Historic Run Share at 4yo': 'group-health-test',
+            'Avg number of races at 4yo': 'group-health-test',
+            'STK Races Ran 2-5yo / #2-5yo Offsprings (Sorted)': 'group-recent-offsprings-test',
+            'STK Wins 2-5yo / #2-5yo Offsprings': 'group-recent-offsprings-test',
+            'STK Wins 3-4yo / #3-4yo Offsprings': 'group-recent-offsprings-test',
+            'Number of Top 100 BSNs / Number of 3&4yo offsprings': 'group-recent-offsprings-test',
+            'Sum AEI 2-5yo / #2-5yo offsprings': 'group-recent-offsprings-test',
+            'G1 Wnrs / Born (Historic)': 'group-recent-offsprings-test',
+            'G1 Wnrs / Born (Last 2 yrs)': 'group-recent-offsprings-test',
+            'Runners': 'group-historic-offsprings-test',
+            'Winners': 'group-historic-offsprings-test',
+            'Wnrs share': 'group-historic-offsprings-test',
+            'Races': 'group-historic-offsprings-test',
+            'Wins': 'group-historic-offsprings-test',
+            'Win share (Races)': 'group-historic-offsprings-test',
+            'STK Runs': 'group-historic-offsprings-test',
+            'G1 Runs': 'group-historic-offsprings-test',
+            'STK Wins': 'group-historic-offsprings-test',
+            'G1 Wins': 'group-historic-offsprings-test',
+            'STK Races /Races': 'group-historic-offsprings-test',
+            'STK Wins / Races': 'group-historic-offsprings-test',
+            'G1 Wins / Races': 'group-historic-offsprings-test',
+        }
         horses_data = horses_df.to_dict(orient="records")
         horses_columns = horses_df_order
 
@@ -634,6 +828,9 @@ def index():
 
         auction_summary_data = past_auction_summary.to_dict(orient="records")
         auction_summary_columns = past_auction_summary_order
+
+        test_mati_data = test_mati_df.to_dict(orient="records")
+        test_mati_columns = test_mati_order
 
 
 
@@ -669,6 +866,15 @@ def index():
                              auctioned_horses_max_values=auctioned_horses_max_values,
                              horses_max_values=horses_max_values,
                              dams_max_values=dams_max_values,
+
+                             #test mati
+                            test_data=test_mati_data,
+                            test_columns=test_mati_columns,
+                            column_groups_test=column_groups_test,
+                            column_group_test_h2=column_group_test_h2,
+                            test_mati_max_values=test_horses_max_values,
+                            test_filters=test_mati_filters,
+                            test_column_classes=test_column_classes,
                              )
     
     

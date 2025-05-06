@@ -34,7 +34,7 @@
         {% endif %}
         <tr>
             {% for column in columns %}
-            <th data-column="{{ column }}">{{ column }}</th>
+            <th data-column="{{ column }}" class="{{ test_column_classes[column] if table_id == 'test' and column in test_column_classes else '' }}">{{ column }}</th>
             {% endfor %}
         </tr>
     </thead>

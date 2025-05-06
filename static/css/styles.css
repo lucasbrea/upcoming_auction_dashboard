@@ -5,7 +5,7 @@
     --border-color: #dee2e6; /* Light border color */
     --text-primary: #212529; /* Dark text color */
     --text-secondary: #6c757d; /* Muted text color */
-    --accent-color: #007bff; /* Accent color for links and buttons */
+    --accent-color: black; /* Accent color for links and buttons */
     --accent-color-light: rgba(0, 123, 255, 0.7); /* Lighter accent color */
     --danger-color: #dc3545; /* Danger color for errors */
 }
@@ -423,6 +423,10 @@ body {
 #horses table thead tr:nth-child(2) th:nth-child(4),
 #horses table thead tr:nth-child(2) th:nth-child(5),
 #horses table thead tr:nth-child(2) th:nth-child(6)
+/* #test table td:nth-child(1),
+#test table th:nth-child(1),
+#test table td:nth-child(6),
+#test table th:nth-child(6) */
   {
     border-right: 4px solid rgb(0, 0, 0) !important;
 }
@@ -549,4 +553,25 @@ body {
 .group-family-dams {
     background-color: rgba(23, 162, 184) !important; 
     color: #17a2b8 !important;
+}
+
+.group-sire-test{
+    background-color: rgb(255,255,209)!important;
+
+}
+.group-offsprings-test{
+    background-color: rgb(247,227,215)!important;
+
+}
+.group-health-test{
+    background-color: rgb(199,229,243)!important;
+
+}
+.group-recent-offsprings-test{
+    background-color: rgb(217,217,217)!important;
+
+}
+.group-historic-offsprings-test{
+    background-color: rgb(148,202,232) !important;
+
 }
