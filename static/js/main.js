@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'PR',
         'PRS',
         'PS',
+        'TPBRS'
 
       ];
     const sortableColumns = Object.keys(columnConfig);
