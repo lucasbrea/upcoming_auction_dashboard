@@ -230,9 +230,6 @@ def load_data(file_path):
                           'ownCharac', 
                           'father',
                           'Fathsiblings', 
-                          'mother', 
-                          'Momsiblings', 
-                          'uncles',
                           'maternalParents',
                           'birthRateLast3',
                           'birthRate',
@@ -240,6 +237,7 @@ def load_data(file_path):
                         'FathSibSTKWnrShL4Gens',
                         'FathSib_runshare_3yo',
                         'MSib_mean_cumAEI_at2y',
+                        'STK_races_total_races',
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -262,11 +260,13 @@ def load_data(file_path):
                         'pricePerBp',
                         'valueUSDB',
                         'mMeanMaxBsn',
-                        'STK_races_total_races',
+                        'Momsiblings',
+                         'mother',  
+                        'uncles',
     ]
     for col in rounded_columns:
         if col in df.columns:
-            if col == 'STK_races_total_races':
+            if col in ['mother', 'uncles','Momsiblings']:
                 df[col] = df[col].round(2).astype('float').astype(str).replace('<NA>', '-')
             else:
                 df[col] = df[col].round().astype('Int64').astype(str).replace('<NA>', '-')
