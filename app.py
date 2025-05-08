@@ -26,7 +26,7 @@ PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Auctioned_Horses_Data.csv")
 
 HORSES_RENAMED_COLUMNS = {
-    'name': 'Name',
+    'name': 'Horse',
     # 'studbook_id': 'Studbook ID',
     'padrillo': 'Sire',
     'M': 'Dam',
@@ -52,15 +52,25 @@ HORSES_RENAMED_COLUMNS = {
     'father': 'Father',
     'Fathsiblings':'Father\'s Offs',
     'mother': 'Dam\'s Age and Racing Career',
-    'Momsiblings': 'Dam\'s Offs',
-    'uncles': 'Dam\'s Sibs',
+    'Momsiblings':'Dam\'s Offsprings Performance',
+    'uncles': 'Dam\'s Family (Parents & Siblings)',
     'maternalParents': 'Dam\'s Parents Career',
     'inbreedingCoefficient': 'Inbreeding',
     'M_age_at_birth': 'Age',
     'M_season': 'Dam\'s Season',
     'FathSibSTKWnrShL4Gens': 'STK Wnrs / Rnrs',
     'FathSib_runshare_3yo': '#RUnners/ Born at 3yo',
-    'MSib_mean_cumAEI_at2y':'CEI per foal'
+    'MSib_mean_cumAEI_at2y':'CEI per foal',
+    'PRS_Value':'PRS Value (2.200 USDB per Bps)',
+    'FathSibSTKWnrShL4Gens':'STK Wins 2-5yo/#2-5yo',
+    'STK_races_total_races':'STK Races /Races',
+    'MomSib_Sibs_raced_at2y':'#Offs Ran',
+    'MomSib_wnrs_STK_at2y':'Offs Stk Wnrs',
+    'rank':'Ranking Gen23',
+    'Best_Foal_Bsn': 'Offs Top BSNs',
+    'birth_month': 'Birth Month',
+
+
 
 }
 DAMS_RENAMED_COLUMNS = {
@@ -252,10 +262,14 @@ def load_data(file_path):
                         'pricePerBp',
                         'valueUSDB',
                         'mMeanMaxBsn',
+                        'STK_races_total_races',
     ]
     for col in rounded_columns:
         if col in df.columns:
-           df[col] = df[col].round().astype('Int64').astype(str).replace('<NA>', '-')
+            if col == 'STK_races_total_races':
+                df[col] = df[col].round(2).astype('float').astype(str).replace('<NA>', '-')
+            else:
+                df[col] = df[col].round().astype('Int64').astype(str).replace('<NA>', '-')
     return df
 
 def filter_dataframe(df, filters):
@@ -283,6 +297,17 @@ def index():
         past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
 
+        def yesno_to_y(val):
+            return 'y' if val == 1 else 'n'
+
+        horses_df['Raced Stk? Won G-Stk? Won-G1?'] = (
+            horses_df['Dam_Raced_STK'].apply(yesno_to_y) + '-' +
+            horses_df['Dam_Won_STK'].apply(yesno_to_y) + '-' +
+            horses_df['Dam_Won_G1_STK'].apply(yesno_to_y)
+        )
+
+
+
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
 
         horses_df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
@@ -298,7 +323,8 @@ def index():
             except Exception:
                 return ""
         past_auction_summary["valueUSDB"] = pd.to_numeric(past_auction_summary["valueUSDB"], errors="coerce")
-        past_auction_summary["PricePerBp"] = pd.to_numeric(past_auction_summary["PricePerBp"], errors="coerce")       
+        past_auction_summary["PricePerBp"] = pd.to_numeric(past_auction_summary["PricePerBp"], errors="coerce")   
+        horses_df["PRS Value (2.200 USDB per Bps)"] = pd.to_numeric(horses_df["PRS Value (2.200 USDB per Bps)"], errors="coerce")    
         past_auction_summary = past_auction_summary.groupby(["Criador","Year"]).agg(
             valueUSDB=("valueUSDB", "mean"),
             PricePerBp=("PricePerBp", "mean"),
@@ -306,6 +332,7 @@ def index():
 
         ).reset_index()
 
+        horses_df["PRS Value (2.200 USDB per Bps)"] = horses_df["PRS Value (2.200 USDB per Bps)"].apply(format_dollar)
         past_auction_summary["valueUSDB"] = past_auction_summary["valueUSDB"].apply(format_dollar)
         past_auction_summary["PricePerBp"] = past_auction_summary["PricePerBp"].apply(format_dollar)
 
@@ -327,22 +354,19 @@ def index():
                         'PS',
                         #Decomposing PS Factors
                         'Sire PS',
-                        'Dam\'s Age and Racing career',
+                        'Dam\'s Age and Racing Career',
                         'Dam\'s Offsprings Performance',
                         'Dam\'s Family (Parents & Siblings)',
                         #Sires PS Characteristics
                         'STK Races /Races',
                         'STK Wins 2-5yo/#2-5yo',
                         'Recent G1 Wnrs/Born',
-                        # 'STK Wnrs / Rnrs',
-                        # '#RUnners/ Born at 3yo',
-
                         #Dams PS Characteristics
                         'Age',
                         'Top BSNs',
                         'Raced Stk? Won G-Stk? Won-G1?',
                         '#Offs Ran',
-                        'Offs Tops BSNs',
+                        'Offs Top BSNs',
                         'Offs Wnrs before 3yo(non-ALT)',
                         'Offs Stk Wnrs',
                         'CEI per offs(**)',
@@ -350,7 +374,6 @@ def index():
                         #Internal Value
                         'PRS Value (2.200 USDB per Bps)',
                         #Auction info
-                        # 'Dam\'s Season',
                         'Haras',
                         'Start',
                         'End',
@@ -375,7 +398,9 @@ def index():
                         # 'Dam\'s Sibs',
                         # 'Dam\'s Parents Career',
                         # 'Inbreeding',
- 
+                         # 'STK Wnrs / Rnrs',
+                        # '#RUnners/ Born at 3yo',
+                        # 'Dam\'s Season',  
                         # 'Studbook ID'
                              ]
         

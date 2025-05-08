@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     const group3Columns = [
         'Sire PS',
-        'Dam\'s Age and Racing career',
+        'Dam\'s Age and Racing Career',
         'Dam\'s Offsprings Performance',
         'Dam\'s Family (Parents & Siblings)',
     ];
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Top BSNs',
         'Raced Stk? Won G-Stk? Won-G1?',
         '#Offs Ran',
-        'Offs Tops BSNs',
+        'Offs Top BSNs',
         'Offs Wnrs before 3yo(non-ALT)',
         'Offs Stk Wnrs',
         'CEI per offs(**)',
