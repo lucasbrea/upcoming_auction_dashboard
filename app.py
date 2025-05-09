@@ -238,6 +238,9 @@ def load_data(file_path):
                         'FathSib_runshare_3yo',
                         'MSib_mean_cumAEI_at2y',
                         'STK_races_total_races',
+                        'Momsiblings',
+                        'mother',  
+                        'uncles',
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -259,10 +262,8 @@ def load_data(file_path):
                         'M_cumAEI',
                         'pricePerBp',
                         'valueUSDB',
-                        'mMeanMaxBsn',
-                        'Momsiblings',
-                         'mother',  
-                        'uncles',
+                        'mMeanMaxBsn',                   
+        
     ]
     for col in rounded_columns:
         if col in df.columns:
