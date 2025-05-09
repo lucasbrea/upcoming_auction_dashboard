@@ -298,14 +298,16 @@ def index():
         past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
 
+        import numpy as np
+
         def yesno_to_y(val):
             return 'y' if val == 1 else 'n'
-
+        
         horses_df['Raced Stk? Won G-Stk? Won-G1?'] = (
             horses_df['Dam_Raced_STK'].apply(yesno_to_y) + '-' +
             horses_df['Dam_Won_STK'].apply(yesno_to_y) + '-' +
             horses_df['Dam_Won_G1_STK'].apply(yesno_to_y)
-        )
+        ) 
 
 
 
@@ -380,29 +382,6 @@ def index():
                         'End',
                         'Lote',
                         'Href'
-                        # 'Dam Stk Wnrs / RA Offs',
-                        # 'Dams RA Offs',
-                        # 'Dam\'s Foals Top 3 BSN',
-                        # 'Dam Placed STK?',
-                        # 'Dam Raced STK?',
-                        # 'Dam Total Races',
-                        # 'Dam\'s Foal Raced Stk?',
-                        # 'Dam\'s Foal Placed Stk?',
-                        # 'Dam\'s Siblings Total G1/G2',
-                        # 'Dam\'s Siblings G1G2/Races',
-                        # 'CEI per foal',
-                        # 'Own Chars',
-                        # 'Father',
-                        # 'Father\'s Offs',
-                        # 'Dam\'s Age and Racing Career',
-                        # 'Dam\'s Offs',
-                        # 'Dam\'s Sibs',
-                        # 'Dam\'s Parents Career',
-                        # 'Inbreeding',
-                         # 'STK Wnrs / Rnrs',
-                        # '#RUnners/ Born at 3yo',
-                        # 'Dam\'s Season',  
-                        # 'Studbook ID'
                              ]
         
         dams_df_order = [
