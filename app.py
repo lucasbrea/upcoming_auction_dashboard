@@ -43,7 +43,6 @@ HORSES_RENAMED_COLUMNS = {
     'Dam_Raced_STK': 'Dam Raced STK?',
     'Dam_Placed_STK': 'Dam Placed STK?',
     'Dam_Total_Rcs': 'Dam Total Races',
-    'Best_Foal_Bsn': 'Dam\'s Foals Top 3 BSN',
     'Best_Foal_Raced_Stk':'Dam\'s Foal Raced Stk?',
     'Best_Foal_Placed_Stk':'Dam\'s Foal Placed Stk?',
     'Dam_Sib_Total_G1G2': 'Dam\'s Siblings Total G1/G2',
@@ -63,12 +62,13 @@ HORSES_RENAMED_COLUMNS = {
     'MSib_mean_cumAEI_at2y':'CEI per foal',
     'PRS_Value':'PRS Value (2.200 USDB per Bps)',
     'FathSibSTKWnrShL4Gens':'STK Wins 2-5yo/#2-5yo',
-    'STK_races_total_races':'STK Races /Races',
+    'f_STK_races_total_races':'STK Races /Races',
     'MomSib_Sibs_raced_at2y':'#Offs Ran',
     'MomSib_wnrs_STK_at2y':'Offs Stk Wnrs',
     'rank':'Ranking Gen23',
     'Best_Foal_Bsn': 'Offs Top BSNs',
     'birth_month': 'Birth Month',
+    'raced_won_g1_yn':'Raced Stk? Won G-Stk? Won-G1?'
 
 
 
@@ -123,6 +123,8 @@ DAMS_RENAMED_COLUMNS = {
     'rank':'Ranking',
     'num_births':'#Births',
     'num_services':'#Services',
+    'offs_ran_over_2yo':'#Offs Ran / #Running age',
+    'Dam_raced_stk_won_stk':'Raced Stk? Won G-Stk?'
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
@@ -172,7 +174,7 @@ PAST_AUCTION_SUMMARY_RENAMED_COLUMNS = {
 # Columnas para filtrar
 HORSES_FILTER_COLUMNS = [
                         'Haras',
-                        'Name',
+                        'Horse',
                         'Sire', 
                         'Dam', 
                         'Href',
@@ -237,10 +239,11 @@ def load_data(file_path):
                         'FathSibSTKWnrShL4Gens',
                         'FathSib_runshare_3yo',
                         'MSib_mean_cumAEI_at2y',
-                        'STK_races_total_races',
+                        'f_STK_races_total_races',
                         'Momsiblings',
                         'mother',  
                         'uncles',
+                        'offs_ran_over_2yo'
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -297,19 +300,6 @@ def index():
         dams_df = load_data(DAMS_CSV_PATH)
         past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
-
-        import numpy as np
-
-        def yesno_to_y(val):
-            return 'y' if val == 1 else 'n'
-        
-        horses_df['Raced Stk? Won G-Stk? Won-G1?'] = (
-            horses_df['Dam_Raced_STK'].apply(yesno_to_y) + '-' +
-            horses_df['Dam_Won_STK'].apply(yesno_to_y) + '-' +
-            horses_df['Dam_Won_G1_STK'].apply(yesno_to_y)
-        ) 
-
-
 
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
 
@@ -700,6 +690,38 @@ def index():
                              auctions_filters={col: '' for col in AUCTIONS_FILTER_COLUMNS},
                              auctioned_horses_filters={col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS})
 
+@app.route("/reports")
+def reports_landing():
+    return render_template("reports_landing.html")
+
+@app.route("/reports/tables")
+def reports_tables():
+    return render_template("reports_tables.html")
+@app.route("/reports/statistics")
+def reports_reports():
+    return render_template("reports_reports.html")
+@app.route("/reports/presentations")
+def reports_presentations():
+    return render_template("reports_presentations.html")
+
+#Paths to folders inside reports
+@app.route("/reports/statistics/choicesVScriador")
+def reports_choices_criador():
+    return render_template("reports_folders/choices_vs_criador.html")
+@app.route("/reports/statistics/criador-caballeriza")
+def reports_criador_caballeriza():
+    return render_template("reports_folders/criador-caballeriza.html")
+@app.route("/reports/statistics/horse")
+def reports_horse():
+    return render_template("reports_folders/reports_horse.html")
+@app.route("/reports/statistics/jockey")
+def reports_jockey():
+    return render_template("reports_folders/reports_jockey.html")
+@app.route("/reports/statistics/trainer")
+def reports_trainer():
+    return render_template("reports_folders/reports_trainer.html")
+
+# (Add statistics/presentations if needed)
 
 if __name__ == '__main__':
     app.run(debug=True) 

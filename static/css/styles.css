@@ -557,7 +557,8 @@ body {
 /*reports  buttons*/
 .spreadsheet-card {
     display: block;
-    max-width: 400px;
+    width: 400px;
+    height:300px;
     padding: 1.5rem;
     border-radius: 1rem;
 
@@ -565,6 +566,7 @@ body {
     color: #212529;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-size: 2rem;
 }
 
 .spreadsheet-card:hover {
@@ -578,3 +580,21 @@ body {
     gap: 2rem;
     justify-content: center;
   }
+  .folder {
+    width: 800px;
+    height: 800px;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .folder:hover {
+    background-color: #c0c0c0;
+  }
+
