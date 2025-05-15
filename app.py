@@ -68,7 +68,9 @@ HORSES_RENAMED_COLUMNS = {
     'rank':'Ranking Gen23',
     'Best_Foal_Bsn': 'Offs Top BSNs',
     'birth_month': 'Birth Month',
-    'raced_won_g1_yn':'Raced Stk? Won G-Stk? Won-G1?'
+    'raced_won_g1_yn':'Raced Stk? Won G-Stk? Won-G1?',
+    'sire_ps':'Sire PS',
+    'FathSibSTKWnrsPerOffs':'Recent G1 Wnrs/Born',
 
 
 
@@ -243,7 +245,9 @@ def load_data(file_path):
                         'Momsiblings',
                         'mother',  
                         'uncles',
-                        'offs_ran_over_2yo'
+                        'offs_ran_over_2yo',
+                        'sire_ps',
+                        'FathSibSTKWnrsPerOffs'
                           ]
     for col in percentage_columns:
         if col in df.columns:
