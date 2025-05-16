@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'Horse',
         'Sire',
          'Dam',
+         'Haras',
          'Sex',
          'Birth Month',
 
@@ -143,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
         'PRS Value (2.200 USDB per Bps)',
     ];
     const group7columns = [
-        'Haras',
         'Start',
         'End',
         'Lote',

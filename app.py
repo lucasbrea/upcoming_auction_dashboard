@@ -343,6 +343,7 @@ def index():
                        'Horse',
                        'Sire',
                         'Dam',
+                        'Haras',
                         'Sex',
                         'Birth Month',
                         #Selection
@@ -371,7 +372,6 @@ def index():
                         #Internal Value
                         'PRS Value (2.200 USDB per Bps)',
                         #Auction info
-                        'Haras',
                         'Start',
                         'End',
                         'Lote',
@@ -580,23 +580,23 @@ def index():
 
 
         column_groups_horses = [
-                        ("Basic Information", 6, "group-basic"),
+                        ("Basic Information", 7, "group-basic"),
                         ("Selection", 3, "group-selection-horses"),
                         ("Decomposing PS Factors", 4, "group-ps"),
                         ("Sire\'s PS Characteristics", 3, "group-sire-ps"),
                         ("Dam\'s PS Characteristics", 9, "group-dam-ps"),
                         ("Internal Value",1, "group-internal-value"),
-                        ("Auction Info", 5, "group-auction")
+                        ("Auction Info", 4, "group-auction")
                     ]
         
         column_groups_horses_h2 = [
-                      ("", 6, "group-basic"),
+                      ("", 7, "group-basic"),
                         ("", 3, "group-selection-horses"),
                         ("", 4, "group-ps"),
                         ("", 3, "group-sire-ps"),
                         ("", 9, "group-dam-ps"),
                         ("",1, "group-internal-value"),
-                        ("", 5, "group-auction")
+                        ("", 4, "group-auction")
                     ]
         
         column_groups_dams = [
