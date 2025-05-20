@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
          'Haras',
          'Sex',
          'Birth Month',
+         'Birth Date',
 
                         ];
     const group2Columns = [

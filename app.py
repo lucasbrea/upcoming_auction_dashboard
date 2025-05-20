@@ -58,7 +58,7 @@ HORSES_RENAMED_COLUMNS = {
     'M_age_at_birth': 'Age',
     'M_season': 'Dam\'s Season',
     'FathSibSTKWnrShL4Gens': 'STK Wnrs / Rnrs',
-    'FathSib_runshare_3yo': '#RUnners/ Born at 3yo',
+    'FathSib_runshare_3yo': '#Runners/ Born at 3yo',
     'MSib_mean_cumAEI_at2y':'CEI per foal',
     'PRS_Value':'PRS Value (2.200 USDB per Bps)',
     'FathSibSTKWnrShL4Gens':'STK Wins 2-5yo/#2-5yo',
@@ -71,6 +71,8 @@ HORSES_RENAMED_COLUMNS = {
     'raced_won_g1_yn':'Raced Stk? Won G-Stk? Won-G1?',
     'sire_ps':'Sire PS',
     'FathSibSTKWnrsPerOffs':'Recent G1 Wnrs/Born',
+    'MomSib_wnrs3yo_at2y':'Offs Wnrs before 3yo(non-ALT)',
+    'cei_per_offs':'CEI per offs(**)',
 
 
 
@@ -101,7 +103,8 @@ DAMS_RENAMED_COLUMNS = {
     'M_STK_won': 'Stk Wins',
     'M_g1_STK_placed': 'G1 Placed',
     'M_g1_STK_won': 'G1 Wins',
-    'MSib_StkWnrs_Offs': 'Foals Stk Wnrs',
+    'MomSib_STKRunners_at2y':'Foals Stk Rnrs',
+    'MomSib_wnrs_STK_at2y': 'Foals Stk Wnrs',
     'MomSib_Sibs_at2y' : 'Dams RA Offs',
     'MomSib_Sibs_raced_at2y': '#Offs Ran',
     'Dam_Mean_T3_BSN': 'Top 3 BSN\'s',
@@ -119,8 +122,8 @@ DAMS_RENAMED_COLUMNS = {
     'PR': 'PR',
     'PS': 'PS',
     'TPBRS':'TPBRS',
-    'Dam_Sib_Total_G1G2G3':'Siblings total G-stk runs',
-    'DamSibs_TotalG1G2_Won':'Siblings total G-stk wins',
+    'MSibs_GSTK_Total_runs':'Siblings total G-stk runs',
+    'MSibs_GSTK_Total_wins':'Siblings total G-stk wins',
     'foal_wnrs_3yo':'Foals wnrs before 3yo(non-ALT)',
     'rank':'Ranking',
     'num_births':'#Births',
@@ -269,8 +272,8 @@ def load_data(file_path):
                         'M_cumAEI',
                         'pricePerBp',
                         'valueUSDB',
-                        'mMeanMaxBsn',                   
-        
+                        'mMeanMaxBsn',
+                        'cei_per_offs',                 
     ]
     for col in rounded_columns:
         if col in df.columns:
@@ -346,6 +349,7 @@ def index():
                         'Haras',
                         'Sex',
                         'Birth Month',
+                        'Birth Date',
                         #Selection
                         'PRS',
                         'PR',
@@ -477,7 +481,7 @@ def index():
                 return pd.NaT
 
         # Apply the functions
-        # horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
+        horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
         horses_df['Start'] = horses_df['Start'].apply(parse_start_end)
         horses_df['End'] = horses_df['End'].apply(parse_start_end)
         dams_df['Start'] = dams_df['Start'].apply(parse_start_end)
@@ -486,7 +490,7 @@ def index():
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].apply(parse_birth_date)
 
         # Format all as dd/mm/yy strings
-        # horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
+        horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
         horses_df['Start'] = horses_df['Start'].dt.strftime('%d/%m/%y')
         horses_df['End'] = horses_df['End'].dt.strftime('%d/%m/%y')
         dams_df['Start'] = dams_df['Start'].dt.strftime('%d/%m/%y')
@@ -509,7 +513,19 @@ def index():
         horses_max_values = {col: float(horses_df[col].str.rstrip('%').astype(float).max()) 
                            for col in gradient_columns if col in horses_df.columns}
         
+    
+        #Corrigo nombres de haras
 
+        horses_df['Haras'] = horses_df['Haras'].replace({
+            'SANTA INAAS':'SANTA INES',
+            'LA GENERACIAAN':'LA GENERACION',
+        })
+        dams_df['Haras'] = dams_df['Haras'].replace({
+            'SANTA INAAS':'SANTA INES',
+            'LA GENERACIAAN':'LA GENERACION',
+        })
+       
+        dams_df['Dam\'s Foals Top 3 BSN'] = dams_df['Dam\'s Foals Top 3 BSN'].round().astype('Int64').astype(str).replace('0', '-')
        
 
         auctioned_horses_max_values = {}
@@ -580,7 +596,7 @@ def index():
 
 
         column_groups_horses = [
-                        ("Basic Information", 7, "group-basic"),
+                        ("Basic Information", 8, "group-basic"),
                         ("Selection", 3, "group-selection-horses"),
                         ("Decomposing PS Factors", 4, "group-ps"),
                         ("Sire\'s PS Characteristics", 3, "group-sire-ps"),
@@ -590,7 +606,7 @@ def index():
                     ]
         
         column_groups_horses_h2 = [
-                      ("", 7, "group-basic"),
+                      ("", 8, "group-basic"),
                         ("", 3, "group-selection-horses"),
                         ("", 4, "group-ps"),
                         ("", 3, "group-sire-ps"),
