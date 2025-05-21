@@ -1,1 +1,210 @@
 rank,TPBRS,PBRS,PB,PR,PS,PRS,inbreedingCoefficient,mother,Momsiblings,uncles,maternalParents,M_age_at_service,M_season_orig,birthRate,birthRateLast3,hadRestYear,M_total_rcs,M_won_rcs,M_cumAEI,M_STK_ran,M_STK_won,M_g1_STK_placed,M_g1_STK_won,MomSib_Sibs_at2y,MomSib_Sibs_raced_at2y,MomSib_wnrs_STK_at2y,Dam_Raced_STK,MSib_StkWnrs_Offs,Dam_Placed_STK,Dam_Total_Rcs,Dam_Mean_T3_BSN,Best_Foal_Bsn,Best_Foal_Raced_Stk,Best_Foal_Placed_Stk,Dam_Sib_Total_G1G2,Dam_Sib_Total_G1G2G3,DamSibs_G1G2_Total,DamSibs_TotalG1G2_Won,foal_wnrs_3yo,num_births,num_services,MomSib_STKRunners_at2y,MSibs_GSTK_Total_runs,MSibs_GSTK_Total_wins,name_clean,padrillo_clean,M_clean,Dam_raced_stk_won_stk,foal_stk_wnrs,offs_ran_over_2yo,blank,blank1,blank2,blank3,blank4,blank5,blank6,foal_stk_rnrs,date_last_service,lote,haras,link,start,end_date
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,admiral joy,fortify,annathela,,,,,,,,,,,,,3,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,alma dinamita,treasure beach,monchu,,,,,,,,,,,,,11,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,amor cautivo,angiolo,amiguita cautiva,,,,,,,,,,,,,18,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,apalta,treasure beach,aguachile,,,,,,,,,,,,,12,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,apartado,village king,joy kiwa,,,,,,,,,,,,,24,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,appellation,lucullan,memorabilia,,,,,,,,,,,,,25,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,arc village,puerto escondido,ardana,,,,,,,,,,,,,40,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,arlington,uncle chuck,arlara,,,,,,,,,,,,,23,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,astro de areco,equal talent,llego la estrella,,,,,,,,,,,,,29,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,baikorki,fortify,baska hermosa,,,,,,,,,,,,,11,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,barbarian,que vida buena,my little barbie,,,,,,,,,,,,,23,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,barbarisima,honour and glory,jade joice,,,,,,,,,,,,,25,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,besitas,cosmic trigger,olivia soy,,,,,,,,,,,,,3,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,bien lunatico,mask,lua de cristal,,,,,,,,,,,,,10,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,bionda bella,que vida buena,insurance money,,,,,,,,,,,,,26,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,borracho de loco,touareg,tina key,,,,,,,,,,,,,7,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,brigadista,daniel boone,branca soy,,,,,,,,,,,,,32,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,bristol boy,suggestive boy,bella italia,,,,,,,,,,,,,6,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,buin,daddy long legs,biaxiqui,,,,,,,,,,,,,8,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,calcolatrice,pure prize,calamintha,,,,,,,,,,,,,7,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,callejon del crimen,village king,queen norita,,,,,,,,,,,,,23,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,caraluna,pure prize,luna de paita,,,,,,,,,,,,,4,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,caspian,remote,avalonia,,,,,,,,,,,,,16,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,cerca del cielo,safety check,torre de babel,,,,,,,,,,,,,11,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,circostanza,pure prize,cirandinha,,,,,,,,,,,,,20,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,coffee boy,nicodemus,la cafeina,,,,,,,,,,,,,8,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,conni craf,mastercraftsman,conniving,,,,,,,,,,,,,12,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,cosa seria,touareg,piu bella cosa,,,,,,,,,,,,,19,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,cosmic love,cosmic trigger,surprise of love,,,,,,,,,,,,,5,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,cry macho,nicodemus,grand athenas,,,,,,,,,,,,,17,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,daddy boy,daddy long legs,calcolatrice,,,,,,,,,,,,,11,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,dancer baby,lizard island,ride on baby,,,,,,,,,,,,,27,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,diguillin,treasure beach,diosa azteca,,,,,,,,,,,,,7,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,dreamway,lizard island,rosita sureÑa,,,,,,,,,,,,,15,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,east prussia,il campione,irrobla,,,,,,,,,,,,,36,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el cancan,hi happy,la barra brava,,,,,,,,,,,,,19,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el gibson,uncle chuck,la barbra,,,,,,,,,,,,,25,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el gran chef,touareg,pure chef,,,,,,,,,,,,,5,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el mossad,pneumatic,marcia o,,,,,,,,,,,,,11,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el romantico,touareg,roman lula,,,,,,,,,,,,,8,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el santo y seÑa,que vida buena,trinity girl,,,,,,,,,,,,,2,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,el sueÑo del pibe,angiolo,to snow,,,,,,,,,,,,,13,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ellison bay,puerto escondido,ellison bay,,,,,,,,,,,,,41,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,elvis tek,luthier blues,powerful wil,,,,,,,,,,,,,22,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,emotion baires,puerto escondido,argentinian roots,,,,,,,,,,,,,51,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,enamorada mia,cosmic trigger,erudita girl,,,,,,,,,,,,,4,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,epicurio,hi happy,express filly,,,,,,,,,,,,,20,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,epoca social,santillano,clase social,,,,,,,,,,,,,16,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,erto,uncle chuck,ersilia,,,,,,,,,,,,,26,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,es un clasico,touareg,catch of the day,,,,,,,,,,,,,10,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,eventual charity,cosmic trigger,eventual champ,,,,,,,,,,,,,3,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,everest joy,fortify,enjoy love,,,,,,,,,,,,,6,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,farmer boy,hi happy,ferber,,,,,,,,,,,,,17,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ferzan,gouverneur morris,farneta,,,,,,,,,,,,,37,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fiers,que vida buena,sitna,,,,,,,,,,,,,3,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fiscalizado,gouverneur morris,fiesta vasca,,,,,,,,,,,,,35,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,flaubert,fortify,poloma,,,,,,,,,,,,,10,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,flute magic,daniel boone,flamejante,,,,,,,,,,,,,27,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fogoso,il campione,chispita holiday,,,,,,,,,,,,,15,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fonetic stripes,seek again,formalidad,,,,,,,,,,,,,6,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fontal beach,treasure beach,m'encanta,,,,,,,,,,,,,50,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,fruity girl,daniel boone,frutta dolce,,,,,,,,,,,,,24,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,funk girl,pure prize,funk dance,,,,,,,,,,,,,22,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,futurum,pneumatic,porta fem,,,,,,,,,,,,,7,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,garnacha,daddy long legs,calcolatrice,,,,,,,,,,,,,8,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hand in hand,il campione,handprint,,,,,,,,,,,,,14,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hanga roa,daddy long legs,hellas verona,,,,,,,,,,,,,16,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,harmony star,nicodemus,hennie six,,,,,,,,,,,,,2,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hojas en blanco,cosmic trigger,de reversa,,,,,,,,,,,,,4,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,hornopiren,treasure beach,huetzca,,,,,,,,,,,,,10,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,huracan de areco,il campione,katrina inc,,,,,,,,,,,,,12,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,idahue,daddy long legs,infiltrada,,,,,,,,,,,,,2,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,inca soleada,dinamix,inca guerrera,,,,,,,,,,,,,1,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,indicada girl,asiatic boy,intense stripes,,,,,,,,,,,,,3,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,indira,true cause,lima de veras,,,,,,,,,,,,,12,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,isa morris,gouverneur morris,ilde,,,,,,,,,,,,,46,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,istmina,nicodemus,inielika,,,,,,,,,,,,,13,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,its true type,yes it&amp;#039;s true,southern tour,,,,,,,,,,,,,8,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,iznajar,nicodemus,istishaary,,,,,,,,,,,,,4,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,joya porteÑa,puerto escondido,joya gaucha,,,,,,,,,,,,,52,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,judas,gouverneur morris,plage midi,,,,,,,,,,,,,22,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kaloneri,uncle chuck,kathy rose,,,,,,,,,,,,,24,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,karma kiss,daniel boone,kiss laurie,,,,,,,,,,,,,29,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kenakir,il campione,kentucky rose,,,,,,,,,,,,,15,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,keydan,fortify,key of luck,,,,,,,,,,,,,8,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kilauea,nicholas,obona,,,,,,,,,,,,,14,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kioto,cityscape,la limeÑita,,,,,,,,,,,,,10,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kyprinos,fortify,kambara,,,,,,,,,,,,,4,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kyprios,hi happy,katy rose,,,,,,,,,,,,,16,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la barbarie,que vida buena,barbarisima,,,,,,,,,,,,,12,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la gran artista,seÑor candy,great appeal,,,,,,,,,,,,,28,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la limeÑita,e dubai,lima de veras,,,,,,,,,,,,,1,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la plage,cosmic trigger,i&amp;#039;love cat,,,,,,,,,,,,,19,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la savante,pneumatic,la limeÑita,,,,,,,,,,,,,2,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la tangueria,touareg,quien dice tango,,,,,,,,,,,,,17,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la tik tok,touareg,joy beloved,,,,,,,,,,,,,15,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,la unica dama,catcher in the rye,una lady,,,,,,,,,,,,,13,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,larry king,uncle chuck,lariana,,,,,,,,,,,,,33,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,lejano oeste,vekoma,mariah girl,,,,,,,,,,,,,11,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,licina,suggestive boy,little goose girl,,,,,,,,,,,,,13,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,lima de veras,sekari,miss baby,,,,,,,,,,,,,9,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,linda menina,daniel boone,la varendetta,,,,,,,,,,,,,25,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,macassar,uncle chuck,madame bey,,,,,,,,,,,,,20,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,madagascar,uncle chuck,madame kris,,,,,,,,,,,,,22,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,magadino,pneumatic,ipanema cat,,,,,,,,,,,,,28,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,malcriado,touareg,miss lola,,,,,,,,,,,,,4,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,malinchera,daniel boone,malibu honey,,,,,,,,,,,,,26,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mari bella,got talent,maria&#039;s rye,,,,,,,,,,,,,24,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,marina city,hi happy,marina azul,,,,,,,,,,,,,45,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mashal,fortify,mehasia,,,,,,,,,,,,,12,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mask may,mask,lucy may,,,,,,,,,,,,,9,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,master sing,mastercraftsman,harlan&amp;#039;s song,,,,,,,,,,,,,10,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,me gustas tu,touareg,megafive,,,,,,,,,,,,,21,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,medallero,mask,medillitta d&amp;#039;oro,,,,,,,,,,,,,8,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mister volare,hi happy,miss top lady,,,,,,,,,,,,,18,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,monchu,lizard island,monrovia,,,,,,,,,,,,,15,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,montaldo,uncle chuck,marsigliese,,,,,,,,,,,,,28,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,morotai,uncle chuck,marina romea,,,,,,,,,,,,,29,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mr gin tonic,mask,nicky&amp;#039;s light,,,,,,,,,,,,,6,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,mundo vasilus,cosmic trigger,clase social,,,,,,,,,,,,,1,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nadie como ella,touareg,koketa,,,,,,,,,,,,,14,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nebbiuno,cosmic trigger,riserva,,,,,,,,,,,,,27,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,negro de pergamino,hi happy,costa smeralda,,,,,,,,,,,,,2,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nevado pisco,fortify,nanga parbat,,,,,,,,,,,,,1,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nilahue,fortify,nasa oro,,,,,,,,,,,,,3,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nilsa,gouverneur morris,narkanda,,,,,,,,,,,,,47,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,no hay nunca,touareg,muy alegre,,,,,,,,,,,,,20,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,no hay plata,hi happy,tinaja nistel,,,,,,,,,,,,,14,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,not for stripes,equal stripes,not for tap,,,,,,,,,,,,,38,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,nurit,lizard island,la cafeina,,,,,,,,,,,,,21,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,obona,perfectperformance,ride on baby,,,,,,,,,,,,,25,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ola polar,easing along,old star,,,,,,,,,,,,,14,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,oli girl,nicodemus,one marylin,,,,,,,,,,,,,20,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,olive garden,orpen,one to want,,,,,,,,,,,,,24,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,one marylin,caesarion,one to want,,,,,,,,,,,,,23,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,orellana,hurricane cat,oriunda,,,,,,,,,,,,,7,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,osca,suggestive boy,octavia minor,,,,,,,,,,,,,18,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,otis blue,uncle chuck,orpen moon,,,,,,,,,,,,,31,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,paderne,nicodemus,pibil,,,,,,,,,,,,,15,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,palau,nicodemus,papadzul,,,,,,,,,,,,,14,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,paperbush,fortify,paper mate,,,,,,,,,,,,,7,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,parroquiano,seÑor candy,luna mani,,,,,,,,,,,,,5,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,petite mechi,nicholas,petite juani,,,,,,,,,,,,,16,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,piantini,daddy long legs,icaria,,,,,,,,,,,,,26,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pionyang,nicodemus,pura ley,,,,,,,,,,,,,12,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,point to point,fortify,pleasant pacific,,,,,,,,,,,,,5,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,por siempre vidi,endorsement,vidi,,,,,,,,,,,,,29,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,porrera,equal stripes,fortezza,,,,,,,,,,,,,37,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,portinari,mask,tesina,,,,,,,,,,,,,7,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,powerful wil,winning prize,powerful cat,,,,,,,,,,,,,26,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,premiado,que vida buena,premurosa,,,,,,,,,,,,,1,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,puerto lapi,treasure beach,pre compaÑia,,,,,,,,,,,,,11,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quality chuck,uncle chuck,queen of music,,,,,,,,,,,,,30,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quality mark,puerto escondido,queen marta,,,,,,,,,,,,,38,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,que buena seÑal,que vida buena,experiencia dolce,,,,,,,,,,,,,13,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,que mandon,que vida buena,aqui mando yo,,,,,,,,,,,,,22,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,que suene el himno,que vida buena,mille fleurs,,,,,,,,,,,,,30,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quebec holiday,uncle chuck,queen diana,,,,,,,,,,,,,32,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,queen ambra,puerto escondido,queen amira,,,,,,,,,,,,,53,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quick boone,daniel boone,quick eagle,,,,,,,,,,,,,31,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quick morris,gouverneur morris,queen naima,,,,,,,,,,,,,36,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quincy uncle,uncle chuck,queen doria,,,,,,,,,,,,,34,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,quotidiana,daniel boone,queijadinha,,,,,,,,,,,,,23,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,real thing,nicodemus,regal compact,,,,,,,,,,,,,1,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,reina casada,long island sound,reinaras siempre,,,,,,,,,,,,,35,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,rockstrong,seahenge,romanara,,,,,,,,,,,,,21,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,roman lula,roman ruler,lulu one,,,,,,,,,,,,,31,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,romantique,hi happy,luna de roma,,,,,,,,,,,,,17,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,rucamara,lucullan,irisada,,,,,,,,,,,,,34,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,run a race,lizard island,run for love,,,,,,,,,,,,,9,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sacramento glad,nicodemus,she&amp;#039;s glad,,,,,,,,,,,,,18,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,salto el laja,daddy long legs,subyugante,,,,,,,,,,,,,4,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,san fernando,suggestive boy,schilleriana,,,,,,,,,,,,,9,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,san gregorio,suggestive boy,she's happy,,,,,,,,,,,,,5,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,san siro,fortify,seducing,,,,,,,,,,,,,13,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sangria,daniel boone,savage nights,,,,,,,,,,,,,28,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,seÑor mayor,touareg,sarahnade,,,,,,,,,,,,,9,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,shani,gouverneur morris,sherah,,,,,,,,,,,,,48,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,siempre de pie,mootasadir,kuwaitiana,,,,,,,,,,,,,3,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sifria,gouverneur morris,sifra,,,,,,,,,,,,,49,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,silk city,bodemeister,hareer,,,,,,,,,,,,,9,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,silky red,puerto escondido,silky rose,,,,,,,,,,,,,39,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,silver red,puerto escondido,siberian rose,,,,,,,,,,,,,42,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,stormclap,gouverneur morris,stormy empirica,,,,,,,,,,,,,19,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,suspira limeÑa,city banker,lima de veras,,,,,,,,,,,,,6,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tabeada,daniel boone,tanga carioca,,,,,,,,,,,,,30,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,take one,japan,taken away,,,,,,,,,,,,,33,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,talking about it,johannesburg,time to talk,,,,,,,,,,,,,32,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tantas veces,cosmic trigger,china de arteaga,,,,,,,,,,,,,5,Gran Venta Fallow Areco,https://www.fallowremates.com/remates/4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tattoum,lode,tatibitati,,,,,,,,,,,,,17,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tenerife boy,suggestive boy,terralba,,,,,,,,,,,,,17,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,teobaldo,uncle chuck,joy tesalina,,,,,,,,,,,,,21,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,thesis,touareg,jazzy clon,,,,,,,,,,,,,16,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,triumph of love,pure prize,triaqueÑa,,,,,,,,,,,,,18,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,truco de magia,touareg,charming meg,,,,,,,,,,,,,6,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,true boy,true cause,indicada girl,,,,,,,,,,,,,13,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tukaram,fortify,tela,,,,,,,,,,,,,9,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,tunelero,manipulator,olive garden,,,,,,,,,,,,,10,El Trebol,https://www.fallowremates.com/remates/6,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,twin sister,hi happy,twin shadow,,,,,,,,,,,,,44,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,uncanny valley,cosmic trigger,gamuza fiel,,,,,,,,,,,,,2,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,va sola,touareg,valerisca,,,,,,,,,,,,,18,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,vacation chuck,uncle chuck,vaga joy,,,,,,,,,,,,,27,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,valerisca,mutakddim,date tree bay,,,,,,,,,,,,,33,Don Florentino - La Valkiria,https://www.fallowremates.com/remates/7,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,valle nevado,daddy long legs,verde pipian,,,,,,,,,,,,,6,POZO DE LUNA,https://arg-sales.com/remates/view/349,19-05-2025,22-05-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,verdot,uncle chuck,caraluna,,,,,,,,,,,,,5,TRES MARÍAS,https://arg-sales.com/remates/view/359,19-06-2025,22-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,vip class,northern afleet,que fuerza,,,,,,,,,,,,,19,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,viva las vegas,wild event,visa bay,,,,,,,,,,,,,21,Juan Antonio y Santa Maria de Araras e Invitados,https://www.fallowremates.com/remates/5,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,voltana,hi happy,vomba,,,,,,,,,,,,,43,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,warrior peter,fortify,la soul,,,,,,,,,,,,,2,SANTA INÉS,https://arg-sales.com/remates/view/350,29-05-2025,01-06-2025
