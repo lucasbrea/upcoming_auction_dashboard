@@ -24,7 +24,7 @@ CSV_PATH = os.path.join("Data/dashboard_data.csv")
 DAMS_CSV_PATH = os.path.join("Data/Dashboard_Data_Dams_Table.csv")
 PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Auctioned_Horses_Data.csv")
-
+SERVICES_PATH = os.path.join("Data/possible_dams_servicios.csv")
 HORSES_RENAMED_COLUMNS = {
     'name': 'Horse',
     # 'studbook_id': 'Studbook ID',
@@ -129,7 +129,11 @@ DAMS_RENAMED_COLUMNS = {
     'num_births':'#Births',
     'num_services':'#Services',
     'offs_ran_over_2yo':'#Offs Ran / #Running age',
-    'Dam_raced_stk_won_stk':'Raced Stk? Won G-Stk?'
+    'Dam_raced_stk_won_stk':'Raced Stk? Won G-Stk?',
+    'ultimo_servicio':'Date last service',
+    'nacimientos_adj': '#Births',
+    'servicios_adj': '#Services',
+    'efectividad_adj': 'Birth Rate',
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
@@ -250,7 +254,8 @@ def load_data(file_path):
                         'uncles',
                         'offs_ran_over_2yo',
                         'sire_ps',
-                        'FathSibSTKWnrsPerOffs'
+                        'FathSibSTKWnrsPerOffs',
+                        'efectividad_adj',
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -273,7 +278,9 @@ def load_data(file_path):
                         'pricePerBp',
                         'valueUSDB',
                         'mMeanMaxBsn',
-                        'cei_per_offs',                 
+                        'cei_per_offs',   
+                        'nacimientos_adj',
+                        'servicios_adj',              
     ]
     for col in rounded_columns:
         if col in df.columns:
@@ -307,6 +314,12 @@ def index():
         dams_df = load_data(DAMS_CSV_PATH)
         past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
         auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
+        services_df = load_data(SERVICES_PATH)
+        dams_df['name_clean'] = dams_df['name_clean'].str.upper()
+    
+        dams_df = pd.merge(dams_df, services_df, how='left', left_on='name_clean', right_on='name')
+
+        dams_df.fillna('-')
 
         dams_df.rename(columns=DAMS_RENAMED_COLUMNS, inplace=True)
 
@@ -315,7 +328,7 @@ def index():
         auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
 
         past_auction_summary.rename(columns=PAST_AUCTION_SUMMARY_RENAMED_COLUMNS, inplace=True)
-
+        
 
         def format_dollar(x):
             try:
@@ -329,7 +342,6 @@ def index():
             valueUSDB=("valueUSDB", "mean"),
             PricePerBp=("PricePerBp", "mean"),
             count=("valueUSDB", "count"),
-
         ).reset_index()
 
         horses_df["PRS Value (2.200 USDB per Bps)"] = horses_df["PRS Value (2.200 USDB per Bps)"].apply(format_dollar)
@@ -419,6 +431,7 @@ def index():
             '#Services',
             '#Births',
             'Date last service',
+            'Birth Rate',
             #Detailed Racing Career
             'Total Races',
             'Total Wins',
@@ -479,7 +492,12 @@ def index():
                 return parser.parse(date_str, dayfirst=True)
             except Exception:
                 return pd.NaT
-
+        def parse_service(date_str):
+            try:
+                date = pd.to_datetime(date_str)
+                return date.strftime('%d/%m/%Y')
+            except Exception:
+                return None
         # Apply the functions
         horses_df['Birth Date'] = horses_df['Birth Date'].apply(parse_birth_date)
         horses_df['Start'] = horses_df['Start'].apply(parse_start_end)
@@ -488,7 +506,7 @@ def index():
         dams_df['End'] = dams_df['End'].apply(parse_start_end)
         auctioned_horses_df['Auction Date'] = auctioned_horses_df['Auction Date'].apply(parse_start_end)
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].apply(parse_birth_date)
-
+        dams_df['Date last service'] = dams_df['Date last service'].apply(parse_service)
         # Format all as dd/mm/yy strings
         horses_df['Birth Date'] = horses_df['Birth Date'].dt.strftime('%d/%m/%y')
         horses_df['Start'] = horses_df['Start'].dt.strftime('%d/%m/%y')
@@ -497,6 +515,7 @@ def index():
         dams_df['End'] = dams_df['End'].dt.strftime('%d/%m/%y')    
         auctioned_horses_df['Auction Date'] = auctioned_horses_df['Auction Date'].dt.strftime('%d/%m/%y')
         auctioned_horses_df['Birth Date'] = auctioned_horses_df['Birth Date'].dt.strftime('%d/%m/%y')
+
 
         # Calculate max values for gradient columns
         gradient_columns = [
@@ -525,7 +544,6 @@ def index():
             'LA GENERACIAAN':'LA GENERACION',
         })
        
-        dams_df['Dam\'s Foals Top 3 BSN'] = dams_df['Dam\'s Foals Top 3 BSN'].round().astype('Int64').astype(str).replace('0', '-')
        
 
         auctioned_horses_max_values = {}
@@ -621,7 +639,7 @@ def index():
                         ("Decomposing PS Factors",4, "group-ps-dam"),
                         ("Main Characteristics", 10, "main-characteristics-dams"),
                         ("Inbreeding",1,"group-inbreeding-dams"),
-                        ("Factors PB/PR", 4, "group-pb-dam"),
+                        ("Factors PB/PR", 5, "group-pb-dam"),
                         ("Detailed Racing Career", 7, "group-racing-dam"),
                         ("Auction Info", 4, "group-auction")
                     ]
@@ -631,7 +649,7 @@ def index():
                         ("",4, "group-ps-dam"),
                         ("", 10, "main-characteristics-dams"),
                         ("",1,"group-inbreeding-dams"),
-                        ("", 4, "group-pb-dam"),
+                        ("", 5, "group-pb-dam"),
                         ("", 7, "group-racing-dam"),
                         ("", 4, "group-auction"),
                     ]
@@ -660,10 +678,6 @@ def index():
 
         auction_summary_data = past_auction_summary.to_dict(orient="records")
         auction_summary_columns = past_auction_summary_order
-
-        
-
-
 
         initial_tab = request.args.get('tab', 'horses')
         

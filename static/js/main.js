@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '#Services',
         '#Births',
         'Date last service',
+        'Birth Rate'
     ];
     const group5Columns_dams = [
         'Total Races',
