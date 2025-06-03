@@ -12,6 +12,13 @@ from weasyprint import HTML
 import sys
 from dateutil import parser
 from unidecode import unidecode
+from openai import OpenAI
+import json
+from dotenv import load_dotenv
+import traceback
+
+load_dotenv() 
+client = OpenAI()
 print(sys.executable)
 
 print("CWD:", os.getcwd())
@@ -666,10 +673,53 @@ column_groups_auctioned_horses_h2 = [
 column_groups_past_auction_summary = [ ("", 5, "group-basic")]
 column_groups_past_auction_summary_h2 = [("", 5, "group-basic")]
 
+
+
+df = pd.read_csv("Data/Past Auction - Horses.csv")
+
+def extract_code_block(text: str) -> str:
+    """Extracts the Python code inside triple backticks."""
+    if "```" in text:
+        lines = text.strip().splitlines()
+        in_code = False
+        code_lines = []
+        for line in lines:
+            if line.strip().startswith("```"):
+                in_code = not in_code
+                continue
+            if in_code:
+                code_lines.append(line)
+        return "\n".join(code_lines)
+    return text.strip()
+
+def sanitize_code(code: str) -> str:
+    return (
+        code.replace("’", "'")
+            .replace("‘", "'")
+            .replace("“", '"')
+            .replace("”", '"')
+            .strip()
+    )
+
+# Fix up bad formats
+def clean_data(df):
+    if 'valueUSDB' in df.columns:
+        df['valueUSDB'] = (
+            df['valueUSDB'].astype(str)
+            .str.extract(r'([\d,\.]+)')[0]
+            .str.replace(',', '', regex=False)
+            .fillna('0')
+            .astype(float)
+        )
+    if 'eday' in df.columns:
+        df['eday'] = pd.to_datetime(df['eday'], errors='coerce')
+    return df
+
+df = clean_data(df)
+    
 @app.route('/')
 def index():
     try:
-
                 # Update with any values from the request
         for col in HORSES_FILTER_COLUMNS:
             if request.args.get(f'horses_{col}'):
@@ -755,6 +805,49 @@ def get_data_horses():
 @app.route('/api/data/past_auctions')
 def get_data_auctions():
     return jsonify(auctioned_horses_df.replace({pd.NA: '-', pd.NaT: '-'}).to_dict(orient="records"))
+
+@app.route("/api/ai-plot", methods=["POST"])
+def ai_plot():
+    prompt = request.json.get("prompt")
+    try:
+        schema = ", ".join([f"{col}: {str(df[col].dtype)}" for col in df.columns])
+        full_prompt = f"""
+You are a data scientist. You are given this DataFrame with columns and types:
+{schema}
+
+Based on this prompt: "{prompt}" which will be about a dataset which contains data about horse auctions.
+
+Write Python code using pandas and plotly.express to produce a plot called `fig`.
+Do NOT show or save the figure. Only define `fig = ...` and any code required to make it. you output ONLY python code, nothing else.
+Top criadores are Firmamento, Abolengo, Vacacion and El Paraiso.
+valueUSDB is how much a horse went for and PRS is a metric of how good a horse is. 
+        """
+
+        res = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": full_prompt}]
+        )
+
+        raw = res.choices[0].message.content
+        code = sanitize_code(extract_code_block(raw))
+        print("Generated Code (cleaned):\n", code)
+        print("Generated code:\n", code)
+
+        local_vars = {'df': df.copy(), 'pd': pd, 'px': px}
+        print("RAW GPT OUTPUT:")
+        print(repr(code)) 
+        exec(code, {}, local_vars)
+        fig = local_vars.get("fig")
+
+        if not fig:
+            return jsonify({"error": "No figure was generated."}), 400
+
+        return jsonify({"plot": fig.to_json()})
+
+    except Exception as e:
+        import traceback
+        print("ERROR:\n", traceback.format_exc())
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/reports")
 def reports_landing():
