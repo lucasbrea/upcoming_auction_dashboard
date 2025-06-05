@@ -170,25 +170,7 @@ PAST_AUCTION_RENAMED_COLUMNS = {
 }
 
 
-PAST_AUCTION_SUMMARY_RENAMED_COLUMNS = {
 
-    'birth_eday': 'Birth Date',
-    'genre': 'Sex',
-    'PR': 'PR',
-    'PS': 'PS',
-    'PRS': 'PRS',
-    'haras1': 'Criador',
-    # 'value': 'Value',
-    'valueUSDB': 'valueUSDB',
-    'pricePerBp': 'PricePerBp',
-    'title': 'Title',
-    # 'source': 'Source', 
-    'auctionOrder': 'Auction Order',
-    'studbook_id': 'Studbook ID',
-    'year': 'Year',
-    'eday': 'Auction Date'
-
-}
 
 
 # Columnas para filtrar
@@ -320,7 +302,6 @@ def filter_dataframe(df, filters):
 # Load both datasets
 horses_df = load_data(CSV_PATH)
 dams_df = load_data(DAMS_CSV_PATH)
-past_auction_summary = load_data(AUCTIONED_HORSES_PATH)
 auctioned_horses_df = load_data(AUCTIONED_HORSES_PATH)
 services_df = load_data(SERVICES_PATH)
 dams_df['name_clean'] = dams_df['name_clean'].str.upper()
@@ -335,26 +316,17 @@ horses_df.rename(columns=HORSES_RENAMED_COLUMNS, inplace=True)
 
 auctioned_horses_df.rename(columns=PAST_AUCTION_RENAMED_COLUMNS, inplace=True)
 
-past_auction_summary.rename(columns=PAST_AUCTION_SUMMARY_RENAMED_COLUMNS, inplace=True)
+
 
 
 def format_dollar(x):
     try:
             return f"${float(x):,.0f}" if pd.notnull(x) else ""
     except Exception:
-        return ""
-past_auction_summary["valueUSDB"] = pd.to_numeric(past_auction_summary["valueUSDB"], errors="coerce")
-past_auction_summary["PricePerBp"] = pd.to_numeric(past_auction_summary["PricePerBp"], errors="coerce")   
+        return "" 
 horses_df["PRS Value (2.200 USDB per Bps)"] = pd.to_numeric(horses_df["PRS Value (2.200 USDB per Bps)"], errors="coerce")    
-past_auction_summary = past_auction_summary.groupby(["Criador","Year"]).agg(
-    valueUSDB=("valueUSDB", "mean"),
-    PricePerBp=("PricePerBp", "mean"),
-    count=("valueUSDB", "count"),
-).reset_index()
-
 horses_df["PRS Value (2.200 USDB per Bps)"] = horses_df["PRS Value (2.200 USDB per Bps)"].apply(format_dollar)
-past_auction_summary["valueUSDB"] = past_auction_summary["valueUSDB"].apply(format_dollar)
-past_auction_summary["PricePerBp"] = past_auction_summary["PricePerBp"].apply(format_dollar)
+
 
 for col in ['Value', 'Value USDB', 'Price per Bp']:
     if col in auctioned_horses_df.columns:
@@ -476,18 +448,11 @@ past_auction_order = [
     'Auction Date'
 ]
 
-past_auction_summary_order = [
-    'Criador',
-    'Year',
-    'valueUSDB',
-    'PricePerBp',
-    'count'
-]
 
 horses_df = horses_df[[col for col in horses_df_order if col in horses_df.columns]]
 dams_df = dams_df[[col for col in dams_df_order if col in dams_df.columns]]
 auctioned_horses_df = auctioned_horses_df[past_auction_order]
-past_auction_summary = past_auction_summary[past_auction_summary_order]
+
 
 #We have to convert all the dates into the same format
 def parse_birth_date(date_str):
@@ -588,7 +553,6 @@ for col in gradient_columns:
 # Initialize empty filter dictionaries
 horses_filters = {col: '' for col in HORSES_FILTER_COLUMNS}
 dams_filters = {col: '' for col in DAMS_FILTER_COLUMNS}
-auctions_filters = {col: '' for col in AUCTIONS_FILTER_COLUMNS}
 auctioned_horses_filters = {col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS}
 
 # # Update with any values from the request
@@ -610,7 +574,6 @@ auctioned_horses_filters = {col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS}
 # Apply filters
 horses_df = filter_dataframe(horses_df, horses_filters)
 dams_df = filter_dataframe(dams_df, dams_filters)
-past_auction_summary = filter_dataframe(past_auction_summary, auctions_filters)
 auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
 #Replace sex int values with strings
 horses_df['Sex'] = horses_df['Sex'].map({1: 'F', 2: 'M'})
@@ -673,9 +636,6 @@ column_groups_auctioned_horses_h2 = [
                 ("", 16, "group-basic")
 ]
 
-column_groups_past_auction_summary = [ ("", 5, "group-basic")]
-column_groups_past_auction_summary_h2 = [("", 5, "group-basic")]
-
 
 
 df = pd.read_csv("Data/Past Auction - Horses.csv")
@@ -732,10 +692,6 @@ def index():
             if request.args.get(f'dams_{col}'):
                 dams_filters[col] = request.args.get(f'dams_{col}')
 
-        for col in AUCTIONS_FILTER_COLUMNS:
-            if request.args.get(f'auctions_{col}'):
-                auctions_filters[col] = request.args.get(f'auctions_{col}')
-
         for col in AUCTIONED_HORSES_FILTER_COLUMNS:
             if request.args.get(f'auctioned_horses_{col}'):
                 auctioned_horses_filters[col] = request.args.get(f'auctioned_horses_{col}')
@@ -748,9 +704,6 @@ def index():
 
         auctioned_horses_data = auctioned_horses_df.to_dict(orient="records")
         auctioned_horses_columns = past_auction_order
-
-        auction_summary_data = past_auction_summary.to_dict(orient="records")
-        auction_summary_columns = past_auction_summary_order
 
         initial_tab = request.args.get('tab', 'horses')
         
@@ -766,14 +719,9 @@ def index():
                              column_groups_dams=column_groups_dams,
                              column_groups_dams_h2=column_groups_dams_h2,
 
-                             auction_summary_data=auction_summary_data,
-                             auction_summary_columns=auction_summary_columns,
-                            column_groups_past_auction_summary=column_groups_past_auction_summary,
-                            column_groups_past_auction_summary_h2=column_groups_past_auction_summary_h2,
 
                              horses_filters=horses_filters,
                              dams_filters=dams_filters,
-                             auctions_filters=auctions_filters,
                              auctioned_horses_filters=auctioned_horses_filters,
 
                              auctioned_horses_data=auctioned_horses_data,
