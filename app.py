@@ -163,7 +163,7 @@ PAST_AUCTION_RENAMED_COLUMNS = {
     # 'source': 'Source', 
     'auctionOrder': 'Auction Order',
     # 'studbook_id': 'Studbook ID',
-    'year': 'Year',
+    'auctionYear': 'Year',
     'eday': 'Auction Date',
     'haras1':'Haras'
 
@@ -265,6 +265,7 @@ def load_data(file_path):
                         'uncles',
                         'offs_ran_over_2yo',
                         'sire_ps',
+                        'Sire_PS',
                         'FathSibSTKWnrsPerOffs',
                         'efectividad_adj',
                           ]
@@ -822,7 +823,14 @@ Based on this prompt: "{prompt}" which will be about a dataset which contains da
 Write Python code using pandas and plotly.express to produce a plot called `fig`.
 Do NOT show or save the figure. Only define `fig = ...` and any code required to make it. you output ONLY python code, nothing else.
 Top criadores are Firmamento, Abolengo, Vacacion and El Paraiso.
-valueUSDB is how much a horse went for and PRS is a metric of how good a horse is. 
+The Name is the name of the horse being sold at auction.
+Sire is the name of the horse's father.
+Dam is the name of the horse's mother.
+PRS is a percentage which indicates how good a horse is, it is the metric you use to compare two horses to see which one is better.
+PR and PS are columns which make up PRS.
+value USDB is how much a horse sold for at auction.
+Price per BP is how much each basis point of PRS is worth for a horse sold at auction.
+
         """
 
         res = client.chat.completions.create(
