@@ -451,7 +451,7 @@ past_auction_order = [
 
 horses_df = horses_df[[col for col in horses_df_order if col in horses_df.columns]]
 dams_df = dams_df[[col for col in dams_df_order if col in dams_df.columns]]
-auctioned_horses_df = auctioned_horses_df[past_auction_order]
+auctioned_horses_df = auctioned_horses_df[[col for col in past_auction_order if col in auctioned_horses_df.columns]]
 
 
 #We have to convert all the dates into the same format
