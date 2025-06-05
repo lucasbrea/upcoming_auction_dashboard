@@ -17,8 +17,8 @@ from openai import OpenAI
 # from dotenv import load_dotenv
 # import traceback
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=openai_api_key)
+api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=api_key)
 print(sys.executable)
 
 print("CWD:", os.getcwd())
@@ -31,7 +31,6 @@ CORS(app)
 
 CSV_PATH = os.path.join("Data/dashboard_data.csv")
 DAMS_CSV_PATH = os.path.join("Data/Dashboard_Data_Dams_Table.csv")
-PAST_AUCTION_PATH = os.path.join("Data/past_auction_summary.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Past Auction - Horses.csv")
 SERVICES_PATH = os.path.join("Data/possible_dams_servicios.csv")
 HORSES_RENAMED_COLUMNS = {
@@ -169,10 +168,6 @@ PAST_AUCTION_RENAMED_COLUMNS = {
 
 }
 
-
-
-
-
 # Columnas para filtrar
 HORSES_FILTER_COLUMNS = [
                         'Haras',
@@ -190,10 +185,6 @@ DAMS_FILTER_COLUMNS = [
                         'Haras', 
                         'Link'
                         ]
-AUCTIONS_FILTER_COLUMNS = [
-                            'Criador', 
-                            'Year', 
-                            ]
 
 AUCTIONED_HORSES_FILTER_COLUMNS = [
 
@@ -519,23 +510,6 @@ dams_df['Haras'] = dams_df['Haras'].replace({
 })
 
 
-
-auctioned_horses_max_values = {}
-for col in gradient_columns:
-    if col in auctioned_horses_df.columns:
-        try:
-            # Remove % and convert to numeric, ignoring errors
-            numeric_values = pd.to_numeric(auctioned_horses_df[col].str.rstrip('%'), errors='coerce')
-            if not numeric_values.empty and not numeric_values.isna().all():
-                max_val = numeric_values.max()
-                if pd.notnull(max_val):
-                    auctioned_horses_max_values[col] = float(max_val)
-        except Exception as e:
-            print(f"Error processing column {col}: {str(e)}")
-            continue
-
-
-# Add error handling for dams max values calculation
 dams_max_values = {}
 for col in gradient_columns:
     if col in dams_df.columns:
@@ -550,40 +524,16 @@ for col in gradient_columns:
             print(f"Error processing column {col}: {str(e)}")
             continue
 
-# Initialize empty filter dictionaries
-horses_filters = {col: '' for col in HORSES_FILTER_COLUMNS}
-dams_filters = {col: '' for col in DAMS_FILTER_COLUMNS}
-auctioned_horses_filters = {col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS}
+# # Initialize empty filter dictionaries
+# horses_filters = {col: '' for col in HORSES_FILTER_COLUMNS}
+# dams_filters = {col: '' for col in DAMS_FILTER_COLUMNS}
+# auctioned_horses_filters = {col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS}
 
-# # Update with any values from the request
-# for col in HORSES_FILTER_COLUMNS:
-#     if request.args.get(f'horses_{col}'):
-#         horses_filters[col] = request.args.get(f'horses_{col}')
-
-# for col in DAMS_FILTER_COLUMNS:
-#     if request.args.get(f'dams_{col}'):
-#         dams_filters[col] = request.args.get(f'dams_{col}')
-
-# for col in AUCTIONS_FILTER_COLUMNS:
-#     if request.args.get(f'auctions_{col}'):
-#         auctions_filters[col] = request.args.get(f'auctions_{col}')
-
-# for col in AUCTIONED_HORSES_FILTER_COLUMNS:
-#     if request.args.get(f'auctioned_horses_{col}'):
-#         auctioned_horses_filters[col] = request.args.get(f'auctioned_horses_{col}')
-# Apply filters
-horses_df = filter_dataframe(horses_df, horses_filters)
-dams_df = filter_dataframe(dams_df, dams_filters)
-auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
+# horses_df = filter_dataframe(horses_df, horses_filters)
+# dams_df = filter_dataframe(dams_df, dams_filters)
+# auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
 #Replace sex int values with strings
 horses_df['Sex'] = horses_df['Sex'].map({1: 'F', 2: 'M'})
-
-# # Modify how horses_df is converted to HTML
-# horses_df['Name'] = horses_df.apply(
-#     lambda x: f'<a href="{url_for("horse_profile", studbook_id=str(x["Studbook ID"]).strip())}">{x["Name"]}</a>', 
-#     axis=1
-# )
-
 
 column_groups_horses = [
                 ("Basic Information", 8, "group-basic"),
@@ -680,70 +630,68 @@ def clean_data(df):
 
 df = clean_data(df)
     
-@app.route('/')
-def index():
-    try:
-                # Update with any values from the request
-        for col in HORSES_FILTER_COLUMNS:
-            if request.args.get(f'horses_{col}'):
-                horses_filters[col] = request.args.get(f'horses_{col}')
+# @app.route('/')
+# def index():
+#     try:
+#         #         # Update with any values from the request
+#         # for col in HORSES_FILTER_COLUMNS:
+#         #     if request.args.get(f'horses_{col}'):
+#         #         horses_filters[col] = request.args.get(f'horses_{col}')
 
-        for col in DAMS_FILTER_COLUMNS:
-            if request.args.get(f'dams_{col}'):
-                dams_filters[col] = request.args.get(f'dams_{col}')
+#         # for col in DAMS_FILTER_COLUMNS:
+#         #     if request.args.get(f'dams_{col}'):
+#         #         dams_filters[col] = request.args.get(f'dams_{col}')
 
-        for col in AUCTIONED_HORSES_FILTER_COLUMNS:
-            if request.args.get(f'auctioned_horses_{col}'):
-                auctioned_horses_filters[col] = request.args.get(f'auctioned_horses_{col}')
+#         # for col in AUCTIONED_HORSES_FILTER_COLUMNS:
+#         #     if request.args.get(f'auctioned_horses_{col}'):
+#         #         auctioned_horses_filters[col] = request.args.get(f'auctioned_horses_{col}')
 
-        horses_data = horses_df.to_dict(orient="records")
-        horses_columns = horses_df_order
+#         horses_data = horses_df.to_dict(orient="records")
+#         horses_columns = horses_df_order
 
-        dams_data = dams_df.to_dict(orient="records")
-        dams_columns = dams_df_order
+#         dams_data = dams_df.to_dict(orient="records")
+#         dams_columns = dams_df_order
 
-        auctioned_horses_data = auctioned_horses_df.to_dict(orient="records")
-        auctioned_horses_columns = past_auction_order
+#         auctioned_horses_data = auctioned_horses_df.to_dict(orient="records")
+#         auctioned_horses_columns = past_auction_order
 
-        initial_tab = request.args.get('tab', 'horses')
+#         initial_tab = request.args.get('tab', 'horses')
         
-        return render_template('index.html', 
-                            initial_tab=initial_tab,
-                             column_groups=column_groups_horses,
-                             column_groups_horses_h2=column_groups_horses_h2,
-                             horses_data=horses_data,
-                             horses_columns=horses_columns,
+#         return render_template('index.html', 
+#                             initial_tab=initial_tab,
+#                              column_groups=column_groups_horses,
+#                              column_groups_horses_h2=column_groups_horses_h2,
+#                              horses_data=horses_data,
+#                              horses_columns=horses_columns,
 
-                             dams_data=dams_data,
-                             dams_columns=dams_columns,
-                             column_groups_dams=column_groups_dams,
-                             column_groups_dams_h2=column_groups_dams_h2,
+#                              dams_data=dams_data,
+#                              dams_columns=dams_columns,
+#                              column_groups_dams=column_groups_dams,
+#                              column_groups_dams_h2=column_groups_dams_h2,
 
 
-                             horses_filters=horses_filters,
-                             dams_filters=dams_filters,
-                             auctioned_horses_filters=auctioned_horses_filters,
+#                             #  horses_filters=horses_filters,
+#                             #  dams_filters=dams_filters,
+#                             #  auctioned_horses_filters=auctioned_horses_filters,
 
-                             auctioned_horses_data=auctioned_horses_data,
-                             auctioned_horses_columns=auctioned_horses_columns,
-                             column_groups_auctioned_horses=column_groups_auctioned_horses,
-                             column_groups_auctioned_horses_h2=column_groups_auctioned_horses_h2,
+#                              auctioned_horses_data=auctioned_horses_data,
+#                              auctioned_horses_columns=auctioned_horses_columns,
+#                              column_groups_auctioned_horses=column_groups_auctioned_horses,
+#                              column_groups_auctioned_horses_h2=column_groups_auctioned_horses_h2,
 
-                             auctioned_horses_max_values=auctioned_horses_max_values,
-                             horses_max_values=horses_max_values,
-                             dams_max_values=dams_max_values,
+#                              horses_max_values=horses_max_values,
+#                              dams_max_values=dams_max_values,
 
-                             )
+#                              )
     
     
-    except Exception as e:
-        # When there's an error, we still need to pass empty filters
-        return render_template('index.html', 
-                             error=str(e),
-                             horses_filters={col: '' for col in HORSES_FILTER_COLUMNS},
-                             dams_filters={col: '' for col in DAMS_FILTER_COLUMNS},
-                             auctions_filters={col: '' for col in AUCTIONS_FILTER_COLUMNS},
-                             auctioned_horses_filters={col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS})
+#     except Exception as e:
+#         # When there's an error, we still need to pass empty filters
+#         return render_template('index.html', 
+#                              error=str(e),
+#                              horses_filters={col: '' for col in HORSES_FILTER_COLUMNS},
+#                              dams_filters={col: '' for col in DAMS_FILTER_COLUMNS},
+#                              auctioned_horses_filters={col: '' for col in AUCTIONED_HORSES_FILTER_COLUMNS})
     
 @app.route('/api/data/dams')
 def get_data():
