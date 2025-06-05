@@ -13,9 +13,9 @@ import sys
 from dateutil import parser
 from unidecode import unidecode
 from openai import OpenAI
-import json
-from dotenv import load_dotenv
-import traceback
+# import json
+# from dotenv import load_dotenv
+# import traceback
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=openai_api_key)
@@ -465,6 +465,7 @@ past_auction_order = [
     'PS',
     'PRS',
     'Haras',
+    'Sire PS',
     # 'Value',
     'Value USDB',
     'Price per Bp',
