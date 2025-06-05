@@ -148,9 +148,9 @@ DAMS_RENAMED_COLUMNS = {
 PAST_AUCTION_RENAMED_COLUMNS = {
     'name_clean': 'Name',
     'padrillo_clean': 'Sire',
-    'yeguaAuction': 'Dam',
+    'M_clean': 'Dam',
     'birth_eday': 'Birth Date',
-    'genre': 'Sex',
+    'sex': 'Sex',
     'PR': 'PR',
     'PS': 'PS',
     'PRS': 'PRS',
