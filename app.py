@@ -13,6 +13,9 @@ import sys
 from dateutil import parser
 from unidecode import unidecode
 from openai import OpenAI
+import json
+from dotenv import load_dotenv
+import traceback
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=openai_api_key)
@@ -143,8 +146,8 @@ DAMS_RENAMED_COLUMNS = {
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
-    'name': 'Name',
-    'padrilloAuction': 'Sire',
+    'name_clean': 'Name',
+    'padrillo_clean': 'Sire',
     'yeguaAuction': 'Dam',
     'birth_eday': 'Birth Date',
     'genre': 'Sex',
@@ -156,9 +159,10 @@ PAST_AUCTION_RENAMED_COLUMNS = {
     'valueUSDB': 'Value USDB',
     'pricePerBp': 'Price per Bp',
     'title': 'Title',
+    'Sire_PS': 'Sire PS',   
     # 'source': 'Source', 
     'auctionOrder': 'Auction Order',
-    'studbook_id': 'Studbook ID',
+    # 'studbook_id': 'Studbook ID',
     'year': 'Year',
     'eday': 'Auction Date',
     'haras1':'Haras'
