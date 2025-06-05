@@ -711,22 +711,29 @@ def ai_plot():
     try:
         schema = ", ".join([f"{col}: {str(df[col].dtype)}" for col in df.columns])
         full_prompt = f"""
-You are a data scientist. You are given this DataFrame with columns and types:
+You are a data scientist working with a DataFrame that contains historical horse auction data. Below is the schema of the DataFrame:
 {schema}
 
-Based on this prompt: "{prompt}" which will be about a dataset which contains data about horse auctions.
+Based on the following user request:
 
-Write Python code using pandas and plotly.express to produce a plot called `fig`.
-Do NOT show or save the figure. Only define `fig = ...` and any code required to make it. you output ONLY python code, nothing else.
-Top criadores are Firmamento, Abolengo, Vacacion and El Paraiso.
-The Name is the name of the horse being sold at auction.
-Sire is the name of the horse's father.
-Dam is the name of the horse's mother.
-PRS is a percentage which indicates how good a horse is, it is the metric you use to compare two horses to see which one is better.
-PR and PS are columns which make up PRS.
-value USDB is how much a horse sold for at auction.
-Price per BP is how much each basis point of PRS is worth for a horse sold at auction.
+”{prompt}”
 
+Write Python code that uses pandas and plotly.express to generate a plot object named fig.
+Do not display, save, or export the plot. Your response must include only the Python code needed to generate fig, nothing else (no explanations or comments).
+
+Context for the data:
+	•	The dataset contains information about horses sold at auction.
+	•	The column “Name” refers to the name of the horse being auctioned.
+	•	Columns "padrilloAuction" and "yeguaAuction" correspond to “Sire” and “Dam” and refer to the horse’s father and mother, respectively.
+	•	“PRS” is a percentage value that measures a horse’s quality. It is the main metric used to compare horses.
+	•	“PR” and “PS” are subcomponents of PRS.
+	•	“value USDB” indicates how much the horse sold for at auction (in US dollars).
+	•	“Price per BP” indicates the value of each basis point of PRS.
+	•	The top criadores (breeders) to highlight or segment if needed are: Firmamento, Abolengo, Vacacion, and El Paraiso.
+    •	The haras1 column is the same as saying criador.
+    •	The title columns refers to the title of a specific auction.
+    •	The year column refers to the year of the auction.
+    •	The the birth_eday column refers to the birth date of the horse sold.
         """
 
         res = client.chat.completions.create(
