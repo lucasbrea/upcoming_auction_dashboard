@@ -17,7 +17,7 @@ from openai import OpenAI
 # from dotenv import load_dotenv
 # import traceback
 
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = "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"
 client = OpenAI(api_key=api_key)
 print(sys.executable)
 
@@ -243,7 +243,7 @@ def load_data(file_path):
                         'Sire_PS',
                         'FathSibSTKWnrsPerOffs',
                         'efectividad_adj',
-                        'Mean PRS',
+                        'criador_PRS'
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -513,6 +513,8 @@ dams_df['Haras'] = dams_df['Haras'].replace({
     'SANTA INAAS':'SANTA INES',
     'LA GENERACIAAN':'LA GENERACION',
 })
+
+
 
 
 dams_max_values = {}
