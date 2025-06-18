@@ -81,6 +81,8 @@ HORSES_RENAMED_COLUMNS = {
     'FathSibSTKWnrsPerOffs':'Recent G1 Wnrs/Born',
     'MomSib_wnrs3yo_at2y':'Offs Wnrs before 3yo(non-ALT)',
     'cei_per_offs':'CEI per offs(**)',
+    'criador_PRS':'Mean PRS',
+    'criador':'Criador'
 
 
 
@@ -132,7 +134,7 @@ DAMS_RENAMED_COLUMNS = {
     'TPBRS':'TPBRS',
     'MSibs_GSTK_Total_runs':'Siblings total G-stk runs',
     'MSibs_GSTK_Total_wins':'Siblings total G-stk wins',
-    'foal_wnrs_3yo':'Foals wnrs before 3yo(non-ALT)',
+    'foal_wnrs_3yo':'Foals wnrs before 3yo(non-ALT)', 
     'rank':'Ranking',
     'num_births':'#Births',
     'num_services':'#Services',
@@ -358,6 +360,8 @@ horses_df_order = [
                 'Dam\'s Siblings(GS) Stk wins',
                 #Internal Value
                 'PRS Value (2.200 USDB per Bps)',
+                'Mean PRS',
+                'Criador',
                 #Auction info
                 'Start',
                 'End',
