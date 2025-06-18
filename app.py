@@ -243,6 +243,7 @@ def load_data(file_path):
                         'Sire_PS',
                         'FathSibSTKWnrsPerOffs',
                         'efectividad_adj',
+                        'Mean PRS',
                           ]
     for col in percentage_columns:
         if col in df.columns:
@@ -267,8 +268,7 @@ def load_data(file_path):
                         'mMeanMaxBsn',
                         'cei_per_offs',   
                         'nacimientos_adj',
-                        'servicios_adj', 
-                        'Mean PRS',             
+                        'servicios_adj',              
     ]
     for col in rounded_columns:
         if col in df.columns:
