@@ -17,7 +17,7 @@ from openai import OpenAI
 # from dotenv import load_dotenv
 # import traceback
 
-api_key = "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"
+api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 print(sys.executable)
 
