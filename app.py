@@ -267,7 +267,8 @@ def load_data(file_path):
                         'mMeanMaxBsn',
                         'cei_per_offs',   
                         'nacimientos_adj',
-                        'servicios_adj',              
+                        'servicios_adj', 
+                        'Mean PRS',             
     ]
     for col in rounded_columns:
         if col in df.columns:
