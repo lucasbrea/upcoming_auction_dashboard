@@ -542,7 +542,9 @@ for col in gradient_columns:
 # auctioned_horses_df = filter_dataframe(auctioned_horses_df, auctioned_horses_filters)
 #Replace sex int values with strings
 horses_df['Sex'] = horses_df['Sex'].map({1: 'F', 2: 'M'})
-
+horses_df = horses_df.fillna('-')
+dams_df = dams_df.fillna('-')
+auctioned_horses_df = auctioned_horses_df.fillna('-')
 column_groups_horses = [
                 ("Basic Information", 8, "group-basic"),
                 ("Selection", 3, "group-selection-horses"),
@@ -593,6 +595,8 @@ column_groups_auctioned_horses_h2 = [
 
                 ("", 16, "group-basic")
 ]
+
+
 
 
 
