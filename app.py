@@ -22,7 +22,7 @@ client = OpenAI(api_key=api_key)
 print(sys.executable)
 
 print("CWD:", os.getcwd())
-#Path to install packages in venv
+#Path to install packages in ven
 # /Users/lucasbrea/Move37/dashboard_remates/.venv/bin/python -m pip install package
 
 
@@ -268,7 +268,8 @@ def load_data(file_path):
                         'mMeanMaxBsn',
                         'cei_per_offs',   
                         'nacimientos_adj',
-                        'servicios_adj',              
+                        'servicios_adj', 
+                        'auctionYear'             
     ]
     for col in rounded_columns:
         if col in df.columns:
