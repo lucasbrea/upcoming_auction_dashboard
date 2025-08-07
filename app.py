@@ -29,7 +29,7 @@ print("CWD:", os.getcwd())
 app = Flask(__name__)
 CORS(app)
 
-CSV_PATH = os.path.join("Data/dashboard_data.csv")
+CSV_PATH = os.path.join("Data/Horses Table - Dashboard.csv")
 DAMS_CSV_PATH = os.path.join("Data/Dashboard_Data_Dams_Table.csv")
 AUCTIONED_HORSES_PATH = os.path.join("Data/Past Auction - Horses.csv")
 SERVICES_PATH = os.path.join("Data/possible_dams_servicios.csv")
