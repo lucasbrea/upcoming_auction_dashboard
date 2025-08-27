@@ -147,9 +147,9 @@ DAMS_RENAMED_COLUMNS = {
 }
 
 PAST_AUCTION_RENAMED_COLUMNS = {
-    'name_clean': 'Name',
-    'padrillo_clean': 'Sire',
-    'M_clean': 'Dam',
+    'name': 'Name',
+    'padrillo': 'Sire',
+    'M': 'Dam',
     'birth_eday': 'Birth Date',
     'sex': 'Sex',
     'PR': 'PR',
